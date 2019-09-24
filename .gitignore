@@ -6,3 +6,5 @@
 .vscode
 objs
 test
+dumbmain.c
+*.dSYM

@@ -3,13 +3,19 @@
 
 # include "libft.h"
 
+# define BI_SUCCESS				0
+# define BI_FAIL				1
+
 typedef struct		s_bigint
 {
-	char			*data;
 	size_t			size;
+	size_t			occupied;
+	unsigned char	*data;
 }					t_bigint;
 
-t_bigint			bi_new(size_t size);
-void				bi_init(t_bigint *bi);
+int					bi_new(t_bigint *bi, size_t size);
+void				bi_erase(t_bigint *bi);
+int					bi_expand(t_bigint *bi, size_t size);
+int					bi_push(t_bigint *bi, char value);
 
 # endif
