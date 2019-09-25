@@ -2,10 +2,11 @@
 
 int		main(void)
 {
-	// basic function
-	test_bi_new_case1();
+	// basic function test_bi_new_case1();
 	test_bi_erase_case1();
 	test_bi_expand_case1();
+	test_bi_shrink_case1();
+	test_bi_shrink_case2();
 	test_bi_push_case1();
 	test_bi_push_case2();
 
@@ -15,8 +16,25 @@ int		main(void)
 	test_bi_abs_compare_case3();
 	test_bi_abs_compare_case4();
 
+	// negate
+	test_bi_negate_case1();
+	test_bi_negate_case2();
+
 	// add
 	test_bi_add_bi_case1();
 	test_bi_add_bi_case2();
 	test_bi_add_bi_case3();
+	test_bi_add_bi_case4();
+	test_bi_add_bi_case5();
+	test_bi_add_bi_case6();
+	test_bi_add_bi_case7();
+
+	// sub
+	test_bi_sub_bi_case1();
+	test_bi_sub_bi_case2();
+	test_bi_sub_bi_case3();
+	test_bi_sub_bi_case4();
+	test_bi_sub_bi_case5();
+	test_bi_sub_bi_case6();
+	test_bi_sub_bi_case7();
 }

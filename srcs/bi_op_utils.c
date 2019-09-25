@@ -1,22 +1,17 @@
 #include "bigint.h"
 
-char	bi_add_one_byte(
-	unsigned char a,
-	unsigned char b,
-	unsigned char *carry
-)
+int				bi_init(t_bigint *res, size_t size)
 {
-	unsigned short		res;
-
-	res = a + b + *carry;
-	if (res > 0xff)
-		*carry = 0x01;
-	else
-		*carry = 0x00;
-	return ((unsigned char)res);
+	if (res->size < size)
+	{
+		if (bi_expand(res, size - res->size) == BI_FAIL)
+			return (BI_FAIL);
+	}
+	bi_erase(res);
+	return (BI_SUCCESS);
 }
 
-void	bi_abs_compare(
+void			bi_abs_compare(
 	t_bigint *a,
 	t_bigint *b,
 	t_bigint **bigger,
@@ -46,4 +41,45 @@ void	bi_abs_compare(
 			i--;
 		}
 	}
+}
+
+unsigned char	bi_add_one_byte(
+	unsigned char a,
+	unsigned char b,
+	unsigned char *carry
+)
+{
+	unsigned short		res;
+
+	res = a + b + *carry;
+	if (res > 0xff)
+		*carry = 0x01;
+	else
+		*carry = 0x00;
+	return ((unsigned char)res);
+}
+
+unsigned char	bi_add_byte_by_byte(
+	t_bigint *bigger,
+	t_bigint *smaller,
+	t_bigint *res
+)
+{
+	size_t			i;
+	unsigned char	carry;
+
+	i = 0;
+	carry = 0x00;
+	while (i < smaller->occupied)
+	{
+		bi_push(res,
+			bi_add_one_byte(smaller->data[i], bigger->data[i], &carry));
+		i++;
+	}
+	while (i < bigger->occupied)
+	{
+		bi_push(res, bi_add_one_byte(bigger->data[i], 0x00, &carry));
+		i++;
+	}
+	return (carry);
 }

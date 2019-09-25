@@ -39,9 +39,12 @@ LIBS = -L . -lbigint\
 SRCS = bi_new.c\
 	bi_erase.c\
 	bi_expand.c\
+	bi_shrink.c\
 	bi_push.c\
 	bi_op_utils.c\
+	bi_negate.c\
 	bi_add_bi.c\
+	bi_sub_bi.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

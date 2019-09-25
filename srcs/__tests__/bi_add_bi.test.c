@@ -1,5 +1,6 @@
 #include "bigint.test.h"
 
+// case one size
 void		test_bi_add_bi_case1(void)
 {
 	t_bigint	a;
@@ -39,6 +40,7 @@ void		test_bi_add_bi_case1(void)
 	free(c.data);
 }
 
+// case multi size
 void		test_bi_add_bi_case2(void)
 {
 	t_bigint	a;
@@ -90,6 +92,7 @@ void		test_bi_add_bi_case2(void)
 	free(c.data);
 }
 
+// case negative + negative
 void		test_bi_add_bi_case3(void)
 {
 	t_bigint	a;
@@ -145,3 +148,199 @@ void		test_bi_add_bi_case3(void)
 	free(b.data);
 	free(c.data);
 }
+
+// case different size
+void		test_bi_add_bi_case4(void)
+{
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xff);
+	bi_push(&b, 0x10);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0xffff + 0x10) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0xffff + 0x10) : c.sign"
+	);
+
+	test(
+		c.size == 3,
+		"bi_add_bi (0xffff + 0x10) : c.size"
+	);
+
+	test(
+		c.occupied == 3,
+		"bi_add_bi (0xffff + 0x10) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0x0f,
+		"bi_add_bi (0xffff + 0x10) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0x00,
+		"bi_add_bi (0xffff + 0x10) : c.data[1]"
+	);
+
+	test(
+		c.data[2] == 0x01,
+		"bi_add_bi (0xffff + 0x10) : c.data[2]"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
+
+// case a + 0
+void		test_bi_add_bi_case5(void)
+{
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x90);
+	bi_push(&a, 0xff);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0xff90 + 0x00) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0xff90 + 0x00) : c.sign"
+	);
+
+	test(
+		c.size == a.occupied,
+		"bi_add_bi (0xff90 + 0x00) : c.size"
+	);
+
+	test(
+		c.occupied == a.occupied,
+		"bi_add_bi (0xff90 + 0x00) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0x90,
+		"bi_add_bi (0xff90 + 0x00) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0xff,
+		"bi_add_bi (0xff90 + 0x00) : c.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
+
+// case 0 + b
+void		test_bi_add_bi_case6(void)
+{
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&b, 0x90);
+	bi_push(&b, 0xff);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0x00 + 0xff90) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0x00 + 0xff90) : c.sign"
+	);
+
+	test(
+		c.size == b.occupied,
+		"bi_add_bi (0x00 + 0xff90) : c.size"
+	);
+
+	test(
+		c.occupied == b.occupied,
+		"bi_add_bi (0x00 + 0xff90) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0x90,
+		"bi_add_bi (0x00 + 0xff90) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0xff,
+		"bi_add_bi (0x00 + 0xff90) : c.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
+
+// case 0 + 0
+void		test_bi_add_bi_case7(void)
+{
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0x00 + 0x00) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0x00 + 0x00) : c.sign"
+	);
+
+	test(
+		c.size == 1,
+		"bi_add_bi (0x00 + 0x00) : c.size"
+	);
+
+	test(
+		c.occupied == 0,
+		"bi_add_bi (0x00 + 0x00) : c.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
+// negative + positive
+// positive + negative
