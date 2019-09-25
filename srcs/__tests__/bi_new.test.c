@@ -4,13 +4,19 @@ void		test_bi_new_case1(void)
 {
 	t_bigint	bi;
 	size_t		size = 5;
+	char		sign = BI_SIGN_POSITIVE;
 	int			res;
 
-	res = bi_new(&bi, size);
+	res = bi_new(&bi, size, sign);
 
 	test(
 		res == BI_SUCCESS,
 		"bi_new : return value"
+	);
+
+	test(
+		bi.sign == BI_SIGN_POSITIVE,
+		"bi_new : bi.sign"
 	);
 
 	test(

@@ -6,7 +6,7 @@ void		test_bi_push_case1(void)
 	size_t		size = 2;
 	int			res;
 
-	bi_new(&bi, size);
+	bi_new(&bi, size, BI_SIGN_POSITIVE);
 	res = bi_push(&bi, 0x11);
 
 	test(
@@ -32,7 +32,7 @@ void		test_bi_push_case2(void)
 	size_t		size = 2;
 	int			res;
 
-	bi_new(&bi, size);
+	bi_new(&bi, size, BI_SIGN_POSITIVE);
 	res = bi_push(&bi, 0x01);
 	res = bi_push(&bi, 0x02);
 	res = bi_push(&bi, 0x03);

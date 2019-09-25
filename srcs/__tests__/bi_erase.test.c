@@ -5,7 +5,7 @@ void		test_bi_erase_case1(void)
 	t_bigint	bi;
 	size_t		size = 5;
 
-	bi_new(&bi, size);
+	bi_new(&bi, size, BI_SIGN_POSITIVE);
 	bi.data[0] = 0xFF;
 	bi.occupied = 2;
 	bi_erase(&bi);

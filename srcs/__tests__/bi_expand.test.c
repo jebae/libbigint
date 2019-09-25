@@ -7,7 +7,7 @@ void		test_bi_expand_case1(void)
 	size_t		size = 1;
 	int			res;
 
-	bi_new(&bi, size);
+	bi_new(&bi, size, BI_SIGN_POSITIVE);
 	bi.data[0] = 0xFF;
 	res = bi_expand(&bi, 15);
 
