@@ -17,18 +17,21 @@ typedef struct		s_bigint
 }					t_bigint;
 
 /*
-** basic function
+** memory management
 */
 int					bi_new(t_bigint *bi, size_t size, char sign);
+int					bi_init(t_bigint *res, size_t size);
 void				bi_erase(t_bigint *bi);
 int					bi_expand(t_bigint *bi, size_t size);
 int					bi_shrink(t_bigint *bi, size_t size);
 int					bi_push(t_bigint *bi, char value);
 
+
+
 /*
 ** operator utils
 */
-int					bi_init(t_bigint *res, size_t size);
+size_t				bi_max_bit(t_bigint *bi);
 void				bi_abs_compare(
 	t_bigint *a,
 	t_bigint *b,
@@ -49,8 +52,8 @@ unsigned char		bi_add_byte_by_byte(
 /*
 ** operator
 */
-int					bi_negate(t_bigint *bi, size_t size);
 int					bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 int					bi_sub_bi(t_bigint *a, t_bigint *b, t_bigint *c);
+int					bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res);
 
 # endif

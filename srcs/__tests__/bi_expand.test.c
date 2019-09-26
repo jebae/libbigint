@@ -3,6 +3,7 @@
 // need leak test
 void		test_bi_expand_case1(void)
 {
+	printf(KYEL "test_bi_expand_case1\n" KNRM);
 	t_bigint	bi;
 	size_t		size = 1;
 	int			res;

@@ -1,16 +1,5 @@
 #include "bigint.h"
 
-int				bi_init(t_bigint *res, size_t size)
-{
-	if (res->size < size)
-	{
-		if (bi_expand(res, size - res->size) == BI_FAIL)
-			return (BI_FAIL);
-	}
-	bi_erase(res);
-	return (BI_SUCCESS);
-}
-
 void			bi_abs_compare(
 	t_bigint *a,
 	t_bigint *b,

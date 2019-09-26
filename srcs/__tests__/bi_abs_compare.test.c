@@ -2,6 +2,7 @@
 
 void		test_bi_abs_compare_case1(void)
 {
+	printf(KYEL "test_bi_abs_compare_case1\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	*bigger;
@@ -35,6 +36,7 @@ void		test_bi_abs_compare_case1(void)
 
 void		test_bi_abs_compare_case2(void)
 {
+	printf(KYEL "test_bi_abs_compare_case2\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	*bigger;
@@ -67,6 +69,7 @@ void		test_bi_abs_compare_case2(void)
 
 void		test_bi_abs_compare_case3(void)
 {
+	printf(KYEL "test_bi_abs_compare_case3\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	*bigger;
@@ -101,6 +104,7 @@ void		test_bi_abs_compare_case3(void)
 // case 0, 0
 void		test_bi_abs_compare_case4(void)
 {
+	printf(KYEL "test_bi_abs_compare_case4\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	*bigger;

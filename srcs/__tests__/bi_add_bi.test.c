@@ -3,6 +3,7 @@
 // case one size
 void		test_bi_add_bi_case1(void)
 {
+	printf(KYEL "test_bi_add_bi_case1\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -43,6 +44,7 @@ void		test_bi_add_bi_case1(void)
 // case multi size
 void		test_bi_add_bi_case2(void)
 {
+	printf(KYEL "test_bi_add_bi_case2\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -95,6 +97,7 @@ void		test_bi_add_bi_case2(void)
 // case negative + negative
 void		test_bi_add_bi_case3(void)
 {
+	printf(KYEL "test_bi_add_bi_case3\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -152,6 +155,7 @@ void		test_bi_add_bi_case3(void)
 // case different size
 void		test_bi_add_bi_case4(void)
 {
+	printf(KYEL "test_bi_add_bi_case4\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -208,14 +212,15 @@ void		test_bi_add_bi_case4(void)
 // case a + 0
 void		test_bi_add_bi_case5(void)
 {
+	printf(KYEL "test_bi_add_bi_case5\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
 	int			res;
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_new(&c, 1, BI_SIGN_NEGATIVE);
 	bi_push(&a, 0x90);
 	bi_push(&a, 0xff);
 	res = bi_add_bi(&a, &b, &c);
@@ -258,14 +263,15 @@ void		test_bi_add_bi_case5(void)
 // case 0 + b
 void		test_bi_add_bi_case6(void)
 {
+	printf(KYEL "test_bi_add_bi_case6\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&a, 1, BI_SIGN_NEGATIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_NEGATIVE);
 	bi_push(&b, 0x90);
 	bi_push(&b, 0xff);
 	res = bi_add_bi(&a, &b, &c);
@@ -308,6 +314,7 @@ void		test_bi_add_bi_case6(void)
 // case 0 + 0
 void		test_bi_add_bi_case7(void)
 {
+	printf(KYEL "test_bi_add_bi_case7\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -324,11 +331,6 @@ void		test_bi_add_bi_case7(void)
 	);
 
 	test(
-		c.sign == BI_SIGN_POSITIVE,
-		"bi_add_bi (0x00 + 0x00) : c.sign"
-	);
-
-	test(
 		c.size == 1,
 		"bi_add_bi (0x00 + 0x00) : c.size"
 	);
@@ -342,5 +344,97 @@ void		test_bi_add_bi_case7(void)
 	free(b.data);
 	free(c.data);
 }
-// negative + positive
-// positive + negative
+
+// case negative + positive
+void		test_bi_add_bi_case8(void)
+{
+	printf(KYEL "test_bi_add_bi_case8\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xff);
+	bi_push(&b, 0x10);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (-0xffff + 0x10) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_NEGATIVE,
+		"bi_add_bi (-0xffff + 0x10) : c.sign"
+	);
+
+	test(
+		c.occupied == 2,
+		"bi_add_bi (-0xffff + 0x10) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0xef,
+		"bi_add_bi (-0xffff + 0x10) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0xff,
+		"bi_add_bi (-0xffff + 0x10) : c.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
+
+// case positive + negative
+void		test_bi_add_bi_case9(void)
+{
+	printf(KYEL "test_bi_add_bi_case9\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xff);
+	bi_push(&b, 0x10);
+	res = bi_add_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0xffff + -0x10) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0xffff + -0x10) : c.sign"
+	);
+
+	test(
+		c.occupied == 2,
+		"bi_add_bi (0xffff + -0x10) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0xef,
+		"bi_add_bi (0xffff + -0x10) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0xff,
+		"bi_add_bi (0xffff + -0x10) : c.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}

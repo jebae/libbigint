@@ -2,6 +2,7 @@
 
 void		test_bi_new_case1(void)
 {
+	printf(KYEL "test_bi_new_case1\n" KNRM);
 	t_bigint	bi;
 	size_t		size = 5;
 	char		sign = BI_SIGN_POSITIVE;

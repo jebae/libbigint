@@ -2,6 +2,7 @@
 
 void		test_bi_erase_case1(void)
 {
+	printf(KYEL "test_bi_erase_case1\n" KNRM);
 	t_bigint	bi;
 	size_t		size = 5;
 

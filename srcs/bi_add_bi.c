@@ -1,9 +1,18 @@
 #include "bigint.h"
 
-static void		set_res_sign(t_bigint *a, t_bigint *b, t_bigint *c)
+static int		pass_to_sub(t_bigint *a, t_bigint *b, t_bigint *c)
 {
-	if (a->sign == b->sign)
-		c->sign = a->sign;
+	char	sign;
+
+	sign = b->sign;
+	b->sign ^= 1;
+	if (bi_sub_bi(a, b, c) == BI_FAIL)
+	{
+		b->sign ^= 1;
+		return (BI_FAIL);
+	}
+	b->sign ^= 1;
+	return (BI_SUCCESS);
 }
 
 int				bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c)
@@ -12,13 +21,14 @@ int				bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	t_bigint		*bigger;
 	t_bigint		*smaller;
 
+	if (a->sign != b->sign)
+		return (pass_to_sub(a, b, c));
 	bi_abs_compare(a, b, &bigger, &smaller);
-	// add line to handle sub when sign is different
+	c->sign = a->sign;
 	if (bi_init(c, bigger->occupied) == BI_FAIL)
 		return (BI_FAIL);
-	if (bigger->occupied == 0) // handle 0
+	if (bigger->occupied == 0)
 		return (BI_SUCCESS);
-	set_res_sign(a, b, c);
 	carry = bi_add_byte_by_byte(bigger, smaller, c);
 	if (carry && bi_push(c, carry) == BI_FAIL)
 		return (BI_FAIL);

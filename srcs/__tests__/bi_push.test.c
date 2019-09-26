@@ -2,6 +2,7 @@
 
 void		test_bi_push_case1(void)
 {
+	printf(KYEL "test_bi_push_case1\n" KNRM);
 	t_bigint	bi;
 	size_t		size = 2;
 	int			res;
@@ -28,6 +29,7 @@ void		test_bi_push_case1(void)
 
 void		test_bi_push_case2(void)
 {
+	printf(KYEL "test_bi_push_case2\n" KNRM);
 	t_bigint	bi;
 	size_t		size = 2;
 	int			res;
