@@ -40,14 +40,20 @@ SRCS = bi_new.c\
 	bi_init.c\
 	bi_erase.c\
 	bi_expand.c\
+	bi_expand_at_least.c\
+	bi_resize.c\
 	bi_push.c\
 	bi_copy.c\
 	bi_abs_compare.c\
 	bi_max_bit.c\
 	bi_op_utils.c\
+	bi_update_occupied.c\
 	bi_add_bi.c\
 	bi_sub_bi.c\
+	bi_abs.c\
 	bi_mul_pow_of_2.c\
+	bi_mod_n_pow_of_2_plus_1.c\
+	bi_mod_n_pow_of_2_plus_1_utils.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

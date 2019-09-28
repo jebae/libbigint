@@ -1,6 +1,5 @@
 #include "bigint.test.h"
 
-/*
 // case q - p < 0
 void		test_bi_mod_n_pow_of_2_plus_1_case1(void)
 {
@@ -19,6 +18,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case1(void)
 	test(
 		res == BI_SUCCESS,
 		"bi_mod_n_pow_of_2_plus_1 (128 mod 17) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (128 mod 17) : b.sign"
 	);
 
 	test(
@@ -56,6 +60,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case2(void)
 	);
 
 	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (21 mod 17) : b.sign"
+	);
+
+	test(
 		b.occupied == 1,
 		"bi_mod_n_pow_of_2_plus_1 (21 mod 17) : b.occupied"
 	);
@@ -87,6 +96,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case3(void)
 	test(
 		res == BI_SUCCESS,
 		"bi_mod_n_pow_of_2_plus_1 (12 mod 17) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (12 mod 17) : b.sign"
 	);
 
 	test(
@@ -125,6 +139,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case4(void)
 	);
 
 	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (693 mod 17) : b.sign"
+	);
+
+	test(
 		b.occupied == 1,
 		"bi_mod_n_pow_of_2_plus_1 (693 mod 17) : b.occupied"
 	);
@@ -160,6 +179,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case5(void)
 	);
 
 	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (-693 mod 17) : b.sign"
+	);
+
+	test(
 		b.occupied == 1,
 		"bi_mod_n_pow_of_2_plus_1 (-693 mod 17) : b.occupied"
 	);
@@ -173,7 +197,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case5(void)
 	free(b.data);
 }
 
-// case n = 0
+// case n = 0, A = odd number
 void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 {
 	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case6\n" KNRM);
@@ -195,6 +219,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 	);
 
 	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (693 mod 2) : b.sign"
+	);
+
+	test(
 		b.occupied == 1,
 		"bi_mod_n_pow_of_2_plus_1 (693 mod 2) : b.occupied"
 	);
@@ -207,17 +236,50 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 	free(a.data);
 	free(b.data);
 }
-*/
+
+// case n = 0, A = even number
+void		test_bi_mod_n_pow_of_2_plus_1_case7(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case7\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xb4);
+	bi_push(&a, 0x02);
+
+	// A mod 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 0, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (692 mod 2) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (692 mod 2) : b.sign"
+	);
+
+	test(
+		b.occupied == 0,
+		"bi_mod_n_pow_of_2_plus_1 (692 mod 2) : b.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
+}
 
 /*
 ** case much of negative in loop
 ** e.g. 1 0000 0000, n = 2
 ** in upon case, q is always smaller than p
 */
-/*
-void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
+void		test_bi_mod_n_pow_of_2_plus_1_case8(void)
 {
-	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case6\n" KNRM);
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case8\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	int			res;
@@ -236,6 +298,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 	);
 
 	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (256 mod 5) : b.sign"
+	);
+
+	test(
 		b.occupied == 1,
 		"bi_mod_n_pow_of_2_plus_1 (256 mod 5) : b.occupied"
 	);
@@ -248,4 +315,80 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 	free(a.data);
 	free(b.data);
 }
-*/
+
+// case A = 0
+void		test_bi_mod_n_pow_of_2_plus_1_case9(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case9\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+
+	// A mod 5
+	res = bi_mod_n_pow_of_2_plus_1(&a, 2, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 5) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 5) : b.sign"
+	);
+
+	test(
+		b.occupied == 0,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 5) : b.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case big
+void		test_bi_mod_n_pow_of_2_plus_1_case10(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case10\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x02);
+	bi_push(&a, 0x00);
+	bi_push(&a, 0x03);
+
+	printf("A : %02x %02x %02x\n", a.data[2], a.data[1], a.data[0]);
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &b);
+	//res = bi_mod_n_pow_of_2_plus_1(&a, 2, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (196611 mod 65537) : return value"
+	);
+
+	printf("occupied : %zu\nresult : ", b.occupied);
+	if (b.occupied > 0)
+		for (size_t i= b.occupied; i > 0; i--)
+			printf("%02x", b.data[i - 1]);
+	printf("\n");
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (196611 mod 65537) : b.sign"
+	);
+
+	test(
+		b.occupied == 0,
+		"bi_mod_n_pow_of_2_plus_1 (196611 mod 65537) : b.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
+}

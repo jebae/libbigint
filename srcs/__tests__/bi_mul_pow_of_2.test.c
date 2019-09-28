@@ -199,7 +199,7 @@ void		test_bi_mul_pow_of_2_case5(void)
 	free(b.data);
 }
 
-// case res = bi (self mul)
+// case res = bi (mutable mul)
 void		test_bi_mul_pow_of_2_case6(void)
 {
 	printf(KYEL "test_bi_mul_pow_of_2_case6\n" KNRM);

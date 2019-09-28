@@ -438,3 +438,101 @@ void		test_bi_add_bi_case9(void)
 	free(b.data);
 	free(c.data);
 }
+
+// case mutable b = c
+void		test_bi_add_bi_case10(void)
+{
+	printf(KYEL "test_bi_add_bi_case10\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xff);
+	bi_push(&b, 0x10);
+	res = bi_add_bi(&a, &b, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0xffff + 0x10) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0xffff + 0x10) : b.sign"
+	);
+
+	test(
+		b.occupied == 3,
+		"bi_add_bi (0xffff + 0x10) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0x0f,
+		"bi_add_bi (0xffff + 0x10) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0x00,
+		"bi_add_bi (0xffff + 0x10) : b.data[1]"
+	);
+
+	test(
+		b.data[2] == 0x01,
+		"bi_add_bi (0xffff + 0x10) : b.data[2]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable a = c
+void		test_bi_add_bi_case11(void)
+{
+	printf(KYEL "test_bi_add_bi_case11\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xff);
+	bi_push(&b, 0x10);
+	res = bi_add_bi(&a, &b, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_add_bi (0xffff + 0x10) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_POSITIVE,
+		"bi_add_bi (0xffff + 0x10) : b.sign"
+	);
+
+	test(
+		a.occupied == 3,
+		"bi_add_bi (0xffff + 0x10) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0x0f,
+		"bi_add_bi (0xffff + 0x10) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0x00,
+		"bi_add_bi (0xffff + 0x10) : a.data[1]"
+	);
+
+	test(
+		a.data[2] == 0x01,
+		"bi_add_bi (0xffff + 0x10) : a.data[2]"
+	);
+
+	free(a.data);
+	free(b.data);
+}

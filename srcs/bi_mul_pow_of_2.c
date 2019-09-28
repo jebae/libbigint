@@ -15,11 +15,8 @@ static int		set_mem(
 		((total_bits % unit_bits) ? 1 : 0);
 	if (res == bi)
 	{
-		if (bi->size < size)
-		{
-			if (bi_expand(bi, size - bi->size) == BI_FAIL)
-				return (BI_FAIL);
-		}
+		if (bi_expand_at_least(bi, size) == BI_FAIL)
+			return (BI_FAIL);
 	}
 	else
 	{

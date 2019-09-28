@@ -12,12 +12,12 @@ void		test(int res, const char *msg);
 void		test_bi_new_case1(void);
 void		test_bi_erase_case1(void);
 void		test_bi_expand_case1(void);
+void		test_bi_resize_case1(void);
+void		test_bi_resize_case2(void);
 void		test_bi_push_case1(void);
 void		test_bi_push_case2(void);
-void		test_bi_plus_bi_case1(void);
-void		test_bi_plus_bi_case2(void);
-void		test_bi_shrink_case1(void);
-void		test_bi_shrink_case2(void);
+void		test_bi_expand_at_least_case1(void);
+void		test_bi_expand_at_least_case2(void);
 
 /*
 ** operator utils test
@@ -43,6 +43,8 @@ void		test_bi_add_bi_case6(void);
 void		test_bi_add_bi_case7(void);
 void		test_bi_add_bi_case8(void);
 void		test_bi_add_bi_case9(void);
+void		test_bi_add_bi_case10(void);
+void		test_bi_add_bi_case11(void);
 
 /*
 ** bi_sub_bi test
@@ -57,6 +59,8 @@ void		test_bi_sub_bi_case7(void);
 void		test_bi_sub_bi_case8(void);
 void		test_bi_sub_bi_case9(void);
 void		test_bi_sub_bi_case10(void);
+void		test_bi_sub_bi_case11(void);
+void		test_bi_sub_bi_case12(void);
 
 /*
 ** bi_mul_pow_of_2 test
@@ -67,5 +71,25 @@ void		test_bi_mul_pow_of_2_case3(void);
 void		test_bi_mul_pow_of_2_case4(void);
 void		test_bi_mul_pow_of_2_case5(void);
 void		test_bi_mul_pow_of_2_case6(void);
+
+/*
+** bi_abs test
+*/
+void		test_bi_abs_case1(void);
+void		test_bi_abs_case2(void);
+
+/*
+** bi_mod_n_pow_of_2_plus_1 test
+*/
+void		test_bi_mod_n_pow_of_2_plus_1_case1(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case2(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case3(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case4(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case5(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case6(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case7(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case8(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case9(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case10(void);
 
 #endif

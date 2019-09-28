@@ -55,29 +55,25 @@ unsigned char	bi_add_byte_by_byte(
 )
 {
 	size_t			i;
+	size_t			j;
 	unsigned char	carry;
 
 	i = 0;
 	carry = 0x00;
-	while (i < smaller->occupied)
+	j = smaller->occupied;
+	while (i < j)
 	{
-		bi_push(res,
-			bi_add_one_byte(smaller->data[i], bigger->data[i], &carry));
+		res->data[i] =
+			bi_add_one_byte(smaller->data[i], bigger->data[i], &carry);
 		i++;
 	}
-	while (i < bigger->occupied)
+	j = bigger->occupied;
+	while (i < j)
 	{
-		bi_push(res, bi_add_one_byte(bigger->data[i], 0x00, &carry));
+		res->data[i] =
+			bi_add_one_byte(bigger->data[i], 0x00, &carry);
 		i++;
 	}
+	res->occupied = i;
 	return (carry);
-}
-
-void			update_occupied(t_bigint *bi)
-{
-	size_t		i;
-
-	i = 0;
-	while (bi->occupied > 0 && bi->data[bi->occupied - 1] == 0x00)
-		(bi->occupied)--;
 }

@@ -471,7 +471,7 @@ void		test_bi_sub_bi_case8(void)
 
 	test(
 		c.sign == BI_SIGN_NEGATIVE,
-		"bi_sub_bi (-0xefff - 0xff0f) : c.occupied"
+		"bi_sub_bi (-0xefff - 0xff0f) : c.sign"
 	);
 
 	test(
@@ -524,7 +524,7 @@ void		test_bi_sub_bi_case9(void)
 
 	test(
 		c.sign == BI_SIGN_POSITIVE,
-		"bi_sub_bi (0xefff - -0xff0f) : c.occupied"
+		"bi_sub_bi (0xefff - -0xff0f) : c.sign"
 	);
 
 	test(
@@ -577,7 +577,7 @@ void		test_bi_sub_bi_case10(void)
 
 	test(
 		c.sign == BI_SIGN_POSITIVE,
-		"bi_sub_bi (-0xefff - -0xff0f) : c.occupied"
+		"bi_sub_bi (-0xefff - -0xff0f) : c.sign"
 	);
 
 	test(
@@ -598,4 +598,94 @@ void		test_bi_sub_bi_case10(void)
 	free(a.data);
 	free(b.data);
 	free(c.data);
+}
+
+// case mutable a = c
+void		test_bi_sub_bi_case11(void)
+{
+	printf(KYEL "test_bi_sub_bi_case11\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xef);
+	bi_push(&b, 0x0f);
+	bi_push(&b, 0xff);
+	res = bi_sub_bi(&a, &b, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0xefff - 0xff0f) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_NEGATIVE,
+		"bi_sub_bi (0xefff - 0xff0f) : a.sign"
+	);
+
+	test(
+		a.occupied == 2,
+		"bi_sub_bi (0xefff - 0xff0f) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0x10,
+		"bi_sub_bi (0xefff - 0xff0f) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0x0f,
+		"bi_sub_bi (0xefff - 0xff0f) : a.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable b = c
+void		test_bi_sub_bi_case12(void)
+{
+	printf(KYEL "test_bi_sub_bi_case12\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xef);
+	bi_push(&b, 0x0f);
+	bi_push(&b, 0xff);
+	res = bi_sub_bi(&a, &b, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0xefff - 0xff0f) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_NEGATIVE,
+		"bi_sub_bi (0xefff - 0xff0f) : b.sign"
+	);
+
+	test(
+		b.occupied == 2,
+		"bi_sub_bi (0xefff - 0xff0f) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0x10,
+		"bi_sub_bi (0xefff - 0xff0f) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0x0f,
+		"bi_sub_bi (0xefff - 0xff0f) : b.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
 }
