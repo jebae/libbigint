@@ -72,3 +72,12 @@ unsigned char	bi_add_byte_by_byte(
 	}
 	return (carry);
 }
+
+void			update_occupied(t_bigint *bi)
+{
+	size_t		i;
+
+	i = 0;
+	while (bi->occupied > 0 && bi->data[bi->occupied - 1] == 0x00)
+		(bi->occupied)--;
+}

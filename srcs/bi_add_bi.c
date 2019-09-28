@@ -24,9 +24,9 @@ int				bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	if (a->sign != b->sign)
 		return (pass_to_sub(a, b, c));
 	bi_abs_compare(a, b, &bigger, &smaller);
-	c->sign = a->sign;
 	if (bi_init(c, bigger->occupied) == BI_FAIL)
 		return (BI_FAIL);
+	c->sign = a->sign;
 	if (bigger->occupied == 0)
 		return (BI_SUCCESS);
 	carry = bi_add_byte_by_byte(bigger, smaller, c);

@@ -8,5 +8,6 @@ int			bi_init(t_bigint *bi, size_t size)
 			return (BI_FAIL);
 	}
 	bi_erase(bi);
+	bi->sign = BI_SIGN_POSITIVE;
 	return (BI_SUCCESS);
 }

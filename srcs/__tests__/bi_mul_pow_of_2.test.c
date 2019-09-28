@@ -160,3 +160,86 @@ void		test_bi_mul_pow_of_2_case4(void)
 	free(a.data);
 	free(b.data);
 }
+
+// case n = 0
+void		test_bi_mul_pow_of_2_case5(void)
+{
+	printf(KYEL "test_bi_mul_pow_of_2_case5\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xa9);
+	res = bi_mul_pow_of_2(&a, 0, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_pow_of_2 (0xa905, 0) : return value"
+	);
+
+	test(
+		b.occupied == 2,
+		"bi_mul_pow_of_2 (0xa905, 0) : b.occupied"
+	);
+
+	test(
+		b.data[0] == a.data[0],
+		"bi_mul_pow_of_2 (0xa905, 0) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == a.data[1],
+		"bi_mul_pow_of_2 (0xa905, 0) : b.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case res = bi (self mul)
+void		test_bi_mul_pow_of_2_case6(void)
+{
+	printf(KYEL "test_bi_mul_pow_of_2_case6\n" KNRM);
+	t_bigint	a;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xa9);
+	res = bi_mul_pow_of_2(&a, 9, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_pow_of_2 (0xa905, 9) : return value"
+	);
+
+	test(
+		a.occupied == 4,
+		"bi_mul_pow_of_2 (0xa905, 9) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0x00,
+		"bi_mul_pow_of_2 (0xa905, 9) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0x0a,
+		"bi_mul_pow_of_2 (0xa905, 9) : a.data[1]"
+	);
+
+	test(
+		a.data[2] == 0x52,
+		"bi_mul_pow_of_2 (0xa905, 9) : a.data[2]"
+	);
+
+	test(
+		a.data[3] == 0x01,
+		"bi_mul_pow_of_2 (0xa905, 9) : a.data[3]"
+	);
+
+	free(a.data);
+}

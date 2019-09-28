@@ -32,6 +32,7 @@ int					bi_push(t_bigint *bi, char value);
 ** operator utils
 */
 size_t				bi_max_bit(t_bigint *bi);
+int					bi_copy(t_bigint *dst, t_bigint *src);
 void				bi_abs_compare(
 	t_bigint *a,
 	t_bigint *b,
@@ -48,6 +49,7 @@ unsigned char		bi_add_byte_by_byte(
 	t_bigint *smaller,
 	t_bigint *res
 );
+void				update_occupied(t_bigint *bi);
 
 /*
 ** operator

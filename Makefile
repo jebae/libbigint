@@ -41,6 +41,7 @@ SRCS = bi_new.c\
 	bi_erase.c\
 	bi_expand.c\
 	bi_push.c\
+	bi_copy.c\
 	bi_abs_compare.c\
 	bi_max_bit.c\
 	bi_op_utils.c\

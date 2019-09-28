@@ -1,14 +1,5 @@
 #include "bigint.h"
 
-static void		update_occupied(t_bigint *bi)
-{
-	size_t		i;
-
-	i = 0;
-	while (bi->occupied > 0 && bi->data[bi->occupied - 1] == 0x00)
-		(bi->occupied)--;
-}
-
 static int		set_negate_data(t_bigint *bi, size_t size)
 {
 	unsigned char	*negate;
@@ -65,14 +56,17 @@ int				bi_sub_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	if (a->sign != b->sign)
 		return (pass_to_add(a, b, c));
 	bi_abs_compare(a, b, &bigger, &smaller);
-	c->sign = get_sign(a, bigger);
 	if (bi_init(c, bigger->occupied) == BI_FAIL)
 		return (BI_FAIL);
+	c->sign = get_sign(a, bigger);
 	if (bigger->occupied == 0)
 		return (BI_SUCCESS);
 	temp = *smaller;
 	if (set_negate_data(smaller, bigger->occupied) == BI_FAIL)
+	{
+		*smaller = temp;
 		return (BI_FAIL);
+	}
 	bi_add_byte_by_byte(bigger, smaller, c);
 	update_occupied(c);
 	ft_memdel((void **)&(smaller->data));

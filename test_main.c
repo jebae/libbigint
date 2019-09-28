@@ -2,7 +2,7 @@
 
 int		main(void)
 {
-	// basic function
+	// memory management
 	test_bi_new_case1();
 	test_bi_erase_case1();
 	test_bi_expand_case1();
@@ -10,6 +10,7 @@ int		main(void)
 	test_bi_push_case2();
 
 	// op_utils
+	test_bi_copy_case1();
 	test_bi_abs_compare_case1();
 	test_bi_abs_compare_case2();
 	test_bi_abs_compare_case3();
@@ -46,4 +47,6 @@ int		main(void)
 	test_bi_mul_pow_of_2_case2();
 	test_bi_mul_pow_of_2_case3();
 	test_bi_mul_pow_of_2_case4();
+	test_bi_mul_pow_of_2_case5();
+	test_bi_mul_pow_of_2_case6();
 }

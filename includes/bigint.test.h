@@ -7,7 +7,7 @@
 void		test(int res, const char *msg);
 
 /*
-** basic function test
+** memory management test
 */
 void		test_bi_new_case1(void);
 void		test_bi_erase_case1(void);
@@ -20,8 +20,9 @@ void		test_bi_shrink_case1(void);
 void		test_bi_shrink_case2(void);
 
 /*
-** op_utils test
+** operator utils test
 */
+void		test_bi_copy_case1(void);
 void		test_bi_abs_compare_case1(void);
 void		test_bi_abs_compare_case2(void);
 void		test_bi_abs_compare_case3(void);
@@ -29,12 +30,6 @@ void		test_bi_abs_compare_case4(void);
 void		test_bi_max_bit_case1(void);
 void		test_bi_max_bit_case2(void);
 void		test_bi_max_bit_case3(void);
-
-/*
-** bi_negate test
-*/
-void		test_bi_negate_case1(void);
-void		test_bi_negate_case2(void);
 
 /*
 ** bi_add_bi test
@@ -64,11 +59,13 @@ void		test_bi_sub_bi_case9(void);
 void		test_bi_sub_bi_case10(void);
 
 /*
-** bi_pow_of_2 test
+** bi_mul_pow_of_2 test
 */
 void		test_bi_mul_pow_of_2_case1(void);
 void		test_bi_mul_pow_of_2_case2(void);
 void		test_bi_mul_pow_of_2_case3(void);
 void		test_bi_mul_pow_of_2_case4(void);
+void		test_bi_mul_pow_of_2_case5(void);
+void		test_bi_mul_pow_of_2_case6(void);
 
 #endif

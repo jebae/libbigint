@@ -48,8 +48,8 @@ void		test_bi_max_bit_case3(void)
 	res = bi_max_bit(&a);
 
 	test(
-		res == 0,
-		"bi_max_bit (0x1004) : return value"
+		res == 1,
+		"bi_max_bit (0x00) : return value"
 	);
 
 	free(a.data);

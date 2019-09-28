@@ -1,5 +1,4 @@
 #include "bigint.h"
-#include <stdio.h>
 
 static int		set_mem(
 	t_bigint *res,
@@ -14,9 +13,20 @@ static int		set_mem(
 	total_bits = n + bi_max_bit(bi);
 	size = total_bits / unit_bits +
 		((total_bits % unit_bits) ? 1 : 0);
-	if (bi_init(res, size) == BI_FAIL)
-		return (BI_FAIL);
-	ft_memcpy(res->data, bi->data, bi->occupied);
+	if (res == bi)
+	{
+		if (bi->size < size)
+		{
+			if (bi_expand(bi, size - bi->size) == BI_FAIL)
+				return (BI_FAIL);
+		}
+	}
+	else
+	{
+		if (bi_init(res, size) == BI_FAIL)
+			return (BI_FAIL);
+		ft_memcpy(res->data, bi->data, bi->occupied);
+	}
 	res->occupied = size;
 	return (BI_SUCCESS);
 }
