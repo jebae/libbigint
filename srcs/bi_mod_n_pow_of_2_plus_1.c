@@ -36,21 +36,20 @@ static void		set_q(t_bigint *q, t_bigint *bi, size_t max_bit_index)
 {
 	static size_t	unit_bits = sizeof(unsigned char) * 8;
 	size_t			i;
+	size_t			j;
 
 	bi_init(q, q->size);
-	i = max_bit_index / unit_bits;
-	printf("mbi : %zu\n", max_bit_index);
-	printf("i : %zu, bi->occupied : %zu\n", i, bi->occupied);
-	while (i > 0)
+	j = max_bit_index / unit_bits;
+	i = 0;
+	while (i < j)
 	{
-		q->data[i - 1] = bi->data[i - 1];
-		i--;
+		q->data[i] = bi->data[i];
+		i++;
 	}
 	i = max_bit_index % unit_bits;
 	while (i > 0)
 	{
-		q->data[q->occupied - 1] |=
-			(bi->data[q->occupied - 1] & (1 << (i - 1)));
+		q->data[j] |= (bi->data[j] & (1 << (i - 1)));
 		i--;
 	}
 	bi_update_occupied(q);
@@ -63,8 +62,9 @@ static int		set_mod_result(
 	size_t neg_depth
 )
 {
+	if (res->occupied == 0)
+		neg_depth = 0;
 	bi_abs(res, res);
-	printf("neg : %zu\n", neg_depth);
 	if (neg_depth & 1)
 	{
 		m->data[m->occupied - 1] = 0x00;
@@ -103,24 +103,18 @@ int				bi_mod_n_pow_of_2_plus_1(
 	max_bit = bi_max_bit(bi);
 	if (init_pq(&p, &q, max_bit) == BI_FAIL)
 		return (BI_FAIL);
-	if (bi_copy(res, bi) == BI_FAIL)
+	if (bi != res && bi_copy(res, bi) == BI_FAIL)
 		return (bi_mod_n_pow_of_2_plus_1_handle_fail(&p, &q));
 	neg_depth = (bi->sign == BI_SIGN_NEGATIVE) ? 1 : 0;
 	while (max_bit - 1 >= n)
 	{
 		set_p(&p, max_bit - 1, n);
-		printf("p : %02x%02x%02x (occ : %zu)\n", p.data[2], p.data[1], p.data[0], p.occupied);
 		set_q(&q, res, max_bit - 1);
-		printf("q : %02x%02x%02x (occ : %zu)\n", q.data[2], q.data[1], q.data[0], q.occupied);
 		bi_sub_bi(&q, &p, res);
-		printf("r : %02x%02x%02x (sign : %d, occ : %zu)\n", res->data[2], res->data[1], res->data[0], res->sign, res->occupied);
-		printf("\n");
-		if (res->occupied != 0 && res->sign == BI_SIGN_NEGATIVE)
+		if (res->sign == BI_SIGN_NEGATIVE)
 			neg_depth++;
 		max_bit = bi_max_bit(res);
 	}
 	ft_memdel((void **)&(q.data));
-	if (res->occupied == 0)
-		neg_depth = 0;
 	return (set_mod_result(res, &p, n, neg_depth));
 }

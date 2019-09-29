@@ -359,25 +359,17 @@ void		test_bi_mod_n_pow_of_2_plus_1_case10(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_push(&a, 0x02);
+	bi_push(&a, 0x03);
 	bi_push(&a, 0x00);
 	bi_push(&a, 0x03);
 
-	printf("A : %02x %02x %02x\n", a.data[2], a.data[1], a.data[0]);
 	// A mod 2^16 + 1
 	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &b);
-	//res = bi_mod_n_pow_of_2_plus_1(&a, 2, &b);
 
 	test(
 		res == BI_SUCCESS,
 		"bi_mod_n_pow_of_2_plus_1 (196611 mod 65537) : return value"
 	);
-
-	printf("occupied : %zu\nresult : ", b.occupied);
-	if (b.occupied > 0)
-		for (size_t i= b.occupied; i > 0; i--)
-			printf("%02x", b.data[i - 1]);
-	printf("\n");
 
 	test(
 		b.sign == BI_SIGN_POSITIVE,
@@ -391,4 +383,170 @@ void		test_bi_mod_n_pow_of_2_plus_1_case10(void)
 
 	free(a.data);
 	free(b.data);
+}
+
+// case big 2
+void		test_bi_mod_n_pow_of_2_plus_1_case11(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case11\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xb9);
+	bi_push(&a, 0xa7);
+	bi_push(&a, 0x03);
+	bi_push(&a, 0xef);
+
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : b.sign"
+	);
+
+	test(
+		b.occupied == 2,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0x4d,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0xb6,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : b.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case big A = 0
+void		test_bi_mod_n_pow_of_2_plus_1_case12(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case12\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 65537) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 65537) : b.sign"
+	);
+
+	test(
+		b.occupied == 0,
+		"bi_mod_n_pow_of_2_plus_1 (0 mod 65537) : b.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable
+void		test_bi_mod_n_pow_of_2_plus_1_case13(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case13\n" KNRM);
+	t_bigint	a;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xb9);
+	bi_push(&a, 0xa7);
+	bi_push(&a, 0x03);
+	bi_push(&a, 0xef);
+
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.sign"
+	);
+
+	test(
+		a.occupied == 2,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0x4d,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0xb6,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[1]"
+	);
+
+	free(a.data);
+}
+
+// case mutable when n = 0
+void		test_bi_mod_n_pow_of_2_plus_1_case14(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case14\n" KNRM);
+	t_bigint	a;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xb9);
+	bi_push(&a, 0xa7);
+	bi_push(&a, 0x03);
+	bi_push(&a, 0xef);
+
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 0, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : a.sign"
+	);
+
+	test(
+		a.occupied == 1,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0x01,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : a.data[0]"
+	);
+
+	free(a.data);
 }

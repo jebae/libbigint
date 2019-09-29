@@ -73,4 +73,8 @@ int		main(void)
 	test_bi_mod_n_pow_of_2_plus_1_case8();
 	test_bi_mod_n_pow_of_2_plus_1_case9();
 	test_bi_mod_n_pow_of_2_plus_1_case10();
+	test_bi_mod_n_pow_of_2_plus_1_case11();
+	test_bi_mod_n_pow_of_2_plus_1_case12();
+	test_bi_mod_n_pow_of_2_plus_1_case13();
+	test_bi_mod_n_pow_of_2_plus_1_case14();
 }

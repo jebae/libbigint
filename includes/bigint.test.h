@@ -91,5 +91,9 @@ void		test_bi_mod_n_pow_of_2_plus_1_case7(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case8(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case9(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case10(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case11(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case12(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case13(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case14(void);
 
 #endif
