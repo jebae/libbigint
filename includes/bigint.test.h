@@ -96,4 +96,18 @@ void		test_bi_mod_n_pow_of_2_plus_1_case12(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case13(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case14(void);
 
+/*
+** bi_array test
+*/
+void		test_bi_to_bi_array_case1(void);
+void		test_bi_to_bi_array_case2(void);
+void		test_bi_to_bi_array_case3(void);
+
+/*
+** bi_mul_bi test
+*/
+void		test_bi_mul_get_block_length_case1(void);
+void		test_bi_mul_get_block_length_case2(void);
+void		test_bi_mul_get_block_length_case3(void);
+
 #endif

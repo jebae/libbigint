@@ -77,4 +77,15 @@ int					bi_mod_n_pow_of_2_plus_1(
 	t_bigint *res
 );
 
+/*
+** bi_array
+*/
+t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size);
+void				bi_del_bi_array(t_bigint *arr, size_t size);
+
+/*
+** bi_mul_bi
+*/
+size_t				bi_mul_get_block_length(t_bigint *a, t_bigint *b);
+
 # endif
