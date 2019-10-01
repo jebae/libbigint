@@ -44,3 +44,5 @@ t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size)
 	}
 	return (arr);
 }
+
+// array to bigint

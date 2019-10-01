@@ -87,4 +87,11 @@ int		main(void)
 	test_bi_mul_get_block_length_case1();
 	test_bi_mul_get_block_length_case2();
 	test_bi_mul_get_block_length_case3();
+	test_bi_mul_shuffle_order_case1();
+	test_bi_mul_shuffle_order_case2();
+	test_bi_mul_shuffle_order_case3();
+	test_bi_mul_1byte_case1();
+	test_bi_mul_1byte_case2();
+	test_bi_mul_1byte_case3();
+	//test_bi_mul_bi_case11();
 }

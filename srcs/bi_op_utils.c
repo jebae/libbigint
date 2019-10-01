@@ -32,7 +32,7 @@ void			bi_abs_compare(
 	}
 }
 
-unsigned char	bi_add_one_byte(
+unsigned char	bi_1byte_add_1byte(
 	unsigned char a,
 	unsigned char b,
 	unsigned char *carry
@@ -42,9 +42,7 @@ unsigned char	bi_add_one_byte(
 
 	res = a + b + *carry;
 	if (res > 0xff)
-		*carry = 0x01;
-	else
-		*carry = 0x00;
+		*carry = res >> 8;
 	return ((unsigned char)res);
 }
 
@@ -64,16 +62,30 @@ unsigned char	bi_add_byte_by_byte(
 	while (i < j)
 	{
 		res->data[i] =
-			bi_add_one_byte(smaller->data[i], bigger->data[i], &carry);
+			bi_1byte_add_1byte(smaller->data[i], bigger->data[i], &carry);
 		i++;
 	}
 	j = bigger->occupied;
 	while (i < j)
 	{
 		res->data[i] =
-			bi_add_one_byte(bigger->data[i], 0x00, &carry);
+			bi_1byte_add_1byte(bigger->data[i], 0x00, &carry);
 		i++;
 	}
 	res->occupied = i;
 	return (carry);
+}
+
+unsigned char	bi_1byte_mul_1byte(
+	unsigned char a,
+	unsigned char b,
+	unsigned char *carry
+)
+{
+	unsigned short		res;
+
+	res = a * b + *carry;
+	if (res > 0xff)
+		*carry = res >> 8;
+	return ((unsigned char)res);
 }

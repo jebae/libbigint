@@ -109,5 +109,22 @@ void		test_bi_to_bi_array_case3(void);
 void		test_bi_mul_get_block_length_case1(void);
 void		test_bi_mul_get_block_length_case2(void);
 void		test_bi_mul_get_block_length_case3(void);
+void		test_bi_mul_shuffle_order_case1(void);
+void		test_bi_mul_shuffle_order_case2(void);
+void		test_bi_mul_shuffle_order_case3(void);
+void		test_bi_mul_1byte_case1(void);
+void		test_bi_mul_1byte_case2(void);
+void		test_bi_mul_1byte_case3(void);
+void		test_bi_mul_bi_case1(void);
+void		test_bi_mul_bi_case2(void);
+void		test_bi_mul_bi_case3(void);
+void		test_bi_mul_bi_case4(void);
+void		test_bi_mul_bi_case5(void);
+void		test_bi_mul_bi_case6(void);
+void		test_bi_mul_bi_case7(void);
+void		test_bi_mul_bi_case8(void);
+void		test_bi_mul_bi_case9(void);
+void		test_bi_mul_bi_case10(void);
+void		test_bi_mul_bi_case11(void);
 
 #endif

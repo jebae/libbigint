@@ -39,7 +39,7 @@ void				bi_abs_compare(
 	t_bigint **bigger,
 	t_bigint **smaller
 );
-unsigned char		bi_add_one_byte(
+unsigned char		bi_1byte_add_1byte(
 	unsigned char a,
 	unsigned char b,
 	unsigned char *carry
@@ -50,6 +50,11 @@ unsigned char		bi_add_byte_by_byte(
 	t_bigint *res
 );
 void				bi_update_occupied(t_bigint *bi);
+unsigned char		bi_1byte_mul_1byte(
+	unsigned char a,
+	unsigned char b,
+	unsigned char *carry
+);
 
 /*
 ** operator
@@ -86,6 +91,12 @@ void				bi_del_bi_array(t_bigint *arr, size_t size);
 /*
 ** bi_mul_bi
 */
+int					bi_mul_1byte(
+	t_bigint *bi,
+	unsigned char factor,
+	t_bigint *res
+);
 size_t				bi_mul_get_block_length(t_bigint *a, t_bigint *b);
+int					bi_mul_shuffle_order(t_bigint *arr, size_t size);
 
 # endif
