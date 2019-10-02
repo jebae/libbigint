@@ -113,7 +113,46 @@ void		test_bi_mul_1byte_case3(void)
 	free(a.data);
 	free(b.data);
 }
-/*
+
+void		test_bi_mul_1byte_case4(void)
+{
+	printf(KYEL "test_bi_mul_1byte_case4\n" KNRM);
+	t_bigint		a;
+	t_bigint		b;
+	unsigned char	factor;
+	int				res;
+	unsigned char	a_arr[9] = { 0x45, 0x09, 0xf3, 0x0e, 0x98, 0xa8, 0x70, 0x10, 0x99 };
+	unsigned char	expected[10] = {
+		0x02, 0xf1, 0xae, 0x84, 0x71, 0x1f, 0x71, 0xab, 0x8b, 0x0f
+	};
+
+	factor = 0x1a;
+	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	for (int i=0; i < 9; i++)
+		bi_push(&a, a_arr[i]);
+	res = bi_mul_1byte(&a, factor, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_bi (0x991070a8980ef30945 * 0x1a) : return value"
+	);
+
+	test(
+		b.occupied == 10,
+		"bi_mul_bi (0x991070a8980ef30945 * 0x1a) : b.occupied"
+	);
+
+	for (int i=0; i < 10; i++)
+		test(
+			b.data[i] == expected[i],
+			"bi_mul_bi (0x991070a8980ef30945 * 0x1a) : b.occupied"
+		);
+
+	free(a.data);
+	free(b.data);
+}
+
 // case small
 void		test_bi_mul_bi_case1(void)
 {
@@ -165,11 +204,15 @@ void		test_bi_mul_bi_case2(void)
 	int				res;
 	unsigned char	a_arr[9] = { 0x45, 0x09, 0xf3, 0x0e, 0x98, 0xa8, 0x70, 0x10, 0x99 };
 	unsigned char	b_arr[9] = { 0x22, 0x1a, 0xfe, 0x8e, 0x90, 0xb1, 0x20, 0x34, 0xe9 };
-	unsigned char	expected[10] = { 0x6a, 0x12, 0xb6, 0xa7, 0x3f, 0x5e, 0xc5, 0x73, 0xaa, 0x8e };
+	unsigned char	expected[18] = {
+		0x2a, 0x3d, 0xae, 0x23, 0xce, 0x65, 0xfd, 0xdd, 0x39,
+		0x11, 0x3b, 0x34, 0x86, 0x8d, 0x6c, 0x21, 0x6f, 0x8b
+	};
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	for (int i=0; i < 9; i++)
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	for (size_t i=0; i < 9; i++)
 	{
 		bi_push(&a, a_arr[i]);
 		bi_push(&b, b_arr[i]);
@@ -182,11 +225,11 @@ void		test_bi_mul_bi_case2(void)
 	);
 
 	test(
-		c.occupied == 10,
-		"bi_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.occupied value"
+		c.occupied == 18,
+		"bi_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.occupied"
 	);
 
-	for (int i=0; i < 10; i++)
+	for (size_t i=0; i < 18; i++)
 		test(
 			c.data[i] == expected[i],
 			"bi_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.data[i]"
@@ -208,6 +251,7 @@ void		test_bi_mul_bi_case3(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0x67);
 	bi_push(&a, 0x78);
 	bi_push(&a, 0x89);
@@ -224,7 +268,7 @@ void		test_bi_mul_bi_case3(void)
 		"bi_mul_bi (0x897867 * 0x01) : c.occupied"
 	);
 
-	for (int i=0; i < a.occupied; i++)
+	for (size_t i=0; i < a.occupied; i++)
 		test(
 			c.data[i] == a.data[i],
 			"bi_mul_bi (0x897867 * 0x01) : c.data[i]"
@@ -246,6 +290,7 @@ void		test_bi_mul_bi_case4(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0x01);
 	bi_push(&b, 0x67);
 	bi_push(&b, 0x78);
@@ -262,7 +307,7 @@ void		test_bi_mul_bi_case4(void)
 		"bi_mul_bi (0x01 * 0x897867) : c.occupied"
 	);
 
-	for (int i=0; i < b.occupied; i++)
+	for (size_t i=0; i < b.occupied; i++)
 		test(
 			c.data[i] == b.data[i],
 			"bi_mul_bi (0x01 * 0x897867) : c.data[i]"
@@ -285,6 +330,7 @@ void		test_bi_mul_bi_case5(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
@@ -307,7 +353,7 @@ void		test_bi_mul_bi_case5(void)
 		"bi_mul_bi (0x32e6 * -0x897867) : c.occupied"
 	);
 
-	for (int i=0; i < b.occupied; i++)
+	for (size_t i=0; i < b.occupied; i++)
 		test(
 			c.data[i] == expected[i],
 			"bi_mul_bi (0x32e6 * -0x897867) : c.data[i]"
@@ -330,6 +376,7 @@ void		test_bi_mul_bi_case6(void)
 
 	bi_new(&a, 1, BI_SIGN_NEGATIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
@@ -352,7 +399,7 @@ void		test_bi_mul_bi_case6(void)
 		"bi_mul_bi (-0x32e6 * 0x897867) : c.occupied"
 	);
 
-	for (int i=0; i < b.occupied; i++)
+	for (size_t i=0; i < b.occupied; i++)
 		test(
 			c.data[i] == expected[i],
 			"bi_mul_bi (-0x32e6 * 0x897867) : c.data[i]"
@@ -375,6 +422,7 @@ void		test_bi_mul_bi_case7(void)
 
 	bi_new(&a, 1, BI_SIGN_NEGATIVE);
 	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
@@ -388,7 +436,7 @@ void		test_bi_mul_bi_case7(void)
 	);
 
 	test(
-		c.sign == BI_SIGN_NEGATIVE,
+		c.sign == BI_SIGN_POSITIVE,
 		"bi_mul_bi (-0x32e6 * -0x897867) : c.sign"
 	);
 
@@ -397,7 +445,7 @@ void		test_bi_mul_bi_case7(void)
 		"bi_mul_bi (-0x32e6 * -0x897867) : c.occupied"
 	);
 
-	for (int i=0; i < b.occupied; i++)
+	for (size_t i=0; i < b.occupied; i++)
 		test(
 			c.data[i] == expected[i],
 			"bi_mul_bi (-0x32e6 * -0x897867) : c.data[i]"
@@ -419,6 +467,7 @@ void		test_bi_mul_bi_case8(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	res = bi_mul_bi(&a, &b, &c);
@@ -449,6 +498,7 @@ void		test_bi_mul_bi_case9(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	bi_push(&b, 0xe6);
 	bi_push(&b, 0x32);
 	res = bi_mul_bi(&a, &b, &c);
@@ -479,6 +529,7 @@ void		test_bi_mul_bi_case10(void)
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
 	res = bi_mul_bi(&a, &b, &c);
 
 	test(
@@ -496,7 +547,7 @@ void		test_bi_mul_bi_case10(void)
 	free(c.data);
 }
 
-// case big to handle array length = 64
+// case big
 void		test_bi_mul_bi_case11(void)
 {
 	printf(KYEL "test_bi_mul_bi_case11\n" KNRM);
@@ -504,18 +555,29 @@ void		test_bi_mul_bi_case11(void)
 	t_bigint		b;
 	t_bigint		c;
 	int				res;
-	unsigned char	a_arr[19] = { 0xfe, };
-	unsigned char	b_arr[17] = { 0xdf, };
-	unsigned char	expected[19] = {
-		0x82, 0xcb, 0x0e, 0x53, 0x97, 0xdb, 0x1f, 0x64, 0x88, 0x14, 0x8c,
-		0x57, 0x13, 0xcf, 0x8a, 0x46, 0x02, 0xbe, 0xfb
+	unsigned char	a_arr[19] = {
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe
+	};
+	unsigned char	b_arr[17] = {
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf
+	};
+	unsigned char	expected[36] = {
+		0x42, 0x61, 0x81, 0xa1, 0xc1, 0xe1, 0x01, 0x22, 0x42, 0x62, 0x82,
+		0xa2, 0xc2, 0xe2, 0x02, 0x23, 0x43, 0x21, 0x22, 0xe0, 0xc0, 0xa0,
+		0x80, 0x60, 0x40, 0x20, 0x00, 0xe0, 0xbf, 0x9f, 0x7f, 0x5f, 0x3f,
+		0x1f, 0xff, 0xde
 	};
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	for (int i=0; i < 19; i++)
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	for (size_t i=0; i < 19; i++)
 		bi_push(&a, a_arr[i]);
-	for (int i=0; i < 17; i++)
+	for (size_t i=0; i < 17; i++)
 		bi_push(&b, b_arr[i]);
 	res = bi_mul_bi(&a, &b, &c);
 
@@ -525,20 +587,121 @@ void		test_bi_mul_bi_case11(void)
 	);
 
 	test(
-		c.occupied == 19,
+		c.occupied == 36,
 		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : c.occupied"
 	);
 
-	for (int i=0; i < 19; i++)
+	for (size_t i=0; i < 36; i++)
 		test(
 			c.data[i] == expected[i],
-		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : c.data[i]"
+			"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : c.data[i]"
 		);
 
 	free(a.data);
 	free(b.data);
 	free(c.data);
 }
-*/
 
-// mutable
+// case mutable a = c
+void		test_bi_mul_bi_case12(void)
+{
+	printf(KYEL "test_bi_mul_bi_case12\n" KNRM);
+	t_bigint		a;
+	t_bigint		b;
+	int				res;
+	unsigned char	a_arr[19] = {
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe
+	};
+	unsigned char	b_arr[17] = {
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf
+	};
+	unsigned char	expected[36] = {
+		0x42, 0x61, 0x81, 0xa1, 0xc1, 0xe1, 0x01, 0x22, 0x42, 0x62, 0x82,
+		0xa2, 0xc2, 0xe2, 0x02, 0x23, 0x43, 0x21, 0x22, 0xe0, 0xc0, 0xa0,
+		0x80, 0x60, 0x40, 0x20, 0x00, 0xe0, 0xbf, 0x9f, 0x7f, 0x5f, 0x3f,
+		0x1f, 0xff, 0xde
+	};
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	for (size_t i=0; i < 19; i++)
+		bi_push(&a, a_arr[i]);
+	for (size_t i=0; i < 17; i++)
+		bi_push(&b, b_arr[i]);
+	res = bi_mul_bi(&a, &b, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : return value"
+	);
+
+	test(
+		a.occupied == 36,
+		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : a.occupied"
+	);
+
+	for (size_t i=0; i < 36; i++)
+		test(
+			a.data[i] == expected[i],
+			"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : a.data[i]"
+		);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable b = c
+void		test_bi_mul_bi_case13(void)
+{
+	printf(KYEL "test_bi_mul_bi_case13\n" KNRM);
+	t_bigint		a;
+	t_bigint		b;
+	int				res;
+	unsigned char	a_arr[19] = {
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe,
+		0xfe, 0xfe, 0xfe
+	};
+	unsigned char	b_arr[17] = {
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xdf,
+		0xdf
+	};
+	unsigned char	expected[36] = {
+		0x42, 0x61, 0x81, 0xa1, 0xc1, 0xe1, 0x01, 0x22, 0x42, 0x62, 0x82,
+		0xa2, 0xc2, 0xe2, 0x02, 0x23, 0x43, 0x21, 0x22, 0xe0, 0xc0, 0xa0,
+		0x80, 0x60, 0x40, 0x20, 0x00, 0xe0, 0xbf, 0x9f, 0x7f, 0x5f, 0x3f,
+		0x1f, 0xff, 0xde
+	};
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	for (size_t i=0; i < 19; i++)
+		bi_push(&a, a_arr[i]);
+	for (size_t i=0; i < 17; i++)
+		bi_push(&b, b_arr[i]);
+	res = bi_mul_bi(&a, &b, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : return value"
+	);
+
+	test(
+		b.occupied == 36,
+		"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : b.occupied"
+	);
+
+	for (size_t i=0; i < 36; i++)
+		test(
+			b.data[i] == expected[i],
+			"bi_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : b.data[i]"
+		);
+
+	free(a.data);
+	free(b.data);
+}

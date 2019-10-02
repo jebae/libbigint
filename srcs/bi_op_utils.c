@@ -41,8 +41,7 @@ unsigned char	bi_1byte_add_1byte(
 	unsigned short		res;
 
 	res = a + b + *carry;
-	if (res > 0xff)
-		*carry = res >> 8;
+	*carry = res >> 8;
 	return ((unsigned char)res);
 }
 
@@ -85,7 +84,6 @@ unsigned char	bi_1byte_mul_1byte(
 	unsigned short		res;
 
 	res = a * b + *carry;
-	if (res > 0xff)
-		*carry = res >> 8;
+	*carry = res >> 8;
 	return ((unsigned char)res);
 }

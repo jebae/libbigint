@@ -6,8 +6,8 @@
 
 # define BI_SUCCESS				0
 # define BI_FAIL				1
-# define BI_SIGN_POSITIVE		1
-# define BI_SIGN_NEGATIVE		0
+# define BI_SIGN_POSITIVE		0
+# define BI_SIGN_NEGATIVE		1
 
 typedef struct		s_bigint
 {
@@ -98,5 +98,6 @@ int					bi_mul_1byte(
 );
 size_t				bi_mul_get_block_length(t_bigint *a, t_bigint *b);
 int					bi_mul_shuffle_order(t_bigint *arr, size_t size);
+int					bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 
 # endif

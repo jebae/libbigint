@@ -15,6 +15,7 @@ static int	copy_arr(t_bigint *arr, t_bigint **copy, size_t size)
 	return (BI_SUCCESS);
 }
 
+// have to rename like strassen_mul
 size_t		bi_mul_get_block_length(t_bigint *a, t_bigint *b)
 {
 	static size_t	unit_bits = 8;

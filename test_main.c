@@ -57,6 +57,7 @@ int		main(void)
 	test_bi_mul_pow_of_2_case4();
 	test_bi_mul_pow_of_2_case5();
 	test_bi_mul_pow_of_2_case6();
+	test_bi_mul_pow_of_2_case7();
 
 	// abs
 	test_bi_abs_case1();
@@ -93,5 +94,18 @@ int		main(void)
 	test_bi_mul_1byte_case1();
 	test_bi_mul_1byte_case2();
 	test_bi_mul_1byte_case3();
-	//test_bi_mul_bi_case11();
+	test_bi_mul_1byte_case4();
+	test_bi_mul_bi_case1();
+	test_bi_mul_bi_case2();
+	test_bi_mul_bi_case3();
+	test_bi_mul_bi_case4();
+	test_bi_mul_bi_case5();
+	test_bi_mul_bi_case6();
+	test_bi_mul_bi_case7();
+	test_bi_mul_bi_case8();
+	test_bi_mul_bi_case9();
+	test_bi_mul_bi_case10();
+	test_bi_mul_bi_case11();
+	test_bi_mul_bi_case12();
+	test_bi_mul_bi_case13();
 }

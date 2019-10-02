@@ -9,7 +9,7 @@ void		test_bi_mul_pow_of_2_case1(void)
 	int			res;
 
 	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
 	bi_push(&a, 0xff);
 	res = bi_mul_pow_of_2(&a, 7, &b);
 
@@ -19,7 +19,7 @@ void		test_bi_mul_pow_of_2_case1(void)
 	);
 
 	test(
-		b.sign = BI_SIGN_POSITIVE,
+		b.sign == a.sign,
 		"bi_mul_pow_of_2 (0xff, 7) : b.sign"
 	);
 
@@ -242,4 +242,30 @@ void		test_bi_mul_pow_of_2_case6(void)
 	);
 
 	free(a.data);
+}
+
+// case bi = 0
+void		test_bi_mul_pow_of_2_case7(void)
+{
+	printf(KYEL "test_bi_mul_pow_of_2_case7\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	res = bi_mul_pow_of_2(&a, 4, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mul_pow_of_2 (0x00, 0) : return value"
+	);
+
+	test(
+		b.occupied == 0,
+		"bi_mul_pow_of_2 (0x00, 0) : b.occupied"
+	);
+
+	free(a.data);
+	free(b.data);
 }

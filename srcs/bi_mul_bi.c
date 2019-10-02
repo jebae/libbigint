@@ -7,7 +7,32 @@ static int	handle_fail(t_bigint *res, t_bigint *to_add)
 	return (BI_FAIL);
 }
 
-int			bi_mul_1byte(
+static int	bi_mul_bi_preprocess(
+	t_bigint *res,
+	t_bigint *to_add
+)
+{
+	if (bi_new(res, 1, BI_SIGN_POSITIVE) == BI_FAIL)
+		return (BI_FAIL);
+	if (bi_new(to_add, 1, BI_SIGN_POSITIVE) == BI_FAIL)
+	{
+		ft_memdel((void **)&(res->data));
+		return (BI_FAIL);
+	}
+	return (BI_SUCCESS);
+}
+
+static char		get_sign(t_bigint *a, t_bigint *b)
+{
+	if (a->occupied == 0 || b->occupied == 0)
+		return (BI_SIGN_POSITIVE);
+	else if (a->sign == b->sign)
+		return (BI_SIGN_POSITIVE);
+	else
+		return (BI_SIGN_NEGATIVE);
+}
+
+int				bi_mul_1byte(
 	t_bigint *bi,
 	unsigned char factor,
 	t_bigint *res
@@ -39,20 +64,23 @@ int			bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	t_bigint		res;
 	t_bigint		to_add;
 
-	if (bi_new(&res, 1, a->sign) == BI_FAIL)
+	if (bi_mul_bi_preprocess(&res, &to_add) == BI_FAIL)
 		return (BI_FAIL);
-	if (bi_new(&to_add, 1, BI_SIGN_POSITIVE) == BI_FAIL)
-	{
-		ft_memdel((void **)&res.data);
-		return (BI_FAIL);
-	}
 	i = 0;
 	while (i < b->occupied)
 	{
 		if (bi_mul_1byte(a, b->data[i], &to_add) == BI_FAIL)
 			return (handle_fail(&res, &to_add));
-		// push pad to_add
-		bi_add_bi(&res, &to_add, &res);
+		if (bi_mul_pow_of_2(&to_add, 8 * i, &to_add) == BI_FAIL)
+			return (handle_fail(&res, &to_add));
+		if (bi_add_bi(&res, &to_add, &res) == BI_FAIL)
+			return (handle_fail(&res, &to_add));
 		i++;
 	}
+	res.sign = get_sign(a, b);
+	if (bi_copy(c, &res) == BI_FAIL)
+		return (BI_FAIL);
+	ft_memdel((void **)&to_add.data);
+	ft_memdel((void **)&res.data);
+	return (BI_SUCCESS);
 }

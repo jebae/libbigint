@@ -71,6 +71,7 @@ void		test_bi_mul_pow_of_2_case3(void);
 void		test_bi_mul_pow_of_2_case4(void);
 void		test_bi_mul_pow_of_2_case5(void);
 void		test_bi_mul_pow_of_2_case6(void);
+void		test_bi_mul_pow_of_2_case7(void);
 
 /*
 ** bi_abs test
@@ -115,6 +116,7 @@ void		test_bi_mul_shuffle_order_case3(void);
 void		test_bi_mul_1byte_case1(void);
 void		test_bi_mul_1byte_case2(void);
 void		test_bi_mul_1byte_case3(void);
+void		test_bi_mul_1byte_case4(void);
 void		test_bi_mul_bi_case1(void);
 void		test_bi_mul_bi_case2(void);
 void		test_bi_mul_bi_case3(void);
@@ -126,5 +128,7 @@ void		test_bi_mul_bi_case8(void);
 void		test_bi_mul_bi_case9(void);
 void		test_bi_mul_bi_case10(void);
 void		test_bi_mul_bi_case11(void);
+void		test_bi_mul_bi_case12(void);
+void		test_bi_mul_bi_case13(void);
 
 #endif

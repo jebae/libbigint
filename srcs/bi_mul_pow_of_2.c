@@ -74,6 +74,7 @@ int				bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
 		return (BI_FAIL);
 	shift_by_byte(res, n, unit_bits);
 	shift_by_bit(res, n, unit_bits);
-	res->sign = BI_SIGN_POSITIVE;
+	res->sign = bi->sign;
+	bi_update_occupied(res);
 	return (BI_SUCCESS);
 }
