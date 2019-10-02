@@ -13,8 +13,7 @@ static int		init_pq(t_bigint *p, t_bigint *q, size_t max_bit)
 	size_t			size;
 
 	size = max_bit / unit_bits + ((max_bit % unit_bits) ? 1 : 0);
-	if (bi_new(p, size, BI_SIGN_POSITIVE) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(bi_new(p, size, BI_SIGN_POSITIVE));
 	if (bi_new(q, size, BI_SIGN_POSITIVE) == BI_FAIL)
 	{
 		ft_memdel((void **)&(p->data));
@@ -101,8 +100,7 @@ int				bi_mod_n_pow_of_2_plus_1(
 	if (n == 0)
 		return (bi_mod_n_pow_of_2_plus_1_handle_0(bi, res));
 	max_bit = bi_max_bit(bi);
-	if (init_pq(&p, &q, max_bit) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(init_pq(&p, &q, max_bit));
 	if (bi != res && bi_copy(res, bi) == BI_FAIL)
 		return (bi_mod_n_pow_of_2_plus_1_handle_fail(&p, &q));
 	neg_depth = (bi->sign == BI_SIGN_NEGATIVE) ? 1 : 0;

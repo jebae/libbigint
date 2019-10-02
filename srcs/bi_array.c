@@ -1,9 +1,15 @@
 #include "bigint.h"
 
-static t_bigint		*handle_fail(t_bigint *arr, size_t size)
+static t_bigint		*to_array_handle_fail(t_bigint *arr, size_t size)
 {
 	bi_del_bi_array(arr, size);
 	return (NULL);
+}
+
+static int			to_bi_handle_fail(t_bigint *to_add)
+{
+	ft_memdel((void **)&(to_add->data));
+	return (BI_FAIL);
 }
 
 void				bi_del_bi_array(t_bigint *arr, size_t size)
@@ -32,17 +38,40 @@ t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size)
 	while (i < bi->occupied && i < size)
 	{
 		if (bi_new(arr + i, 1, bi->sign) == BI_FAIL)
-			return (handle_fail(arr, size));
+			return (to_array_handle_fail(arr, size));
 		bi_push(&(arr[i]), bi->data[i]);
 		i++;
 	}
 	while (i < size)
 	{
 		if (bi_new(arr + i, 1, BI_SIGN_POSITIVE) == BI_FAIL)
-			return (handle_fail(arr, size));
+			return (to_array_handle_fail(arr, size));
 		i++;
 	}
 	return (arr);
 }
 
-// array to bigint
+int					bi_array_to_bi(
+	t_bigint *arr,
+	size_t size, 
+	t_bigint *res
+)
+{
+	static size_t	unit_bits = sizeof(unsigned char) * 8;
+	size_t			i;
+	t_bigint		to_add;
+
+	BI_HANDLE_FUNC_FAIL(bi_init(res, 1));
+	BI_HANDLE_FUNC_FAIL(bi_new(&to_add, 1, BI_SIGN_POSITIVE));
+	i = 0;
+	while (i < size)
+	{
+		if (bi_mul_pow_of_2(&(arr[i]), unit_bits * i, &to_add) == BI_FAIL)
+			return (to_bi_handle_fail(&to_add));
+		if (bi_add_bi(res, &to_add, res) == BI_FAIL)
+			return (to_bi_handle_fail(&to_add));
+		i++;
+	}
+	ft_memdel((void **)&to_add.data);
+	return (BI_SUCCESS);
+}

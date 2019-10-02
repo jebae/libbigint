@@ -37,7 +37,7 @@ static void		shift_by_byte(t_bigint *bi, size_t n, size_t unit_bits)
 	if (shift == 0)
 		return ;
 	i = bi->occupied;
-	while (i - shift > 0)
+	while (i > shift)
 	{
 		bi->data[i - 1] = bi->data[i - 1 - shift];
 		bi->data[i - 1 - shift] = 0x00;
@@ -47,7 +47,7 @@ static void		shift_by_byte(t_bigint *bi, size_t n, size_t unit_bits)
 
 static void		shift_by_bit(t_bigint *bi, size_t n, size_t unit_bits)
 {
-	int				shift;
+	size_t			shift;
 	size_t			i;
 	unsigned char	*prev;
 

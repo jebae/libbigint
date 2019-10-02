@@ -1,9 +1,9 @@
 #include "bigint.test.h"
 
 // case size = 8
-void		test_bi_mul_shuffle_order_case1(void)
+void		test_bi_strassen_mul_shuffle_order_case1(void)
 {
-	printf(KYEL "test_bi_mul_shuffle_order_case1\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_shuffle_order_case1\n" KNRM);
 	t_bigint	bi;
 	t_bigint	*arr;
 	int			res;
@@ -14,17 +14,17 @@ void		test_bi_mul_shuffle_order_case1(void)
 	for (size_t i=0; i < size; i++)
 		bi_push(&bi, i);
 	arr = bi_to_bi_array(&bi, size);
-	res = bi_mul_shuffle_order(arr, size);
+	res = bi_strassen_mul_shuffle_order(arr, size);
 
 	test(
 		res == BI_SUCCESS,
-		"bi_mul_shuffle_order (size = 8) : return value"
+		"bi_strassen_mul_shuffle_order (size = 8) : return value"
 	);
 
 	for (size_t i=0; i < size; i++)
 		test(
 			arr[i].data[0] == expected[i],
-			"bi_mul_shuffle_order (size = 8) : arr[i].data"
+			"bi_strassen_mul_shuffle_order (size = 8) : arr[i].data"
 		);
 
 	free(bi.data);
@@ -32,9 +32,9 @@ void		test_bi_mul_shuffle_order_case1(void)
 }
 
 // case size = 16
-void		test_bi_mul_shuffle_order_case2(void)
+void		test_bi_strassen_mul_shuffle_order_case2(void)
 {
-	printf(KYEL "test_bi_mul_shuffle_order_case2\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_shuffle_order_case2\n" KNRM);
 	t_bigint	bi;
 	t_bigint	*arr;
 	int			res;
@@ -48,17 +48,17 @@ void		test_bi_mul_shuffle_order_case2(void)
 	for (size_t i=0; i < size; i++)
 		bi_push(&bi, i);
 	arr = bi_to_bi_array(&bi, size);
-	res = bi_mul_shuffle_order(arr, size);
+	res = bi_strassen_mul_shuffle_order(arr, size);
 
 	test(
 		res == BI_SUCCESS,
-		"bi_mul_shuffle_order (size = 16) : return value"
+		"bi_strassen_mul_shuffle_order (size = 16) : return value"
 	);
 
 	for (size_t i=0; i < size; i++)
 		test(
 			arr[i].data[0] == expected[i],
-			"bi_mul_shuffle_order (size = 16) : arr[i].data"
+			"bi_strassen_mul_shuffle_order (size = 16) : arr[i].data"
 		);
 
 	free(bi.data);
@@ -66,9 +66,9 @@ void		test_bi_mul_shuffle_order_case2(void)
 }
 
 // case size = 32
-void		test_bi_mul_shuffle_order_case3(void)
+void		test_bi_strassen_mul_shuffle_order_case3(void)
 {
-	printf(KYEL "test_bi_mul_shuffle_order_case3\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_shuffle_order_case3\n" KNRM);
 	t_bigint	bi;
 	t_bigint	*arr;
 	int			res;
@@ -84,17 +84,17 @@ void		test_bi_mul_shuffle_order_case3(void)
 	for (size_t i=0; i < size; i++)
 		bi_push(&bi, i);
 	arr = bi_to_bi_array(&bi, size);
-	res = bi_mul_shuffle_order(arr, size);
+	res = bi_strassen_mul_shuffle_order(arr, size);
 
 	test(
 		res == BI_SUCCESS,
-		"bi_mul_shuffle_order (size = 16) : return value"
+		"bi_strassen_mul_shuffle_order (size = 16) : return value"
 	);
 
 	for (size_t i=0; i < size; i++)
 		test(
 			arr[i].data[0] == expected[i],
-			"bi_mul_shuffle_order (size = 32) : arr[i].data"
+			"bi_strassen_mul_shuffle_order (size = 32) : arr[i].data"
 		);
 
 	free(bi.data);

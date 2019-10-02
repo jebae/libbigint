@@ -53,10 +53,12 @@ SRCS = bi_new.c\
 	bi_sub_bi.c\
 	bi_abs.c\
 	bi_mul_pow_of_2.c\
+	bi_div_pow_of_2.c\
 	bi_mod_n_pow_of_2_plus_1.c\
 	bi_mod_n_pow_of_2_plus_1_utils.c\
 	bi_strassen_mul_bi_utils.c\
 	bi_mul_bi.c\
+	bi_strassen_mul_bi.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

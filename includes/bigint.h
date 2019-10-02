@@ -9,6 +9,8 @@
 # define BI_SIGN_POSITIVE		0
 # define BI_SIGN_NEGATIVE		1
 
+# define BI_HANDLE_FUNC_FAIL(F) if ((F) == BI_FAIL) return (BI_FAIL)
+
 typedef struct		s_bigint
 {
 	char			sign;
@@ -16,6 +18,14 @@ typedef struct		s_bigint
 	size_t			occupied;
 	unsigned char	*data;
 }					t_bigint;
+
+typedef struct		s_bi_strassen_mul_fft_vars
+{
+	size_t		m;
+	size_t		m2;
+	size_t		em;
+	t_bigint	t;
+}					t_bi_strassen_mul_fft_vars;
 
 /*
 ** memory management
@@ -57,17 +67,33 @@ unsigned char		bi_1byte_mul_1byte(
 );
 
 /*
-** operator
+** add
 */
 int					bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c);
+
+/*
+** subtract
+*/
 int					bi_sub_bi(t_bigint *a, t_bigint *b, t_bigint *c);
+
+/*
+** abs
+*/
 int					bi_abs(t_bigint *bi, t_bigint *res);
+
+/*
+** multiply 2^n
+*/
 int					bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res);
 
 /*
-** mod_n_pow_of_2_plus_1
+** divide by 2^n
 */
+int					bi_div_pow_of_2(t_bigint *bi, size_t n, t_bigint *res);
 
+/*
+** modulo 2^n + 1
+*/
 int					bi_mod_n_pow_of_2_plus_1_handle_fail(
 	t_bigint *p,
 	t_bigint *q
@@ -83,21 +109,37 @@ int					bi_mod_n_pow_of_2_plus_1(
 );
 
 /*
-** bi_array
+** array
 */
 t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size);
 void				bi_del_bi_array(t_bigint *arr, size_t size);
+int					bi_array_to_bi(
+	t_bigint *arr,
+	size_t size, 
+	t_bigint *res
+);
 
 /*
-** bi_mul_bi
+** multiply
 */
 int					bi_mul_1byte(
 	t_bigint *bi,
 	unsigned char factor,
 	t_bigint *res
 );
-size_t				bi_mul_get_block_length(t_bigint *a, t_bigint *b);
-int					bi_mul_shuffle_order(t_bigint *arr, size_t size);
 int					bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 
-# endif
+/*
+** strassen multiply
+*/
+size_t				bi_strassen_mul_get_block_length(t_bigint *a, t_bigint *b);
+int					bi_strassen_mul_shuffle_order(t_bigint *arr, size_t size);
+int					bi_strassen_mul_pointwise_prod(
+	t_bigint *a_arr,
+	t_bigint *b_arr,
+	size_t n
+);
+void				bi_strassen_invsere_array(t_bigint *arr, size_t n);
+int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
+
+#endif

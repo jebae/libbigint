@@ -1,9 +1,9 @@
 #include "bigint.test.h"
 
 // case a's max bit + b's max bit <= length * 8 
-void		test_bi_mul_get_block_length_case1(void)
+void		test_bi_strassen_mul_get_block_length_case1(void)
 {
-	printf(KYEL "test_bi_mul_get_block_length_case1\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_get_block_length_case1\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	size_t		length;
@@ -12,11 +12,11 @@ void		test_bi_mul_get_block_length_case1(void)
 	bi_new(&b, 1, BI_SIGN_POSITIVE);
 	bi_push(&a, 0xff);
 	bi_push(&b, 0xff);
-	length = bi_mul_get_block_length(&a, &b);
+	length = bi_strassen_mul_get_block_length(&a, &b);
 
 	test(
 		length == 32,
-		"bi_mul_get_block_length : length"
+		"bi_strassen_mul_get_block_length : length"
 	);
 
 	free(a.data);
@@ -24,9 +24,9 @@ void		test_bi_mul_get_block_length_case1(void)
 }
 
 // case a's max bit + b's max bit > length * 8 
-void		test_bi_mul_get_block_length_case2(void)
+void		test_bi_strassen_mul_get_block_length_case2(void)
 {
-	printf(KYEL "test_bi_mul_get_block_length_case2\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_get_block_length_case2\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	size_t		length;
@@ -38,11 +38,11 @@ void		test_bi_mul_get_block_length_case2(void)
 		bi_push(&a, 0xff);
 		bi_push(&b, 0xff);
 	}
-	length = bi_mul_get_block_length(&a, &b);
+	length = bi_strassen_mul_get_block_length(&a, &b);
 
 	test(
 		length == 64,
-		"bi_mul_get_block_length : length"
+		"bi_strassen_mul_get_block_length : length"
 	);
 
 	free(a.data);
@@ -50,9 +50,9 @@ void		test_bi_mul_get_block_length_case2(void)
 }
 
 // case a's max bit + b's max bit > length * 8
-void		test_bi_mul_get_block_length_case3(void)
+void		test_bi_strassen_mul_get_block_length_case3(void)
 {
-	printf(KYEL "test_bi_mul_get_block_length_case3\n" KNRM);
+	printf(KYEL "test_bi_strassen_mul_get_block_length_case3\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	size_t		length;
@@ -64,11 +64,11 @@ void		test_bi_mul_get_block_length_case3(void)
 		bi_push(&a, 0xff);
 		bi_push(&b, 0xff);
 	}
-	length = bi_mul_get_block_length(&a, &b);
+	length = bi_strassen_mul_get_block_length(&a, &b);
 
 	test(
 		length == 128,
-		"bi_mul_get_block_length : length"
+		"bi_strassen_mul_get_block_length : length"
 	);
 
 	free(a.data);

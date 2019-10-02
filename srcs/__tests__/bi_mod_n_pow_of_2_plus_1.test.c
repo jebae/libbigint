@@ -511,7 +511,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case13(void)
 	free(a.data);
 }
 
-// case mutable when n = 0
+// case mutable n = 0
 void		test_bi_mod_n_pow_of_2_plus_1_case14(void)
 {
 	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case14\n" KNRM);
@@ -546,6 +546,51 @@ void		test_bi_mod_n_pow_of_2_plus_1_case14(void)
 	test(
 		a.data[0] == 0x01,
 		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : a.data[0]"
+	);
+
+	free(a.data);
+}
+
+// case mutable negative
+void		test_bi_mod_n_pow_of_2_plus_1_case15(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case15\n" KNRM);
+	t_bigint	a;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_push(&a, 0x05);
+	bi_push(&a, 0xb9);
+	bi_push(&a, 0xa7);
+	bi_push(&a, 0x03);
+	bi_push(&a, 0xef);
+
+	// A mod 2^16 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.sign"
+	);
+
+	test(
+		a.occupied == 2,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0xb4,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0x49,
+		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[1]"
 	);
 
 	free(a.data);

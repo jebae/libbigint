@@ -50,7 +50,7 @@ int		main(void)
 	test_bi_sub_bi_case11();
 	test_bi_sub_bi_case12();
 
-	// pow of 2
+	// mul pow of 2
 	test_bi_mul_pow_of_2_case1();
 	test_bi_mul_pow_of_2_case2();
 	test_bi_mul_pow_of_2_case3();
@@ -78,19 +78,17 @@ int		main(void)
 	test_bi_mod_n_pow_of_2_plus_1_case12();
 	test_bi_mod_n_pow_of_2_plus_1_case13();
 	test_bi_mod_n_pow_of_2_plus_1_case14();
+	test_bi_mod_n_pow_of_2_plus_1_case15();
 
 	// array
 	test_bi_to_bi_array_case1();
 	test_bi_to_bi_array_case2();
 	test_bi_to_bi_array_case3();
+	test_bi_to_bi_array_case4();
+	test_bi_array_to_bi_case1();
+	test_bi_array_to_bi_case2();
 
 	// bi_mul
-	test_bi_mul_get_block_length_case1();
-	test_bi_mul_get_block_length_case2();
-	test_bi_mul_get_block_length_case3();
-	test_bi_mul_shuffle_order_case1();
-	test_bi_mul_shuffle_order_case2();
-	test_bi_mul_shuffle_order_case3();
 	test_bi_mul_1byte_case1();
 	test_bi_mul_1byte_case2();
 	test_bi_mul_1byte_case3();
@@ -108,4 +106,25 @@ int		main(void)
 	test_bi_mul_bi_case11();
 	test_bi_mul_bi_case12();
 	test_bi_mul_bi_case13();
+
+	// bi_strassen_mul_bi
+	test_bi_strassen_mul_get_block_length_case1();
+	test_bi_strassen_mul_get_block_length_case2();
+	test_bi_strassen_mul_get_block_length_case3();
+	test_bi_strassen_mul_shuffle_order_case1();
+	test_bi_strassen_mul_shuffle_order_case2();
+	test_bi_strassen_mul_shuffle_order_case3();
+	test_bi_strassen_mul_pointwise_prod_case1();
+	test_bi_strassen_mul_inverse_array_case1();
+	test_bi_strassen_mul_bi_case1();
+	test_bi_strassen_mul_bi_case2();
+
+	// div pow of 2
+	test_bi_div_pow_of_2_case1();
+	test_bi_div_pow_of_2_case2();
+	test_bi_div_pow_of_2_case3();
+	test_bi_div_pow_of_2_case4();
+	test_bi_div_pow_of_2_case5();
+	test_bi_div_pow_of_2_case6();
+	test_bi_div_pow_of_2_case7();
 }
