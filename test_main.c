@@ -116,8 +116,9 @@ int		main(void)
 	test_bi_strassen_mul_shuffle_order_case3();
 	test_bi_strassen_mul_pointwise_prod_case1();
 	test_bi_strassen_mul_inverse_array_case1();
-	test_bi_strassen_mul_bi_case1();
-	test_bi_strassen_mul_bi_case2();
+	//test_bi_strassen_mul_bi_case1();
+	//test_bi_strassen_mul_bi_case2();
+	test_bi_strassen_mul_bi_case0();
 
 	// div pow of 2
 	test_bi_div_pow_of_2_case1();

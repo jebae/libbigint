@@ -1,5 +1,50 @@
 #include "bigint.test.h"
 
+// case temp
+void		test_bi_strassen_mul_bi_case0(void)
+{
+	printf(KYEL "test_bi_strassen_mul_bi_case0\n" KNRM);
+	t_bigint		a;
+	t_bigint		b;
+	t_bigint		c;
+	int				res;
+	unsigned char	a_arr[9] = { 0x45, 0x09, 0xf3, 0x0e };
+	unsigned char	b_arr[9] = { 0x22, 0x1a, 0xfe, 0x8e };
+	unsigned char	expected[18] = {
+		0x2a, 0x3d, 0xae, 0x23, 0xce, 0x65, 0xfd, 0xdd, 0x39,
+		0x11, 0x3b, 0x34, 0x86, 0x8d, 0x6c, 0x21, 0x6f, 0x8b
+	};
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	for (size_t i=0; i < 4; i++)
+	{
+		bi_push(&a, a_arr[i]);
+		bi_push(&b, b_arr[i]);
+	}
+	res = bi_strassen_mul_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_strassen_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : return value"
+	);
+
+	test(
+		c.occupied == 18,
+		"bi_strassen_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.occupied"
+	);
+
+	for (size_t i=0; i < 18; i++)
+		test(
+			c.data[i] == expected[i],
+			"bi_strassen_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.data[i]"
+		);
+
+	free(a.data);
+	free(b.data);
+	free(c.data);
+}
 // case small
 void		test_bi_strassen_mul_bi_case1(void)
 {

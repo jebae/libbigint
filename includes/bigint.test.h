@@ -143,6 +143,7 @@ void		test_bi_strassen_mul_bi_case10(void);
 void		test_bi_strassen_mul_bi_case11(void);
 void		test_bi_strassen_mul_bi_case12(void);
 void		test_bi_strassen_mul_bi_case13(void);
+void		test_bi_strassen_mul_bi_case0(void);
 
 /*
 ** bi_mul_bi test
