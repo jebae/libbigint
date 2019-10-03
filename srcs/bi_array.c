@@ -17,6 +17,8 @@ void				bi_del_bi_array(t_bigint *arr, size_t size)
 	size_t		i;
 
 	i = 0;
+	if (arr == NULL)
+		return ;
 	while (i < size)
 		ft_memdel((void **)&(arr[i++].data));
 	ft_memdel((void **)&arr);
@@ -39,7 +41,7 @@ t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size)
 	{
 		if (bi_new(arr + i, 1, bi->sign) == BI_FAIL)
 			return (to_array_handle_fail(arr, size));
-		bi_push(&(arr[i]), bi->data[i]);
+		bi_push(arr + i, bi->data[i]);
 		i++;
 	}
 	while (i < size)
@@ -66,7 +68,7 @@ int					bi_array_to_bi(
 	i = 0;
 	while (i < size)
 	{
-		if (bi_mul_pow_of_2(&(arr[i]), unit_bits * i, &to_add) == BI_FAIL)
+		if (bi_mul_pow_of_2(arr + i, unit_bits * i, &to_add) == BI_FAIL)
 			return (to_bi_handle_fail(&to_add));
 		if (bi_add_bi(res, &to_add, res) == BI_FAIL)
 			return (to_bi_handle_fail(&to_add));

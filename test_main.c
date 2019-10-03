@@ -15,6 +15,7 @@ int		main(void)
 
 	// op_utils
 	test_bi_copy_case1();
+	test_bi_copy_case2();
 	test_bi_abs_compare_case1();
 	test_bi_abs_compare_case2();
 	test_bi_abs_compare_case3();
@@ -51,6 +52,10 @@ int		main(void)
 	test_bi_sub_bi_case11();
 	test_bi_sub_bi_case12();
 	test_bi_sub_bi_case13();
+	test_bi_sub_bi_case14();
+	test_bi_sub_bi_case15();
+	test_bi_sub_bi_case16();
+	test_bi_sub_bi_case17();
 
 	// mul pow of 2
 	test_bi_mul_pow_of_2_case1();
@@ -81,6 +86,8 @@ int		main(void)
 	test_bi_mod_n_pow_of_2_plus_1_case13();
 	test_bi_mod_n_pow_of_2_plus_1_case14();
 	test_bi_mod_n_pow_of_2_plus_1_case15();
+	test_bi_mod_n_pow_of_2_plus_1_case16();
+	test_bi_mod_n_pow_of_2_plus_1_case17();
 
 	// array
 	test_bi_to_bi_array_case1();
@@ -140,5 +147,5 @@ int		main(void)
 	test_bi_div_pow_of_2_case5();
 	test_bi_div_pow_of_2_case6();
 	test_bi_div_pow_of_2_case7();
-
+	while (1);
 }

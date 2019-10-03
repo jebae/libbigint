@@ -37,3 +37,43 @@ void		test_bi_copy_case1(void)
 	free(a.data);
 	free(b.data);
 }
+
+// case mutable
+void		test_bi_copy_case2(void)
+{
+	printf(KYEL "test_bi_copy_case2\n" KNRM);
+	t_bigint	a;
+	int			res;
+
+	bi_new(&a, 3, BI_SIGN_NEGATIVE);
+	bi_push(&a, 0x11);
+	bi_push(&a, 0x0e);
+	res = bi_copy(&a, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_copy : return value"
+	);
+
+	test(
+		a.occupied == 2,
+		"bi_copy : a.occupied"
+	);
+
+	test(
+		a.sign == BI_SIGN_NEGATIVE,
+		"bi_copy : a.sign"
+	);
+
+	test(
+		a.data[0] == 0x11,
+		"bi_copy : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0x0e,
+		"bi_copy : a.data[1]"
+	);
+
+	free(a.data);
+}

@@ -43,6 +43,7 @@ int			bi_strassen_mul_shuffle_order(t_bigint *arr, size_t size)
 	while (i < size)
 	{
 		arr[i] = copy[ft_bit_reverse(i, num_bits)];
+		arr[i].sign = BI_SIGN_POSITIVE;
 		i++;
 	}
 	ft_memdel((void **)&copy);

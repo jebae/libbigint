@@ -1,6 +1,5 @@
 #include "bigint.test.h"
 
-// need leak test
 void		test_bi_expand_case1(void)
 {
 	printf(KYEL "test_bi_expand_case1\n" KNRM);
@@ -10,6 +9,7 @@ void		test_bi_expand_case1(void)
 
 	bi_new(&bi, size, BI_SIGN_POSITIVE);
 	bi.data[0] = 0xFF;
+	bi.occupied = 1;
 	res = bi_expand(&bi, 15);
 
 	test(

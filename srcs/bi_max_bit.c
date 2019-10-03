@@ -4,6 +4,7 @@
 ** bi_max_bit returns size of used bits
 ** not index of biggest bit
 */
+
 size_t			bi_max_bit(t_bigint *bi)
 {
 	static size_t	unit_bits = sizeof(unsigned char) * 8;
@@ -22,4 +23,3 @@ size_t			bi_max_bit(t_bigint *bi)
 	}
 	return (res);
 }
-
