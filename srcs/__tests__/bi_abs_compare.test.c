@@ -129,3 +129,37 @@ void		test_bi_abs_compare_case4(void)
 	free(a.data);
 	free(b.data);
 }
+
+void		test_bi_abs_compare_case5(void)
+{
+	printf(KYEL "test_bi_abs_compare_case5\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	*bigger;
+	t_bigint	*smaller;
+	size_t		size = 2;
+
+	bi_new(&a, size, BI_SIGN_POSITIVE);
+	bi_new(&b, size, BI_SIGN_NEGATIVE);
+
+	// a = 0x0f75, b = 0x03a4 -> a > b
+	bi_push(&a, 0x75);
+	bi_push(&a, 0x0f);
+	bi_push(&b, 0xa4);
+	bi_push(&b, 0x03);
+
+	bi_abs_compare(&a, &b, &bigger, &smaller);
+
+	test(
+		bigger == &a,
+		"bi_abs_compare (0x0f75 > 0x03a4) : bigger"
+	);
+
+	test(
+		smaller == &b,
+		"bi_abs_compare (0x0f75 > 0x03a4) : smaller"
+	);
+
+	free(a.data);
+	free(b.data);
+}

@@ -27,6 +27,7 @@ void		test_bi_abs_compare_case1(void);
 void		test_bi_abs_compare_case2(void);
 void		test_bi_abs_compare_case3(void);
 void		test_bi_abs_compare_case4(void);
+void		test_bi_abs_compare_case5(void);
 void		test_bi_max_bit_case1(void);
 void		test_bi_max_bit_case2(void);
 void		test_bi_max_bit_case3(void);
@@ -61,6 +62,7 @@ void		test_bi_sub_bi_case9(void);
 void		test_bi_sub_bi_case10(void);
 void		test_bi_sub_bi_case11(void);
 void		test_bi_sub_bi_case12(void);
+void		test_bi_sub_bi_case13(void);
 
 /*
 ** bi_mul_pow_of_2 test

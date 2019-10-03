@@ -19,6 +19,7 @@ int		main(void)
 	test_bi_abs_compare_case2();
 	test_bi_abs_compare_case3();
 	test_bi_abs_compare_case4();
+	test_bi_abs_compare_case5();
 	test_bi_max_bit_case1();
 	test_bi_max_bit_case2();
 	test_bi_max_bit_case3();
@@ -49,6 +50,7 @@ int		main(void)
 	test_bi_sub_bi_case10();
 	test_bi_sub_bi_case11();
 	test_bi_sub_bi_case12();
+	test_bi_sub_bi_case13();
 
 	// mul pow of 2
 	test_bi_mul_pow_of_2_case1();
@@ -116,9 +118,19 @@ int		main(void)
 	test_bi_strassen_mul_shuffle_order_case3();
 	test_bi_strassen_mul_pointwise_prod_case1();
 	test_bi_strassen_mul_inverse_array_case1();
-	//test_bi_strassen_mul_bi_case1();
-	//test_bi_strassen_mul_bi_case2();
-	test_bi_strassen_mul_bi_case0();
+	test_bi_strassen_mul_bi_case1();
+	test_bi_strassen_mul_bi_case2();
+	test_bi_strassen_mul_bi_case3();
+	test_bi_strassen_mul_bi_case4();
+	test_bi_strassen_mul_bi_case5();
+	test_bi_strassen_mul_bi_case6();
+	test_bi_strassen_mul_bi_case7();
+	test_bi_strassen_mul_bi_case8();
+	test_bi_strassen_mul_bi_case9();
+	test_bi_strassen_mul_bi_case10();
+	test_bi_strassen_mul_bi_case11();
+	test_bi_strassen_mul_bi_case12();
+	test_bi_strassen_mul_bi_case13();
 
 	// div pow of 2
 	test_bi_div_pow_of_2_case1();
@@ -128,4 +140,5 @@ int		main(void)
 	test_bi_div_pow_of_2_case5();
 	test_bi_div_pow_of_2_case6();
 	test_bi_div_pow_of_2_case7();
+
 }

@@ -19,15 +19,12 @@ void			bi_abs_compare(
 	else if (a->occupied == b->occupied)
 	{
 		i = a->occupied;
-		while (i > 0)
-		{
-			if (a->data[i - 1] < b->data[i - 1])
-			{
-				*bigger = b;
-				*smaller = a;
-				return ;
-			}
+		while (i > 0 && (a->data[i - 1] == b->data[i - 1]))
 			i--;
+		if (i > 0 && a->data[i - 1] < b->data[i - 1])
+		{
+			*bigger = b;
+			*smaller = a;
 		}
 	}
 }

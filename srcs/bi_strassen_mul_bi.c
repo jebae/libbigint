@@ -27,13 +27,33 @@ static int		fft_loop_by_level(
 			BI_HANDLE_FUNC_FAIL(bi_mul_pow_of_2(arr + k + v->m2, e, &(v->t)));
 			BI_HANDLE_FUNC_FAIL(
 				bi_sub_bi(arr + k, &(v->t), arr + k + v->m2));
-			BI_HANDLE_FUNC_FAIL(bi_add_bi(arr + k, &(v->t), arr + k));
+
 			/*
+			printf("[%zu] sub : ", k + v->m2);
+
+			printf("%c", (arr[k].sign == BI_SIGN_POSITIVE) ? '+' : '-');
+			for (size_t i=arr[k].occupied; i > 0; i--)
+				printf("%02x", arr[k].data[i - 1]);
+
+			printf(" - ");
+
+			printf("%c", (v->t.sign == BI_SIGN_POSITIVE) ? '+' : '-');
+			for (size_t i=v->t.occupied; i > 0; i--)
+				printf("%02x", v->t.data[i - 1]);
+
+			printf(" = ");
+
+			printf("%c", (arr[k + v->m2].sign == BI_SIGN_POSITIVE) ? '+' : '-');
+			for (size_t i=arr[k + v->m2].occupied; i > 0; i--)
+				printf("%02x", arr[k + v->m2].data[i - 1]);
+			printf("\n");
+			*/
+
+			BI_HANDLE_FUNC_FAIL(bi_add_bi(arr + k, &(v->t), arr + k));
 			BI_HANDLE_FUNC_FAIL(
 				bi_mod_n_pow_of_2_plus_1(arr + k, n, arr + k));
 			BI_HANDLE_FUNC_FAIL(bi_mod_n_pow_of_2_plus_1(
 				arr + k + v->m2, n, arr + k + v->m2));
-			*/
 			k += v->m;
 		}
 		e += v->em;
@@ -99,6 +119,7 @@ int				bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	if (fft(a_arr, n, log2n) == BI_FAIL || fft(b_arr, n, log2n) == BI_FAIL)
 		return (handle_fail(a_arr, b_arr, n));
 
+	/*
 	printf("============ F{ a } ==============\n");
 	for (size_t i=0; i < n; i++)
 	{
@@ -107,6 +128,7 @@ int				bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 			printf("%02x ", a_arr[i].data[j - 1]);
 		printf("\n");
 	}
+	
 
 	printf("============ F{ b } ==============\n");
 	for (size_t i=0; i < n; i++)
@@ -116,19 +138,12 @@ int				bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 			printf("%02x ", b_arr[i].data[j - 1]);
 		printf("\n");
 	}
+	*/
 
 	if (bi_strassen_mul_pointwise_prod(a_arr, b_arr, n) == BI_FAIL)
 		return (handle_fail(a_arr, b_arr, n));
-	printf("pointwise : ");
-	for (size_t i=0; i < n; i++)
-		printf("%02x%02x ", a_arr[i].data[1], a_arr[i].data[0]);
-	printf("\n");
 	if (ifft(a_arr, n, log2n) == BI_FAIL)
 		return (handle_fail(a_arr, b_arr, n));
-	printf("ifft : ");
-	for (size_t i=0; i < n; i++)
-		printf("%02x%02x ", a_arr[i].data[1], a_arr[i].data[0]);
-	printf("\n");
 	if (bi_array_to_bi(a_arr, n, c) == BI_FAIL)
 		return (BI_FAIL);
 	return (BI_SUCCESS);

@@ -689,3 +689,49 @@ void		test_bi_sub_bi_case12(void)
 	free(a.data);
 	free(b.data);
 }
+
+void		test_bi_sub_bi_case13(void)
+{
+	printf(KYEL "test_bi_sub_bi_case13\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	t_bigint	c;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0x75);
+	bi_push(&a, 0x0f);
+	bi_push(&b, 0xa4);
+	bi_push(&b, 0x03);
+	res = bi_sub_bi(&a, &b, &c);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0x0f75 - 0x03a4) : return value"
+	);
+
+	test(
+		c.sign == BI_SIGN_POSITIVE,
+		"bi_sub_bi (0x0f75 - 0x03a4) : c.sign"
+	);
+
+	test(
+		c.occupied == 2,
+		"bi_sub_bi (0x0f75 - 0x03a4) : c.occupied"
+	);
+
+	test(
+		c.data[0] == 0xd1,
+		"bi_sub_bi (0x0f75 - 0x03a4) : c.data[0]"
+	);
+
+	test(
+		c.data[1] == 0x0b,
+		"bi_sub_bi (0x0f75 - 0x03a4) : c.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
