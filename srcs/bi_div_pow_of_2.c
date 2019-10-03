@@ -48,11 +48,9 @@ int				bi_div_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
 {
 	static size_t	unit_bits = sizeof(unsigned char) * 8;
 
-	if (bi != res && bi_copy(res, bi) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(bi_copy(res, bi));
 	shift_by_byte(res, n, unit_bits);
 	shift_by_bit(res, n, unit_bits);
-	res->sign = bi->sign;
 	bi_update_occupied(res);
 	return (BI_SUCCESS);
 }

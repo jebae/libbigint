@@ -1,19 +1,18 @@
 #include "bigint.h"
 
-static int	handle_fail(t_bigint *res, t_bigint *to_add)
+static int	handle_return(t_bigint *res, t_bigint *to_add, int ret)
 {
 	ft_memdel((void **)&(res->data));
 	ft_memdel((void **)&(to_add->data));
-	return (BI_FAIL);
+	return (ret);
 }
 
-static int	bi_mul_bi_preprocess(
+static int	preprocess(
 	t_bigint *res,
 	t_bigint *to_add
 )
 {
-	if (bi_new(res, 1, BI_SIGN_POSITIVE) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(bi_new(res, 1, BI_SIGN_POSITIVE));
 	if (bi_new(to_add, 1, BI_SIGN_POSITIVE) == BI_FAIL)
 	{
 		ft_memdel((void **)&(res->data));
@@ -41,8 +40,7 @@ int				bi_mul_1byte(
 	unsigned char		carry;
 	size_t				i;
 
-	if (bi_init(res, bi->occupied) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(bi_init(res, bi->occupied));
 	i = 0;
 	carry = 0x00;
 	while (i < bi->occupied)
@@ -64,23 +62,20 @@ int			bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	t_bigint		res;
 	t_bigint		to_add;
 
-	if (bi_mul_bi_preprocess(&res, &to_add) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(preprocess(&res, &to_add));
 	i = 0;
 	while (i < b->occupied)
 	{
 		if (bi_mul_1byte(a, b->data[i], &to_add) == BI_FAIL)
-			return (handle_fail(&res, &to_add));
+			return (handle_return(&res, &to_add, BI_FAIL));
 		if (bi_mul_pow_of_2(&to_add, 8 * i, &to_add) == BI_FAIL)
-			return (handle_fail(&res, &to_add));
+			return (handle_return(&res, &to_add, BI_FAIL));
 		if (bi_add_bi(&res, &to_add, &res) == BI_FAIL)
-			return (handle_fail(&res, &to_add));
+			return (handle_return(&res, &to_add, BI_FAIL));
 		i++;
 	}
 	res.sign = get_sign(a, b);
 	if (bi_copy(c, &res) == BI_FAIL)
-		return (BI_FAIL);
-	ft_memdel((void **)&to_add.data);
-	ft_memdel((void **)&res.data);
-	return (BI_SUCCESS);
+		return (handle_return(&res, &to_add, BI_FAIL));
+	return (handle_return(&res, &to_add, BI_SUCCESS));
 }

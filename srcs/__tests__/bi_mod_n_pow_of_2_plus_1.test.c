@@ -595,3 +595,93 @@ void		test_bi_mod_n_pow_of_2_plus_1_case15(void)
 
 	free(a.data);
 }
+
+// case A's max bit < n
+void		test_bi_mod_n_pow_of_2_plus_1_case16(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case16\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_push(&a, 0x0c);
+	bi_push(&a, 0xf1);
+
+	// A mod 2^100 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 100, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : b.sign"
+	);
+
+	test(
+		b.occupied == 2,
+		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0x0c,
+		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0xf1,
+		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : b.data[1]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case A's max bit < n (negative A)
+void		test_bi_mod_n_pow_of_2_plus_1_case17(void)
+{
+	printf(KYEL "test_bi_mod_n_pow_of_2_plus_1_case17\n" KNRM);
+	t_bigint		a;
+	t_bigint		b;
+	int				res;
+	unsigned char	expected[13] = {
+		0xf5, 0x0e, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+		0xff, 0xff, 0xff, 0xff,	0x0f
+	};
+
+	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_push(&a, 0x0c);
+	bi_push(&a, 0xf1);
+
+	// A mod 2^100 + 1
+	res = bi_mod_n_pow_of_2_plus_1(&a, 100, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_mod_n_pow_of_2_plus_1 (-0xf10c mod 2^100 + 1) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_mod_n_pow_of_2_plus_1 (-0xf10c mod 2^100 + 1) : b.sign"
+	);
+
+	test(
+		b.occupied == 13,
+		"bi_mod_n_pow_of_2_plus_1 (-0xf10c mod 2^100 + 1) : b.occupied"
+	);
+
+	for (int i=0; i < 13; i++)
+		test(
+			b.data[i] == expected[i],
+			"bi_mod_n_pow_of_2_plus_1 (-0xf10c mod 2^100 + 1) : b.data[i]"
+		);
+
+	free(a.data);
+	free(b.data);
+}

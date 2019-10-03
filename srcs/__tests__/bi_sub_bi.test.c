@@ -690,9 +690,237 @@ void		test_bi_sub_bi_case12(void)
 	free(b.data);
 }
 
+// case mutable different size, a = c
 void		test_bi_sub_bi_case13(void)
 {
 	printf(KYEL "test_bi_sub_bi_case13\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xef);
+	bi_push(&a, 0x40);
+	bi_push(&a, 0x21);
+	bi_push(&b, 0x0f);
+	bi_push(&b, 0xff);
+	res = bi_sub_bi(&a, &b, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0x2140efff - 0xff0f) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_POSITIVE,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.sign"
+	);
+
+	test(
+		a.occupied == 4,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0xf0,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0xf0,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.data[1]"
+	);
+
+	test(
+		a.data[2] == 0x3f,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.data[2]"
+	);
+
+	test(
+		a.data[3] == 0x21,
+		"bi_sub_bi (0x2140efff - 0xff0f) : a.data[3]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable different size, a = c
+void		test_bi_sub_bi_case14(void)
+{
+	printf(KYEL "test_bi_sub_bi_case14\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&b, 0xff);
+	bi_push(&b, 0xef);
+	bi_push(&b, 0x40);
+	bi_push(&b, 0x21);
+	bi_push(&a, 0x0f);
+	bi_push(&a, 0xff);
+	res = bi_sub_bi(&a, &b, &a);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0xff0f - 0x2140efff) : return value"
+	);
+
+	test(
+		a.sign == BI_SIGN_NEGATIVE,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.sign"
+	);
+
+	test(
+		a.occupied == 4,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.occupied"
+	);
+
+	test(
+		a.data[0] == 0xf0,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.data[0]"
+	);
+
+	test(
+		a.data[1] == 0xf0,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.data[1]"
+	);
+
+	test(
+		a.data[2] == 0x3f,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.data[2]"
+	);
+
+	test(
+		a.data[3] == 0x21,
+		"bi_sub_bi (0xff0f - 0x2140efff) : a.data[3]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable different size, b = c
+void		test_bi_sub_bi_case15(void)
+{
+	printf(KYEL "test_bi_sub_bi_case15\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&b, 0xff);
+	bi_push(&b, 0xef);
+	bi_push(&b, 0x40);
+	bi_push(&b, 0x21);
+	bi_push(&a, 0x0f);
+	bi_push(&a, 0xff);
+	res = bi_sub_bi(&a, &b, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0xff0f - 0x2140efff) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_NEGATIVE,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.sign"
+	);
+
+	test(
+		b.occupied == 4,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0xf0,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0xf0,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.data[1]"
+	);
+
+	test(
+		b.data[2] == 0x3f,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.data[2]"
+	);
+
+	test(
+		b.data[3] == 0x21,
+		"bi_sub_bi (0xff0f - 0x2140efff) : b.data[3]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+// case mutable different size, b = c
+void		test_bi_sub_bi_case16(void)
+{
+	printf(KYEL "test_bi_sub_bi_case16\n" KNRM);
+	t_bigint	a;
+	t_bigint	b;
+	int			res;
+
+	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_push(&a, 0xff);
+	bi_push(&a, 0xef);
+	bi_push(&a, 0x40);
+	bi_push(&a, 0x21);
+	bi_push(&b, 0x0f);
+	bi_push(&b, 0xff);
+	res = bi_sub_bi(&a, &b, &b);
+
+	test(
+		res == BI_SUCCESS,
+		"bi_sub_bi (0x2140efff - 0xff0f) : return value"
+	);
+
+	test(
+		b.sign == BI_SIGN_POSITIVE,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.sign"
+	);
+
+	test(
+		b.occupied == 4,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.occupied"
+	);
+
+	test(
+		b.data[0] == 0xf0,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.data[0]"
+	);
+
+	test(
+		b.data[1] == 0xf0,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.data[1]"
+	);
+
+	test(
+		b.data[2] == 0x3f,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.data[2]"
+	);
+
+	test(
+		b.data[3] == 0x21,
+		"bi_sub_bi (0x2140efff - 0xff0f) : b.data[3]"
+	);
+
+	free(a.data);
+	free(b.data);
+}
+
+void		test_bi_sub_bi_case17(void)
+{
+	printf(KYEL "test_bi_sub_bi_case17\n" KNRM);
 	t_bigint	a;
 	t_bigint	b;
 	t_bigint	c;
@@ -734,4 +962,5 @@ void		test_bi_sub_bi_case13(void)
 
 	free(a.data);
 	free(b.data);
+	free(c.data);
 }

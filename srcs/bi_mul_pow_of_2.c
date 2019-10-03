@@ -20,8 +20,7 @@ static int		set_mem(
 	}
 	else
 	{
-		if (bi_init(res, size) == BI_FAIL)
-			return (BI_FAIL);
+		BI_HANDLE_FUNC_FAIL(bi_init(res, size));
 		ft_memcpy(res->data, bi->data, bi->occupied);
 	}
 	res->occupied = size;
@@ -70,8 +69,7 @@ int				bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
 {
 	static size_t	unit_bits = sizeof(unsigned char) * 8;
 
-	if (set_mem(res, bi, n, unit_bits) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(set_mem(res, bi, n, unit_bits));
 	shift_by_byte(res, n, unit_bits);
 	shift_by_bit(res, n, unit_bits);
 	res->sign = bi->sign;

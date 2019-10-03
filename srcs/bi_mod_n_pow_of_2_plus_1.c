@@ -68,14 +68,13 @@ static int		set_mod_result(
 	{
 		m->data[m->occupied - 1] = 0x00;
 		m->occupied = 0;
-		if (n == 0)
-			bi_push(m, 0x02);
-		else
+		bi_push(m, 0x01);
+		if (bi_mul_pow_of_2(m, n, m) == BI_FAIL)
 		{
-			bi_push(m, 0x01);
-			bi_mul_pow_of_2(m, n, m);
-			m->data[0] |= 0x01;
+			ft_memdel((void **)&(m->data));
+			return (BI_FAIL);
 		}
+		m->data[0] |= 0x01;
 		if (bi_sub_bi(m, res, res) == BI_FAIL)
 		{
 			ft_memdel((void **)&(m->data));
@@ -101,10 +100,10 @@ int				bi_mod_n_pow_of_2_plus_1(
 		return (bi_mod_n_pow_of_2_plus_1_handle_0(bi, res));
 	max_bit = bi_max_bit(bi);
 	BI_HANDLE_FUNC_FAIL(init_pq(&p, &q, max_bit));
-	if (bi != res && bi_copy(res, bi) == BI_FAIL)
+	if (bi_copy(res, bi) == BI_FAIL)
 		return (bi_mod_n_pow_of_2_plus_1_handle_fail(&p, &q));
 	neg_depth = (bi->sign == BI_SIGN_NEGATIVE) ? 1 : 0;
-	while (max_bit - 1 >= n)
+	while (max_bit >= n + 1)
 	{
 		set_p(&p, max_bit - 1, n);
 		set_q(&q, res, max_bit - 1);

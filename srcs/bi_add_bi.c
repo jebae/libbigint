@@ -8,8 +8,7 @@ static int		set_mem(t_bigint *bi, size_t size, int mutable)
 		f = &bi_expand_at_least;
 	else
 		f = &bi_init;
-	if (f(bi, size) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(f(bi, size));
 	return (BI_SUCCESS);
 }
 
@@ -47,8 +46,7 @@ int				bi_add_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	if (a->sign != b->sign)
 		return (pass_to_sub(a, b, c));
 	bi_abs_compare(a, b, &bigger, &smaller);
-	if (set_mem(c, bigger->occupied, (c == a || c == b)) == BI_FAIL)
-		return (BI_FAIL);
+	BI_HANDLE_FUNC_FAIL(set_mem(c, bigger->occupied, (c == a || c == b)));
 	c->sign = get_sign(a, b);
 	carry = bi_add_byte_by_byte(bigger, smaller, c);
 	if (carry && bi_push(c, carry) == BI_FAIL)

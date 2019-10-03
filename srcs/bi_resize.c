@@ -4,12 +4,12 @@ int		bi_resize(t_bigint *bi, size_t size)
 {
 	unsigned char	*temp;
 
-	temp = bi->data;
-	if ((bi->data = ft_memalloc(size)) == NULL)
+	if ((temp = ft_memalloc(size)) == NULL)
 		return (BI_FAIL);
-	ft_memcpy(bi->data, temp, (size < bi->size) ? size : bi->size);
+	ft_memcpy(temp, bi->data, (size < bi->occupied) ? size : bi->occupied);
+	ft_memdel((void **)&(bi->data));
 	bi->size = size;
+	bi->data = temp;
 	bi_update_occupied(bi);
-	ft_memdel((void **)&temp);
 	return (BI_SUCCESS);
 }

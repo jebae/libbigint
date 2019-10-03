@@ -23,6 +23,7 @@ void		test_bi_expand_at_least_case2(void);
 ** operator utils test
 */
 void		test_bi_copy_case1(void);
+void		test_bi_copy_case2(void);
 void		test_bi_abs_compare_case1(void);
 void		test_bi_abs_compare_case2(void);
 void		test_bi_abs_compare_case3(void);
@@ -63,6 +64,10 @@ void		test_bi_sub_bi_case10(void);
 void		test_bi_sub_bi_case11(void);
 void		test_bi_sub_bi_case12(void);
 void		test_bi_sub_bi_case13(void);
+void		test_bi_sub_bi_case14(void);
+void		test_bi_sub_bi_case15(void);
+void		test_bi_sub_bi_case16(void);
+void		test_bi_sub_bi_case17(void);
 
 /*
 ** bi_mul_pow_of_2 test
@@ -110,6 +115,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case12(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case13(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case14(void);
 void		test_bi_mod_n_pow_of_2_plus_1_case15(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case16(void);
+void		test_bi_mod_n_pow_of_2_plus_1_case17(void);
 
 /*
 ** bi_array test
