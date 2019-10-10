@@ -59,6 +59,8 @@ SRCS = bi_new.c\
 	bi_strassen_mul_bi_utils.c\
 	bi_mul_bi.c\
 	bi_strassen_mul_bi.c\
+	bi_get_bit.c\
+	bi_double_dabble.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

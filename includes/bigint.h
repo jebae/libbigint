@@ -10,6 +10,7 @@
 # define BI_SIGN_NEGATIVE		1
 
 # define BI_HANDLE_FUNC_FAIL(F) if ((F) == BI_FAIL) return (BI_FAIL)
+# define BI_UNIT_BITS			8
 
 typedef struct		s_bigint
 {
@@ -65,6 +66,7 @@ unsigned char		bi_1byte_mul_1byte(
 	unsigned char b,
 	unsigned char *carry
 );
+int					bi_get_bit(t_bigint *bi, size_t n);
 
 /*
 ** add
@@ -141,5 +143,9 @@ int					bi_strassen_mul_pointwise_prod(
 );
 void				bi_strassen_invsere_array(t_bigint *arr, size_t n);
 int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
+
+/*
+** double dabble
+*/
 
 #endif

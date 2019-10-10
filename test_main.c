@@ -147,5 +147,11 @@ int		main(void)
 	test_bi_div_pow_of_2_case5();
 	test_bi_div_pow_of_2_case6();
 	test_bi_div_pow_of_2_case7();
-	while (1);
+
+	// bi_get_bit
+	test_bi_get_bit_case1();
+	test_bi_get_bit_case2();
+	test_bi_get_bit_case3();
+
+	test_add_3_if_gte_5_case1();
 }

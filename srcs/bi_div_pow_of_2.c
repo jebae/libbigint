@@ -1,11 +1,11 @@
 #include "bigint.h"
 
-static void		shift_by_byte(t_bigint *bi, size_t n, size_t unit_bits)
+static void		shift_by_byte(t_bigint *bi, size_t n)
 {
 	size_t		i;
 	size_t		shift;
 
-	shift = n / unit_bits;
+	shift = n / BI_UNIT_BITS;
 	if (shift == 0)
 		return ;
 	i = 0;
@@ -20,14 +20,14 @@ static void		shift_by_byte(t_bigint *bi, size_t n, size_t unit_bits)
 	bi_update_occupied(bi);
 }
 
-static void		shift_by_bit(t_bigint *bi, size_t n, size_t unit_bits)
+static void		shift_by_bit(t_bigint *bi, size_t n)
 {
 	size_t			shift;
 	size_t			i;
 	unsigned char	*prev;
 	unsigned short	cur;
 
-	shift = n % unit_bits;
+	shift = n % BI_UNIT_BITS;
 	if (shift == 0)
 		return ;
 	prev = bi->data;
@@ -36,9 +36,9 @@ static void		shift_by_bit(t_bigint *bi, size_t n, size_t unit_bits)
 	while (i < bi->occupied)
 	{
 		cur = bi->data[i];
-		cur = cur << unit_bits >> shift;
+		cur = cur << BI_UNIT_BITS >> shift;
 		*prev |= (unsigned char)cur;
-		bi->data[i] = cur >> unit_bits;
+		bi->data[i] = cur >> BI_UNIT_BITS;
 		prev = bi->data + i;
 		i++;
 	}
@@ -46,11 +46,9 @@ static void		shift_by_bit(t_bigint *bi, size_t n, size_t unit_bits)
 
 int				bi_div_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
 {
-	static size_t	unit_bits = sizeof(unsigned char) * 8;
-
 	BI_HANDLE_FUNC_FAIL(bi_copy(res, bi));
-	shift_by_byte(res, n, unit_bits);
-	shift_by_bit(res, n, unit_bits);
+	shift_by_byte(res, n);
+	shift_by_bit(res, n);
 	bi_update_occupied(res);
 	return (BI_SUCCESS);
 }

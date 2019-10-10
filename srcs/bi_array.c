@@ -59,7 +59,6 @@ int					bi_array_to_bi(
 	t_bigint *res
 )
 {
-	static size_t	unit_bits = sizeof(unsigned char) * 8;
 	size_t			i;
 	t_bigint		to_add;
 
@@ -68,7 +67,7 @@ int					bi_array_to_bi(
 	i = 0;
 	while (i < size)
 	{
-		if (bi_mul_pow_of_2(arr + i, unit_bits * i, &to_add) == BI_FAIL)
+		if (bi_mul_pow_of_2(arr + i, BI_UNIT_BITS * i, &to_add) == BI_FAIL)
 			return (to_bi_handle_fail(&to_add));
 		if (bi_add_bi(res, &to_add, res) == BI_FAIL)
 			return (to_bi_handle_fail(&to_add));

@@ -175,4 +175,16 @@ void		test_bi_mul_bi_case11(void);
 void		test_bi_mul_bi_case12(void);
 void		test_bi_mul_bi_case13(void);
 
+/*
+** bi_get_bit test
+*/
+void		test_bi_get_bit_case1(void);
+void		test_bi_get_bit_case2(void);
+void		test_bi_get_bit_case3(void);
+
+/*
+** double dabble test
+*/
+void		test_add_3_if_gte_5_case1(void);
+
 #endif

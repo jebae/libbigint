@@ -9,10 +9,9 @@
 
 static int		init_pq(t_bigint *p, t_bigint *q, size_t max_bit)
 {
-	static size_t	unit_bits = sizeof(unsigned char) * 8;
 	size_t			size;
 
-	size = max_bit / unit_bits + ((max_bit % unit_bits) ? 1 : 0);
+	size = max_bit / BI_UNIT_BITS + ((max_bit % BI_UNIT_BITS) ? 1 : 0);
 	BI_HANDLE_FUNC_FAIL(bi_new(p, size, BI_SIGN_POSITIVE));
 	if (bi_new(q, size, BI_SIGN_POSITIVE) == BI_FAIL)
 	{
@@ -33,19 +32,18 @@ static void		set_p(t_bigint *p, size_t max_bit_index, size_t n)
 
 static void		set_q(t_bigint *q, t_bigint *bi, size_t max_bit_index)
 {
-	static size_t	unit_bits = sizeof(unsigned char) * 8;
 	size_t			i;
 	size_t			j;
 
 	bi_init(q, q->size);
-	j = max_bit_index / unit_bits;
+	j = max_bit_index / BI_UNIT_BITS;
 	i = 0;
 	while (i < j)
 	{
 		q->data[i] = bi->data[i];
 		i++;
 	}
-	i = max_bit_index % unit_bits;
+	i = max_bit_index % BI_UNIT_BITS;
 	while (i > 0)
 	{
 		q->data[j] |= (bi->data[j] & (1 << (i - 1)));
