@@ -27,7 +27,7 @@ static void		set_p(t_bigint *p, size_t max_bit_index, size_t n)
 	p->data[p->occupied - 1] = 0x00;
 	p->occupied = 0;
 	bi_push(p, 0x01);
-	bi_mul_pow_of_2(p, max_bit_index - n, p);
+	bi_left_shift(p, max_bit_index - n, p);
 }
 
 static void		set_q(t_bigint *q, t_bigint *bi, size_t max_bit_index)
@@ -67,7 +67,7 @@ static int		set_mod_result(
 		m->data[m->occupied - 1] = 0x00;
 		m->occupied = 0;
 		bi_push(m, 0x01);
-		if (bi_mul_pow_of_2(m, n, m) == BI_FAIL)
+		if (bi_left_shift(m, n, m) == BI_FAIL)
 		{
 			ft_memdel((void **)&(m->data));
 			return (BI_FAIL);

@@ -52,15 +52,17 @@ SRCS = bi_new.c\
 	bi_add_bi.c\
 	bi_sub_bi.c\
 	bi_abs.c\
-	bi_mul_pow_of_2.c\
-	bi_div_pow_of_2.c\
+	bi_left_shift.c\
+	bi_right_shift.c\
 	bi_mod_n_pow_of_2_plus_1.c\
 	bi_mod_n_pow_of_2_plus_1_utils.c\
 	bi_strassen_mul_bi_utils.c\
 	bi_mul_bi.c\
 	bi_strassen_mul_bi.c\
 	bi_get_bit.c\
+	bi_set_bit.c\
 	bi_double_dabble.c\
+	bi_rev_double_dabble.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

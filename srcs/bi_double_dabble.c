@@ -1,6 +1,6 @@
 #include "bigint.h"
 
-static int		set_mem(t_bigint *bin, t_bigint *bcd)
+static int		set_mem(t_bigint *bcd, t_bigint *bin)
 {
 	size_t		size;
 
@@ -12,9 +12,9 @@ static int		set_mem(t_bigint *bin, t_bigint *bcd)
 	return (BI_SUCCESS);
 }
 
-static int		bcd_shift(t_bigint *bcd, int bit)
+static int		bcd_left_shift(t_bigint *bcd, int bit)
 {
-	BI_HANDLE_FUNC_FAIL(bi_mul_pow_of_2(bcd, 1, bcd));
+	BI_HANDLE_FUNC_FAIL(bi_left_shift(bcd, 1, bcd));
 	bcd->data[0] |= bit;
 	return (BI_SUCCESS);
 }
@@ -39,13 +39,13 @@ int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 	size_t		i;
 	int			bit;
 
-	BI_HANDLE_FUNC_FAIL(set_mem(bin, bcd));
+	BI_HANDLE_FUNC_FAIL(set_mem(bcd, bin));
 	i = bi_max_bit(bin);
 	while (i > 0)
 	{
 		add_3_if_gte_5(bcd);
 		bit = bi_get_bit(bin, i - 1);
-		BI_HANDLE_FUNC_FAIL(bcd_shift(bcd, bit));
+		bcd_left_shift(bcd, bit);
 		i--;
 	}
 	bcd->sign = bin->sign;

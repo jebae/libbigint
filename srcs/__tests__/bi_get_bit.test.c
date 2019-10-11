@@ -29,11 +29,11 @@ void		test_bi_get_bit_case2(void)
 	int			expected[24] = {
 		1, 0, 0, 0, 1, 1, 0, 0,
 		0, 0, 0, 0, 1, 1, 1, 0,
-		0, 0, 0, 1, 0, 0, 0, 1
+		0, 0, 0, 1, 0, 0, 0, 0
 	};
 
 	bi_new(&bi, 3, BI_SIGN_POSITIVE);
-	bi_push(&bi, 0x11);
+	bi_push(&bi, 0x10);
 	bi_push(&bi, 0x0e);
 	bi_push(&bi, 0x8c);
 

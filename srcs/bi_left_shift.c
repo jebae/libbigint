@@ -64,7 +64,7 @@ static void		shift_by_bit(t_bigint *bi, size_t n)
 	}
 }
 
-int				bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
+int				bi_left_shift(t_bigint *bi, size_t n, t_bigint *res)
 {
 	BI_HANDLE_FUNC_FAIL(set_mem(res, bi, n));
 	shift_by_byte(res, n);

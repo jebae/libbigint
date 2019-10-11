@@ -70,26 +70,26 @@ void		test_bi_sub_bi_case16(void);
 void		test_bi_sub_bi_case17(void);
 
 /*
-** bi_mul_pow_of_2 test
+** bi_left_shift test
 */
-void		test_bi_mul_pow_of_2_case1(void);
-void		test_bi_mul_pow_of_2_case2(void);
-void		test_bi_mul_pow_of_2_case3(void);
-void		test_bi_mul_pow_of_2_case4(void);
-void		test_bi_mul_pow_of_2_case5(void);
-void		test_bi_mul_pow_of_2_case6(void);
-void		test_bi_mul_pow_of_2_case7(void);
+void		test_bi_left_shift_case1(void);
+void		test_bi_left_shift_case2(void);
+void		test_bi_left_shift_case3(void);
+void		test_bi_left_shift_case4(void);
+void		test_bi_left_shift_case5(void);
+void		test_bi_left_shift_case6(void);
+void		test_bi_left_shift_case7(void);
 
 /*
-** bi_div_pow_of_2 test
+** bi_right_shift test
 */
-void		test_bi_div_pow_of_2_case1(void);
-void		test_bi_div_pow_of_2_case2(void);
-void		test_bi_div_pow_of_2_case3(void);
-void		test_bi_div_pow_of_2_case4(void);
-void		test_bi_div_pow_of_2_case5(void);
-void		test_bi_div_pow_of_2_case6(void);
-void		test_bi_div_pow_of_2_case7(void);
+void		test_bi_right_shift_case1(void);
+void		test_bi_right_shift_case2(void);
+void		test_bi_right_shift_case3(void);
+void		test_bi_right_shift_case4(void);
+void		test_bi_right_shift_case5(void);
+void		test_bi_right_shift_case6(void);
+void		test_bi_right_shift_case7(void);
 
 /*
 ** bi_abs test
@@ -189,5 +189,20 @@ void		test_bi_double_dabble_case1(void);
 void		test_bi_double_dabble_case2(void);
 void		test_bi_double_dabble_case3(void);
 void		test_bi_double_dabble_case4(void);
+
+/*
+** bi_set_bit test
+*/
+void		test_bi_set_bit_case1(void);
+void		test_bi_set_bit_case2(void);
+void		test_bi_set_bit_case3(void);
+
+/*
+** reverse double dabble test
+*/
+void		test_bi_rev_double_dabble_case1(void);
+void		test_bi_rev_double_dabble_case2(void);
+void		test_bi_rev_double_dabble_case3(void);
+void		test_bi_rev_double_dabble_case4(void);
 
 #endif

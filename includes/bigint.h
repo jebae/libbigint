@@ -67,6 +67,7 @@ unsigned char		bi_1byte_mul_1byte(
 	unsigned char *carry
 );
 int					bi_get_bit(t_bigint *bi, size_t n);
+void				bi_set_bit(t_bigint *bi, size_t n, int value);
 
 /*
 ** add
@@ -86,12 +87,12 @@ int					bi_abs(t_bigint *bi, t_bigint *res);
 /*
 ** multiply 2^n
 */
-int					bi_mul_pow_of_2(t_bigint *bi, size_t n, t_bigint *res);
+int					bi_left_shift(t_bigint *bi, size_t n, t_bigint *res);
 
 /*
 ** divide by 2^n
 */
-int					bi_div_pow_of_2(t_bigint *bi, size_t n, t_bigint *res);
+int					bi_right_shift(t_bigint *bi, size_t n, t_bigint *res);
 
 /*
 ** modulo 2^n + 1
@@ -148,5 +149,6 @@ int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 ** double dabble
 */
 int					bi_double_dabble(t_bigint *bin, t_bigint *bcd);
+int             	bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin);
 
 #endif

@@ -29,7 +29,7 @@ static int		fft_loop_by_level(
 		k = j;
 		while (k < n)
 		{
-			BI_HANDLE_FUNC_FAIL(bi_mul_pow_of_2(arr + k + v->m2, e, &(v->t)));
+			BI_HANDLE_FUNC_FAIL(bi_left_shift(arr + k + v->m2, e, &(v->t)));
 			BI_HANDLE_FUNC_FAIL(
 				bi_sub_bi(arr + k, &(v->t), arr + k + v->m2));
 			BI_HANDLE_FUNC_FAIL(bi_add_bi(arr + k, &(v->t), arr + k));
@@ -78,7 +78,7 @@ static int		ifft(t_bigint *arr, size_t n, unsigned int log2n)
 	i = 0;
 	while (i < n)
 	{
-		bi_div_pow_of_2(arr + i, log2n, arr + i);
+		bi_right_shift(arr + i, log2n, arr + i);
 		i++;
 	}
 	return (BI_SUCCESS);

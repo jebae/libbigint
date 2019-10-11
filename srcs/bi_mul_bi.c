@@ -68,7 +68,7 @@ int			bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	{
 		if (bi_mul_1byte(a, b->data[i], &to_add) == BI_FAIL)
 			return (handle_return(&res, &to_add, BI_FAIL));
-		if (bi_mul_pow_of_2(&to_add, 8 * i, &to_add) == BI_FAIL)
+		if (bi_left_shift(&to_add, 8 * i, &to_add) == BI_FAIL)
 			return (handle_return(&res, &to_add, BI_FAIL));
 		if (bi_add_bi(&res, &to_add, &res) == BI_FAIL)
 			return (handle_return(&res, &to_add, BI_FAIL));

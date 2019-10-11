@@ -44,7 +44,7 @@ static void		shift_by_bit(t_bigint *bi, size_t n)
 	}
 }
 
-int				bi_div_pow_of_2(t_bigint *bi, size_t n, t_bigint *res)
+int				bi_right_shift(t_bigint *bi, size_t n, t_bigint *res)
 {
 	BI_HANDLE_FUNC_FAIL(bi_copy(res, bi));
 	shift_by_byte(res, n);
