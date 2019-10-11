@@ -36,5 +36,18 @@ static void		add_3_if_gte_5(t_bigint *bcd)
 
 int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 {
+	size_t		i;
+	int			bit;
 
+	BI_HANDLE_FUNC_FAIL(set_mem(bin, bcd));
+	i = bi_max_bit(bin);
+	while (i > 0)
+	{
+		add_3_if_gte_5(bcd);
+		bit = bi_get_bit(bin, i - 1);
+		BI_HANDLE_FUNC_FAIL(bcd_shift(bcd, bit));
+		i--;
+	}
+	bcd->sign = bin->sign;
+	return (BI_SUCCESS);
 }

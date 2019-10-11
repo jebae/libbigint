@@ -185,6 +185,9 @@ void		test_bi_get_bit_case3(void);
 /*
 ** double dabble test
 */
-void		test_add_3_if_gte_5_case1(void);
+void		test_bi_double_dabble_case1(void);
+void		test_bi_double_dabble_case2(void);
+void		test_bi_double_dabble_case3(void);
+void		test_bi_double_dabble_case4(void);
 
 #endif

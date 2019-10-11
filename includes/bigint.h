@@ -147,5 +147,6 @@ int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 /*
 ** double dabble
 */
+int					bi_double_dabble(t_bigint *bin, t_bigint *bcd);
 
 #endif
