@@ -37,7 +37,7 @@ void				bi_erase(t_bigint *bi);
 int					bi_expand(t_bigint *bi, size_t size);
 int					bi_expand_at_least(t_bigint *bi, size_t size);
 int					bi_resize(t_bigint *bi, size_t size);
-int					bi_push(t_bigint *bi, char value);
+int					bi_push(t_bigint *bi, unsigned char value);
 
 /*
 ** operator utils
