@@ -205,4 +205,26 @@ void		test_bi_rev_double_dabble_case2(void);
 void		test_bi_rev_double_dabble_case3(void);
 void		test_bi_rev_double_dabble_case4(void);
 
+/*
+* bcd_len test
+*/
+void		test_bcd_len_case1(void);
+void		test_bcd_len_case2(void);
+void		test_bcd_len_case3(void);
+void		test_bcd_len_case4(void);
+void		test_bcd_len_case5(void);
+
+/*
+* bcd_get_digit test
+*/
+void		test_bcd_get_digit_case1(void);
+void		test_bcd_get_digit_case2(void);
+
+/*
+* bcd_set_digit test
+*/
+void		test_bcd_set_digit_case1(void);
+void		test_bcd_set_digit_case2(void);
+void		test_bcd_set_digit_case3(void);
+
 #endif

@@ -169,5 +169,21 @@ int		main(void)
 	test_bi_rev_double_dabble_case2();
 	test_bi_rev_double_dabble_case3();
 	test_bi_rev_double_dabble_case4();
+
+	// bcd_len
+	test_bcd_len_case1();
+	test_bcd_len_case2();
+	test_bcd_len_case3();
+	test_bcd_len_case4();
+	test_bcd_len_case5();
+
+	// bcd_get_digit
+	test_bcd_get_digit_case1();
+	test_bcd_get_digit_case2();
+
+	// bcd_set_digit
+	test_bcd_set_digit_case1();
+	test_bcd_set_digit_case2();
+	test_bcd_set_digit_case3();
 	// while (1);
 }

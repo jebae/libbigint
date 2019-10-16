@@ -63,6 +63,8 @@ SRCS = bi_new.c\
 	bi_set_bit.c\
 	bi_double_dabble.c\
 	bi_rev_double_dabble.c\
+	bcd_len.c\
+	bcd_get_digit.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

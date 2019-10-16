@@ -151,4 +151,10 @@ int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 int					bi_double_dabble(t_bigint *bin, t_bigint *bcd);
 int             	bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin);
 
+/*
+** bcd
+*/
+size_t				bcd_len(t_bigint *bcd);
+unsigned char		bcd_get_digit(t_bigint *bcd, size_t n);
+
 #endif
