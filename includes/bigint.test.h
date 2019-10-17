@@ -226,5 +226,13 @@ void		test_bcd_get_digit_case2(void);
 void		test_bcd_set_digit_case1(void);
 void		test_bcd_set_digit_case2(void);
 void		test_bcd_set_digit_case3(void);
+void		test_bcd_set_digit_case4(void);
+
+/*
+* bcd_rm_trailing_zero test
+*/
+void		test_bcd_rm_trailing_zero_case1(void);
+void		test_bcd_rm_trailing_zero_case2(void);
+void		test_bcd_rm_trailing_zero_case3(void);
 
 #endif

@@ -185,5 +185,11 @@ int		main(void)
 	test_bcd_set_digit_case1();
 	test_bcd_set_digit_case2();
 	test_bcd_set_digit_case3();
+	test_bcd_set_digit_case4();
+
+	// bcd_rm_trailing_zero
+	test_bcd_rm_trailing_zero_case1();
+	test_bcd_rm_trailing_zero_case2();
+	test_bcd_rm_trailing_zero_case3();
 	// while (1);
 }
