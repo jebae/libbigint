@@ -13,4 +13,5 @@ void			bi_set_bit(t_bigint *bi, size_t n, int value)
         *byte |= 1 << (n % BI_UNIT_BITS);
     else
         *byte &= ~(1 << (n % BI_UNIT_BITS));
+	bi_update_occupied(bi);
 }

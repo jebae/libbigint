@@ -45,6 +45,6 @@ int             bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin)
 	}
     bin->sign = bcd->sign;
     bi_update_occupied(bin);
-    ft_memdel((void **)&(copy.data));
+    ft_memdel((void **)&copy.data);
     return (BI_SUCCESS);
 }
