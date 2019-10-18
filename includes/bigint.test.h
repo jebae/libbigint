@@ -188,6 +188,8 @@ void		test_bi_double_dabble_case1(void);
 void		test_bi_double_dabble_case2(void);
 void		test_bi_double_dabble_case3(void);
 void		test_bi_double_dabble_case4(void);
+void		test_bi_double_dabble_case5(void);
+void		test_bi_double_dabble_case6(void);
 
 /*
 ** bi_set_bit test

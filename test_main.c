@@ -156,6 +156,8 @@ int		main(void)
 	test_bi_double_dabble_case2();
 	test_bi_double_dabble_case3();
 	test_bi_double_dabble_case4();
+	test_bi_double_dabble_case5();
+	test_bi_double_dabble_case6();
 
 	// // bi_set_bit
 	test_bi_set_bit_case1();

@@ -5,7 +5,7 @@ void		test_bi_get_bit_case1(void)
 	printf(KYEL "test_bi_get_bit_case1\n" KNRM);
 	t_bigint	bi;
 	int			expected[16] = {
-		-1, -1, -1, -1, 1, 1, 1, 0,
+		0, 0, 0, 0, 1, 1, 1, 0,
 		0, 0, 0, 1, 0, 0, 0, 1
 	};
 
@@ -56,17 +56,17 @@ void		test_bi_get_bit_case3(void)
 	bi_push(&bi, 0x11);
 
 	test(
-		bi_get_bit(&bi, 5) == -1,
+		bi_get_bit(&bi, 5) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 
 	test(
-		bi_get_bit(&bi, 6) == -1,
+		bi_get_bit(&bi, 6) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 
 	test(
-		bi_get_bit(&bi, 7) == -1,
+		bi_get_bit(&bi, 7) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 
@@ -82,17 +82,17 @@ void		test_bi_get_bit_case4(void)
 	bi_init(&bi);
 
 	test(
-		bi_get_bit(&bi, 5) == -1,
+		bi_get_bit(&bi, 5) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 
 	test(
-		bi_get_bit(&bi, 6) == -1,
+		bi_get_bit(&bi, 6) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 
 	test(
-		bi_get_bit(&bi, 7) == -1,
+		bi_get_bit(&bi, 7) == 0,
 		"bi_get_bit : bi_get_bit()"
 	);
 

@@ -40,7 +40,7 @@ int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 	int			bit;
 
 	BI_HANDLE_FUNC_FAIL(set_mem(bcd, bin));
-	i = bi_max_bit(bin);
+	i = bin->occupied * BI_UNIT_BITS;
 	while (i > 0)
 	{
 		add_3_if_gte_5(bcd);
@@ -49,5 +49,6 @@ int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 		i--;
 	}
 	bcd->sign = bin->sign;
+    bi_update_occupied(bcd);
 	return (BI_SUCCESS);
 }
