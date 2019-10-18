@@ -234,4 +234,9 @@ void		test_bcd_rm_trailing_zero_case1(void);
 void		test_bcd_rm_trailing_zero_case2(void);
 void		test_bcd_rm_trailing_zero_case3(void);
 
+/*
+** bcd_iter
+*/
+void		test_bcd_iter_case1(void);
+
 #endif

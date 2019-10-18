@@ -189,5 +189,8 @@ int		main(void)
 	test_bcd_rm_trailing_zero_case1();
 	test_bcd_rm_trailing_zero_case2();
 	test_bcd_rm_trailing_zero_case3();
+
+	// bcd_iter
+	test_bcd_iter_case1();
 	// while (1);
 }

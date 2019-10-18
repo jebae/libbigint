@@ -158,5 +158,10 @@ size_t				bcd_len(t_bigint *bcd);
 unsigned char		bcd_get_digit(t_bigint *bcd, size_t n);
 void				bcd_set_digit(t_bigint *bcd, size_t n, unsigned char val);
 size_t				bcd_rm_trailing_zero(t_bigint *bcd);
+void				bcd_iter(
+	t_bigint *bcd,
+	void (*f)(unsigned char, void *),
+	void *arg
+);
 
 #endif
