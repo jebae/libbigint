@@ -9,7 +9,7 @@ void		test_bi_to_bi_array_case1(void)
 	size_t		size = 32;
 	size_t		i = 0;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
@@ -28,7 +28,7 @@ void		test_bi_to_bi_array_case1(void)
 			"bi_to_bi_array : arr[i] zero pad"
 		);
 
-	free(a.data);
+	bi_del(&a);
 	bi_del_bi_array(arr, size);
 }
 
@@ -40,7 +40,7 @@ void		test_bi_to_bi_array_case2(void)
 	t_bigint	*arr;
 	size_t		size = 3;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
@@ -54,7 +54,7 @@ void		test_bi_to_bi_array_case2(void)
 			"bi_to_bi_array : arr[i].data"
 		);
 
-	free(a.data);
+	bi_del(&a);
 	bi_del_bi_array(arr, size);
 }
 
@@ -65,7 +65,7 @@ void		test_bi_to_bi_array_case3(void)
 	t_bigint	a;
 	t_bigint	*arr;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
@@ -78,7 +78,7 @@ void		test_bi_to_bi_array_case3(void)
 		"bi_to_bi_array : arr"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case negative
@@ -90,12 +90,13 @@ void		test_bi_to_bi_array_case4(void)
 	size_t		size = 32;
 	size_t		i = 0;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
 	bi_push(&a, 0x04);
 	bi_push(&a, 0x05);
+	a.sign = BI_SIGN_NEGATIVE;
 	arr = bi_to_bi_array(&a, 32);
 
 	for (i=0; i < a.occupied; i++)
@@ -116,6 +117,6 @@ void		test_bi_to_bi_array_case4(void)
 			"bi_to_bi_array : arr[i] zero pad"
 		);
 
-	free(a.data);
+	bi_del(&a);
 	bi_del_bi_array(arr, size);
 }

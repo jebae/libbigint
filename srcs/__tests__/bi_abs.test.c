@@ -7,10 +7,12 @@ void		test_bi_abs_case1(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x04);
 	bi_push(&a, 0x23);
+	a.sign = BI_SIGN_NEGATIVE;
+
 	res = bi_abs(&a, &b);
 
 	test(
@@ -43,8 +45,8 @@ void		test_bi_abs_case1(void)
 		"bi_abs : b.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case mutable
@@ -54,9 +56,11 @@ void		test_bi_abs_case2(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
 	bi_push(&a, 0x04);
 	bi_push(&a, 0x23);
+	a.sign = BI_SIGN_NEGATIVE;
+
 	res = bi_abs(&a, &a);
 
 	test(
@@ -89,5 +93,5 @@ void		test_bi_abs_case2(void)
 		"bi_abs : a.data[1]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }

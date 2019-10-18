@@ -4,10 +4,9 @@ void		test_bi_push_case1(void)
 {
 	printf(KYEL "test_bi_push_case1\n" KNRM);
 	t_bigint	bi;
-	size_t		size = 2;
 	int			res;
 
-	bi_new(&bi, size, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	res = bi_push(&bi, 0x11);
 
 	test(
@@ -24,17 +23,17 @@ void		test_bi_push_case1(void)
 		bi.data[0] == 0x11,
 		"bi_push (0x11) : bi.data[0]"
 	);
-	free(bi.data);
+
+	bi_del(&bi);
 }
 
 void		test_bi_push_case2(void)
 {
 	printf(KYEL "test_bi_push_case2\n" KNRM);
 	t_bigint	bi;
-	size_t		size = 2;
 	int			res;
 
-	bi_new(&bi, size, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	res = bi_push(&bi, 0x01);
 	res = bi_push(&bi, 0x02);
 	res = bi_push(&bi, 0x03);
@@ -58,5 +57,6 @@ void		test_bi_push_case2(void)
 			bi.data[i] == 0x01 * (i + 1),
 			"bi_push (0x0i) : bi.data[i]"
 		);
-	free(bi.data);
+
+	bi_del(&bi);
 }

@@ -6,7 +6,7 @@ void		test_bcd_rm_trailing_zero_case1(void)
 	printf(KYEL "test_bcd_rm_trailing_zero_case1\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x20);
 	bi_push(&bcd, 0x01);
 
@@ -25,7 +25,7 @@ void		test_bcd_rm_trailing_zero_case1(void)
 		"bcd_rm_trailing_zero : bcd.data[0]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 1200000
@@ -34,7 +34,7 @@ void		test_bcd_rm_trailing_zero_case2(void)
 	printf(KYEL "test_bcd_rm_trailing_zero_case2\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x00);
 	bi_push(&bcd, 0x00);
 	bi_push(&bcd, 0x20);
@@ -55,7 +55,7 @@ void		test_bcd_rm_trailing_zero_case2(void)
 		"bcd_rm_trailing_zero : bcd.data[0]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 1000002
@@ -64,7 +64,7 @@ void		test_bcd_rm_trailing_zero_case3(void)
 	printf(KYEL "test_bcd_rm_trailing_zero_case3\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x02);
 	bi_push(&bcd, 0x00);
 	bi_push(&bcd, 0x00);
@@ -98,5 +98,5 @@ void		test_bcd_rm_trailing_zero_case3(void)
 		"bcd_rm_trailing_zero : bcd.data[3]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }

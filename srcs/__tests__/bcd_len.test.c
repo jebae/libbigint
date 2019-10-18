@@ -7,7 +7,7 @@ void		test_bcd_len_case1(void)
 	t_bigint	bcd;
 	size_t		expected = 5;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x45);
 	bi_push(&bcd, 0x23);
 	bi_push(&bcd, 0x01);
@@ -17,7 +17,7 @@ void		test_bcd_len_case1(void)
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 112345
@@ -27,7 +27,7 @@ void		test_bcd_len_case2(void)
 	t_bigint	bcd;
 	size_t		expected = 6;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x45);
 	bi_push(&bcd, 0x23);
 	bi_push(&bcd, 0x11);
@@ -37,7 +37,7 @@ void		test_bcd_len_case2(void)
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 10
@@ -47,7 +47,7 @@ void		test_bcd_len_case3(void)
 	t_bigint	bcd;
 	size_t		expected = 2;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x10);
 
 	test(
@@ -55,7 +55,7 @@ void		test_bcd_len_case3(void)
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 8
@@ -65,7 +65,7 @@ void		test_bcd_len_case4(void)
 	t_bigint	bcd;
 	size_t		expected = 1;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x08);
 
 	test(
@@ -73,7 +73,7 @@ void		test_bcd_len_case4(void)
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 123000000000
@@ -83,7 +83,7 @@ void		test_bcd_len_case5(void)
 	t_bigint	bcd;
 	size_t		expected = 12;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x00);
 	bi_push(&bcd, 0x00);
 	bi_push(&bcd, 0x00);
@@ -96,7 +96,7 @@ void		test_bcd_len_case5(void)
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 0
@@ -106,12 +106,12 @@ void		test_bcd_len_case6(void)
 	t_bigint	bcd;
 	size_t		expected = 1;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 
 	test(
 		bcd_len(&bcd) == expected,
 		"bcd_len : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }

@@ -7,8 +7,9 @@ void		test_bi_double_dabble_case1(void)
 	t_bigint	bcd;
 	int			res;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
-	bi_new(&bcd, 1, BI_SIGN_NEGATIVE);
+	bi_init(&bi);
+	bi_init(&bcd);
+	bcd.sign = BI_SIGN_NEGATIVE;
 
 	bi_push(&bi, 0xff);
 	bi_push(&bi, 0xfe);
@@ -45,8 +46,8 @@ void		test_bi_double_dabble_case1(void)
 		"bi_double_dabble : bcd.data[2]"
 	);
 
-	free(bi.data);
-	free(bcd.data);
+	bi_del(&bi);
+	bi_del(&bcd);
 }
 
 // case negative
@@ -57,11 +58,12 @@ void		test_bi_double_dabble_case2(void)
 	t_bigint	bcd;
 	int			res;
 
-	bi_new(&bi, 1, BI_SIGN_NEGATIVE);
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bi);
+	bi_init(&bcd);
 
 	bi_push(&bi, 0xff);
 	bi_push(&bi, 0xfe);
+	bi.sign = BI_SIGN_NEGATIVE;
 
 	res = bi_double_dabble(&bi, &bcd);
 
@@ -95,8 +97,8 @@ void		test_bi_double_dabble_case2(void)
 		"bi_double_dabble : bcd.data[2]"
 	);
 
-	free(bi.data);
-	free(bcd.data);
+	bi_del(&bi);
+	bi_del(&bcd);
 }
 
 // case big
@@ -110,8 +112,9 @@ void		test_bi_double_dabble_case3(void)
 		0x93, 0x82, 0x61, 0x05, 0x00, 0x53
 	};
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
-	bi_new(&bcd, 1, BI_SIGN_NEGATIVE);
+	bi_init(&bi);
+	bi_init(&bcd);
+	bcd.sign = BI_SIGN_NEGATIVE;
 
 	bi_push(&bi, 0xc5);
 	bi_push(&bi, 0x72);
@@ -142,8 +145,8 @@ void		test_bi_double_dabble_case3(void)
 			"bi_double_dabble : bcd.data[i]"
 		);
 
-	free(bi.data);
-	free(bcd.data);
+	bi_del(&bi);
+	bi_del(&bcd);
 }
 
 // case 0
@@ -154,8 +157,9 @@ void		test_bi_double_dabble_case4(void)
 	t_bigint		bcd;
 	int				res;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
-	bi_new(&bcd, 1, BI_SIGN_NEGATIVE);
+	bi_init(&bi);
+	bi_init(&bcd);
+	bcd.sign = BI_SIGN_NEGATIVE;
 
 	res = bi_double_dabble(&bi, &bcd);
 
@@ -174,6 +178,6 @@ void		test_bi_double_dabble_case4(void)
 		"bi_double_dabble : bcd.sign"
 	);
 
-	free(bi.data);
-	free(bcd.data);
+	bi_del(&bi);
+	bi_del(&bcd);
 }

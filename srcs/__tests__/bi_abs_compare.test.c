@@ -7,10 +7,9 @@ void		test_bi_abs_compare_case1(void)
 	t_bigint	b;
 	t_bigint	*bigger;
 	t_bigint	*smaller;
-	size_t		size = 2;
 
-	bi_new(&a, size, BI_SIGN_POSITIVE);
-	bi_new(&b, size, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// a = 0xfeff, b = 0xff90 -> a < b
 	bi_push(&a, 0xff);
@@ -30,8 +29,8 @@ void		test_bi_abs_compare_case1(void)
 		"bi_abs_compare (0xfeff < 0xff90) : smaller"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 void		test_bi_abs_compare_case2(void)
@@ -41,10 +40,9 @@ void		test_bi_abs_compare_case2(void)
 	t_bigint	b;
 	t_bigint	*bigger;
 	t_bigint	*smaller;
-	size_t		size = 2;
 
-	bi_new(&a, size, BI_SIGN_POSITIVE);
-	bi_new(&b, size, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// a = 0xfeff, b = 0xff -> a > b
 	bi_push(&a, 0xff);
@@ -63,8 +61,8 @@ void		test_bi_abs_compare_case2(void)
 		"bi_abs_compare (0xfeff > 0xff) : smaller"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 void		test_bi_abs_compare_case3(void)
@@ -74,10 +72,9 @@ void		test_bi_abs_compare_case3(void)
 	t_bigint	b;
 	t_bigint	*bigger;
 	t_bigint	*smaller;
-	size_t		size = 2;
 
-	bi_new(&a, size, BI_SIGN_POSITIVE);
-	bi_new(&b, size, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// a = 0xffff, b = 0xffff -> a == b
 	bi_push(&a, 0xff);
@@ -97,8 +94,8 @@ void		test_bi_abs_compare_case3(void)
 		"bi_abs_compare (0xffff == 0xffff) : smaller"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case 0, 0
@@ -109,10 +106,9 @@ void		test_bi_abs_compare_case4(void)
 	t_bigint	b;
 	t_bigint	*bigger;
 	t_bigint	*smaller;
-	size_t		size = 2;
 
-	bi_new(&a, size, BI_SIGN_POSITIVE);
-	bi_new(&b, size, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	bi_abs_compare(&a, &b, &bigger, &smaller);
 
@@ -126,8 +122,8 @@ void		test_bi_abs_compare_case4(void)
 		"bi_abs_compare (0x00 == 0x00) : smaller"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 void		test_bi_abs_compare_case5(void)
@@ -137,10 +133,9 @@ void		test_bi_abs_compare_case5(void)
 	t_bigint	b;
 	t_bigint	*bigger;
 	t_bigint	*smaller;
-	size_t		size = 2;
 
-	bi_new(&a, size, BI_SIGN_POSITIVE);
-	bi_new(&b, size, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// a = 0x0f75, b = 0x03a4 -> a > b
 	bi_push(&a, 0x75);
@@ -160,6 +155,6 @@ void		test_bi_abs_compare_case5(void)
 		"bi_abs_compare (0x0f75 > 0x03a4) : smaller"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }

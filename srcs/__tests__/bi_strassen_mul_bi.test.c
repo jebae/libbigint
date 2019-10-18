@@ -9,9 +9,9 @@ void		test_bi_strassen_mul_bi_case1(void)
 	t_bigint	c;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0x04);
 	bi_push(&b, 0x7a);
 	res = bi_strassen_mul_bi(&a, &b, &c);
@@ -36,9 +36,9 @@ void		test_bi_strassen_mul_bi_case1(void)
 		"bi_strassen_mul_bi (0x04 * 0x7a) : c.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case big
@@ -56,9 +56,9 @@ void		test_bi_strassen_mul_bi_case2(void)
 		0x11, 0x3b, 0x34, 0x86, 0x8d, 0x6c, 0x21, 0x6f, 0x8b
 	};
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	for (size_t i=0; i < 9; i++)
 	{
 		bi_push(&a, a_arr[i]);
@@ -82,9 +82,9 @@ void		test_bi_strassen_mul_bi_case2(void)
 			"bi_strassen_mul_bi (0x991070a8980ef30945 * 0xe93420b1908efe1a22) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case a * 1
@@ -96,9 +96,9 @@ void		test_bi_strassen_mul_bi_case3(void)
 	t_bigint		c;
 	int				res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0x67);
 	bi_push(&a, 0x78);
 	bi_push(&a, 0x89);
@@ -121,9 +121,9 @@ void		test_bi_strassen_mul_bi_case3(void)
 			"bi_strassen_mul_bi (0x897867 * 0x01) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case 1 * b
@@ -135,9 +135,9 @@ void		test_bi_strassen_mul_bi_case4(void)
 	t_bigint		c;
 	int				res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0x01);
 	bi_push(&b, 0x67);
 	bi_push(&b, 0x78);
@@ -160,9 +160,9 @@ void		test_bi_strassen_mul_bi_case4(void)
 			"bi_strassen_mul_bi (0x01 * 0x897867) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case positive * negative
@@ -175,14 +175,15 @@ void		test_bi_strassen_mul_bi_case5(void)
 	int				res;
 	unsigned char	expected[5] = { 0x8a, 0x4a, 0x06, 0x55, 0x1b };
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
 	bi_push(&b, 0x78);
 	bi_push(&b, 0x89);
+	b.sign = BI_SIGN_NEGATIVE;
 	res = bi_strassen_mul_bi(&a, &b, &c);
 
 	test(
@@ -206,9 +207,9 @@ void		test_bi_strassen_mul_bi_case5(void)
 			"bi_strassen_mul_bi (0x32e6 * -0x897867) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case negative * positive
@@ -221,14 +222,15 @@ void		test_bi_strassen_mul_bi_case6(void)
 	int				res;
 	unsigned char	expected[5] = { 0x8a, 0x4a, 0x06, 0x55, 0x1b };
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
 	bi_push(&b, 0x78);
 	bi_push(&b, 0x89);
+	a.sign = BI_SIGN_NEGATIVE;
 	res = bi_strassen_mul_bi(&a, &b, &c);
 
 	test(
@@ -252,9 +254,9 @@ void		test_bi_strassen_mul_bi_case6(void)
 			"bi_strassen_mul_bi (-0x32e6 * 0x897867) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case negative * negative
@@ -267,14 +269,16 @@ void		test_bi_strassen_mul_bi_case7(void)
 	int				res;
 	unsigned char	expected[5] = { 0x8a, 0x4a, 0x06, 0x55, 0x1b };
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	bi_push(&b, 0x67);
 	bi_push(&b, 0x78);
 	bi_push(&b, 0x89);
+	a.sign = BI_SIGN_NEGATIVE;
+	b.sign = BI_SIGN_NEGATIVE;
 	res = bi_strassen_mul_bi(&a, &b, &c);
 
 	test(
@@ -298,9 +302,9 @@ void		test_bi_strassen_mul_bi_case7(void)
 			"bi_strassen_mul_bi (-0x32e6 * -0x897867) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case a * 0
@@ -312,9 +316,9 @@ void		test_bi_strassen_mul_bi_case8(void)
 	t_bigint		c;
 	int				res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&a, 0xe6);
 	bi_push(&a, 0x32);
 	res = bi_strassen_mul_bi(&a, &b, &c);
@@ -329,9 +333,9 @@ void		test_bi_strassen_mul_bi_case8(void)
 		"bi_strassen_mul_bi (0x32e6 * 0x00) : c.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case 0 * b
@@ -343,9 +347,9 @@ void		test_bi_strassen_mul_bi_case9(void)
 	t_bigint		c;
 	int				res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	bi_push(&b, 0xe6);
 	bi_push(&b, 0x32);
 	res = bi_strassen_mul_bi(&a, &b, &c);
@@ -360,9 +364,9 @@ void		test_bi_strassen_mul_bi_case9(void)
 		"bi_strassen_mul_bi (0x00 * 0x32e6) : c.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case 0 * 0
@@ -374,9 +378,9 @@ void		test_bi_strassen_mul_bi_case10(void)
 	t_bigint		c;
 	int				res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	res = bi_strassen_mul_bi(&a, &b, &c);
 
 	test(
@@ -389,9 +393,9 @@ void		test_bi_strassen_mul_bi_case10(void)
 		"bi_strassen_mul_bi (0x00 * 0x00) : c.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case big
@@ -419,9 +423,9 @@ void		test_bi_strassen_mul_bi_case11(void)
 		0x1f, 0xff, 0xde
 	};
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
-	bi_new(&c, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
+	bi_init(&c);
 	for (size_t i=0; i < 19; i++)
 		bi_push(&a, a_arr[i]);
 	for (size_t i=0; i < 17; i++)
@@ -444,9 +448,9 @@ void		test_bi_strassen_mul_bi_case11(void)
 			"bi_strassen_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : c.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
-	free(c.data);
+	bi_del(&a);
+	bi_del(&b);
+	bi_del(&c);
 }
 
 // case mutable a = c
@@ -473,8 +477,8 @@ void		test_bi_strassen_mul_bi_case12(void)
 		0x1f, 0xff, 0xde
 	};
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	for (size_t i=0; i < 19; i++)
 		bi_push(&a, a_arr[i]);
 	for (size_t i=0; i < 17; i++)
@@ -497,8 +501,8 @@ void		test_bi_strassen_mul_bi_case12(void)
 			"bi_strassen_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : a.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case mutable b = c
@@ -525,8 +529,8 @@ void		test_bi_strassen_mul_bi_case13(void)
 		0x1f, 0xff, 0xde
 	};
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	for (size_t i=0; i < 19; i++)
 		bi_push(&a, a_arr[i]);
 	for (size_t i=0; i < 17; i++)
@@ -549,6 +553,6 @@ void		test_bi_strassen_mul_bi_case13(void)
 			"bi_strassen_mul_bi ( ([0xfe] * 19) * ([0xdf] * 17)) : b.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }

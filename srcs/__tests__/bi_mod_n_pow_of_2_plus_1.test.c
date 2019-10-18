@@ -8,8 +8,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case1(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x80);
 
 	// A mod 17
@@ -35,8 +35,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case1(void)
 		"bi_mod_n_pow_of_2_plus_1 (128 mod 17) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case p = 2^0 = 1
@@ -47,8 +47,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case2(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x15);
 
 	// A mod 17
@@ -74,8 +74,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case2(void)
 		"bi_mod_n_pow_of_2_plus_1 (21 mod 17) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case A's max bit < n
@@ -86,8 +86,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case3(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x0c);
 
 	// A mod 17
@@ -113,8 +113,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case3(void)
 		"bi_mod_n_pow_of_2_plus_1 (12 mod 17) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case multiple bits bigger than n is 1
@@ -125,8 +125,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case4(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xb5);
 	bi_push(&a, 0x02);
 
@@ -153,8 +153,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case4(void)
 		"bi_mod_n_pow_of_2_plus_1 (693 mod 17) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case negative
@@ -165,10 +165,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case5(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xb5);
 	bi_push(&a, 0x02);
+	a.sign = BI_SIGN_NEGATIVE;
 
 	// A mod 17
 	res = bi_mod_n_pow_of_2_plus_1(&a, 4, &b);
@@ -193,8 +194,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case5(void)
 		"bi_mod_n_pow_of_2_plus_1 (-693 mod 17) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case n = 0, A = odd number
@@ -205,8 +206,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xb5);
 	bi_push(&a, 0x02);
 
@@ -233,8 +234,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case6(void)
 		"bi_mod_n_pow_of_2_plus_1 (693 mod 2) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case n = 0, A = even number
@@ -245,8 +246,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case7(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xb4);
 	bi_push(&a, 0x02);
 
@@ -268,8 +269,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case7(void)
 		"bi_mod_n_pow_of_2_plus_1 (692 mod 2) : b.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 /*
@@ -284,8 +285,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case8(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x00);
 	bi_push(&a, 0x01);
 
@@ -312,8 +313,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case8(void)
 		"bi_mod_n_pow_of_2_plus_1 (256 mod 5) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case A = 0
@@ -324,8 +325,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case9(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// A mod 5
 	res = bi_mod_n_pow_of_2_plus_1(&a, 2, &b);
@@ -345,8 +346,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case9(void)
 		"bi_mod_n_pow_of_2_plus_1 (0 mod 5) : b.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case big
@@ -357,8 +358,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case10(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x03);
 	bi_push(&a, 0x00);
 	bi_push(&a, 0x03);
@@ -381,8 +382,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case10(void)
 		"bi_mod_n_pow_of_2_plus_1 (196611 mod 65537) : b.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case big 2
@@ -393,8 +394,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case11(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xb9);
 	bi_push(&a, 0xa7);
@@ -429,8 +430,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case11(void)
 		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : b.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case big A = 0
@@ -441,8 +442,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case12(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 
 	// A mod 2^16 + 1
 	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &b);
@@ -462,8 +463,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case12(void)
 		"bi_mod_n_pow_of_2_plus_1 (0 mod 65537) : b.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case mutable
@@ -473,7 +474,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case13(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xb9);
 	bi_push(&a, 0xa7);
@@ -508,7 +509,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case13(void)
 		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[1]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case mutable n = 0
@@ -518,7 +519,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case14(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xb9);
 	bi_push(&a, 0xa7);
@@ -548,7 +549,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case14(void)
 		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 2) : a.data[0]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case mutable negative
@@ -558,12 +559,13 @@ void		test_bi_mod_n_pow_of_2_plus_1_case15(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xb9);
 	bi_push(&a, 0xa7);
 	bi_push(&a, 0x03);
 	bi_push(&a, 0xef);
+	a.sign = BI_SIGN_NEGATIVE;
 
 	// A mod 2^16 + 1
 	res = bi_mod_n_pow_of_2_plus_1(&a, 16, &a);
@@ -593,7 +595,7 @@ void		test_bi_mod_n_pow_of_2_plus_1_case15(void)
 		"bi_mod_n_pow_of_2_plus_1 (1026558507269 mod 65537) : a.data[1]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case A's max bit < n
@@ -604,10 +606,11 @@ void		test_bi_mod_n_pow_of_2_plus_1_case16(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x0c);
 	bi_push(&a, 0xf1);
+	b.sign = BI_SIGN_NEGATIVE;
 
 	// A mod 2^100 + 1
 	res = bi_mod_n_pow_of_2_plus_1(&a, 100, &b);
@@ -637,8 +640,8 @@ void		test_bi_mod_n_pow_of_2_plus_1_case16(void)
 		"bi_mod_n_pow_of_2_plus_1 (0xf10c mod 2^100 + 1) : b.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case A's max bit < n (negative A)
@@ -653,10 +656,12 @@ void		test_bi_mod_n_pow_of_2_plus_1_case17(void)
 		0xff, 0xff, 0xff, 0xff,	0x0f
 	};
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x0c);
 	bi_push(&a, 0xf1);
+	a.sign = BI_SIGN_NEGATIVE;
+	b.sign = BI_SIGN_NEGATIVE;
 
 	// A mod 2^100 + 1
 	res = bi_mod_n_pow_of_2_plus_1(&a, 100, &b);
@@ -682,6 +687,6 @@ void		test_bi_mod_n_pow_of_2_plus_1_case17(void)
 			"bi_mod_n_pow_of_2_plus_1 (-0xf10c mod 2^100 + 1) : b.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }

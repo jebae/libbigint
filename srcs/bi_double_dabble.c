@@ -8,7 +8,7 @@ static int		set_mem(t_bigint *bcd, t_bigint *bin)
 	size = (size % BI_UNIT_BITS == 0)
 		? size / BI_UNIT_BITS
 		: size / BI_UNIT_BITS + 1;
-	BI_HANDLE_FUNC_FAIL(bi_init(bcd, size));
+	BI_HANDLE_FUNC_FAIL(bi_memalloc(bcd, size));
 	return (BI_SUCCESS);
 }
 

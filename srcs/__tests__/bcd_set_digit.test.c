@@ -6,7 +6,7 @@ void		test_bcd_set_digit_case1(void)
 	printf(KYEL "test_bcd_set_digit_case1\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x21);
 	bi_push(&bcd, 0x43);
 	bi_push(&bcd, 0x05);
@@ -29,7 +29,7 @@ void		test_bcd_set_digit_case1(void)
 		"bcd_set_digit : bcd.data[2]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 0
@@ -38,17 +38,17 @@ void		test_bcd_set_digit_case2(void)
 	printf(KYEL "test_bcd_set_digit_case2\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 
 	bcd_set_digit(&bcd, 0, 9);
 	bcd_set_digit(&bcd, 1, 9);
 
 	test(
-		bcd.data[0] == 0x99,
-		"bcd_set_digit : bcd.data[0]"
+		bcd.occupied == 0,
+		"bcd_set_digit : bcd.occupied"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case bigger than 9
@@ -57,7 +57,7 @@ void		test_bcd_set_digit_case3(void)
 	printf(KYEL "test_bcd_set_digit_case3\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x21);
 
 	bcd_set_digit(&bcd, 0, 10);
@@ -68,7 +68,7 @@ void		test_bcd_set_digit_case3(void)
 		"bcd_set_digit : bcd.data[0]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case set 0 to first bits
@@ -77,7 +77,7 @@ void		test_bcd_set_digit_case4(void)
 	printf(KYEL "test_bcd_set_digit_case4\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 5, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x21);
 	bi_push(&bcd, 0x43);
 	bi_push(&bcd, 0x05);
@@ -94,5 +94,5 @@ void		test_bcd_set_digit_case4(void)
 		"bcd_set_digit : bcd.data[2]"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }

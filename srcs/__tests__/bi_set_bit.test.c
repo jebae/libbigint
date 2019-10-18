@@ -5,7 +5,7 @@ void		test_bi_set_bit_case1(void)
 	printf(KYEL "test_bi_set_bit_case1\n" KNRM);
 	t_bigint	bi;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 
 	bi_push(&bi, 0xff);
 	bi_push(&bi, 0xfe);
@@ -25,7 +25,7 @@ void		test_bi_set_bit_case1(void)
 		"bi_set_bit : bi.data[1]"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
 }
 
 // case invalid bit
@@ -34,7 +34,7 @@ void		test_bi_set_bit_case2(void)
 	printf(KYEL "test_bi_set_bit_case2\n" KNRM);
 	t_bigint	bi;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 
 	bi_push(&bi, 0xff);
 	bi_push(&bi, 0xfe);
@@ -51,7 +51,7 @@ void		test_bi_set_bit_case2(void)
 		"bi_set_bit : bi.data[1]"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
 }
 
 // case invalid value
@@ -60,7 +60,7 @@ void		test_bi_set_bit_case3(void)
 	printf(KYEL "test_bi_set_bit_case3\n" KNRM);
 	t_bigint	bi;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 
 	bi_push(&bi, 0xff);
 	bi_push(&bi, 0xfe);
@@ -77,5 +77,5 @@ void		test_bi_set_bit_case3(void)
 		"bi_set_bit : bi.data[1]"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
 }

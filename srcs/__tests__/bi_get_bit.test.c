@@ -9,7 +9,7 @@ void		test_bi_get_bit_case1(void)
 		0, 0, 0, 1, 0, 0, 0, 1
 	};
 
-	bi_new(&bi, 3, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	bi_push(&bi, 0x11);
 	bi_push(&bi, 0x0e);
 
@@ -19,7 +19,7 @@ void		test_bi_get_bit_case1(void)
 			"bi_get_bit : bi_get_bit()"
 		);
 
-	free(bi.data);
+	bi_del(&bi);
 }
 
 void		test_bi_get_bit_case2(void)
@@ -32,7 +32,7 @@ void		test_bi_get_bit_case2(void)
 		0, 0, 0, 1, 0, 0, 0, 0
 	};
 
-	bi_new(&bi, 3, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	bi_push(&bi, 0x10);
 	bi_push(&bi, 0x0e);
 	bi_push(&bi, 0x8c);
@@ -43,7 +43,7 @@ void		test_bi_get_bit_case2(void)
 			"bi_get_bit : bi_get_bit()"
 		);
 
-	free(bi.data);
+	bi_del(&bi);
 }
 
 // case n >= max bit
@@ -52,7 +52,7 @@ void		test_bi_get_bit_case3(void)
 	printf(KYEL "test_bi_get_bit_case3\n" KNRM);
 	t_bigint	bi;
 
-	bi_new(&bi, 3, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	bi_push(&bi, 0x11);
 
 	test(
@@ -70,5 +70,31 @@ void		test_bi_get_bit_case3(void)
 		"bi_get_bit : bi_get_bit()"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
+}
+
+// case 0
+void		test_bi_get_bit_case4(void)
+{
+	printf(KYEL "test_bi_get_bit_case4\n" KNRM);
+	t_bigint	bi;
+
+	bi_init(&bi);
+
+	test(
+		bi_get_bit(&bi, 5) == -1,
+		"bi_get_bit : bi_get_bit()"
+	);
+
+	test(
+		bi_get_bit(&bi, 6) == -1,
+		"bi_get_bit : bi_get_bit()"
+	);
+
+	test(
+		bi_get_bit(&bi, 7) == -1,
+		"bi_get_bit : bi_get_bit()"
+	);
+
+	bi_del(&bi);
 }

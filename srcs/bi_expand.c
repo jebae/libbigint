@@ -9,7 +9,7 @@ int		bi_expand(t_bigint *bi, size_t size)
 	if ((temp = ft_memalloc(bi->size + size)) == NULL)
 		return (BI_FAIL);
 	ft_memcpy(temp, bi->data, bi->occupied);
-	ft_memdel((void **)&(bi->data));
+	ft_memdel((void **)&bi->data);
 	bi->data = temp;
 	bi->size += size;
 	return (BI_SUCCESS);

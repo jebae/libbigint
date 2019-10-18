@@ -6,7 +6,7 @@ void		test_bcd_get_digit_case1(void)
 	printf(KYEL "test_bcd_get_digit_case1\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 	bi_push(&bcd, 0x21);
 	bi_push(&bcd, 0x43);
 	bi_push(&bcd, 0x05);
@@ -27,7 +27,7 @@ void		test_bcd_get_digit_case1(void)
 		"bcd_get_digit : return value bigger than occupied"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }
 
 // case 0
@@ -36,7 +36,7 @@ void		test_bcd_get_digit_case2(void)
 	printf(KYEL "test_bcd_get_digit_case2\n" KNRM);
 	t_bigint	bcd;
 
-	bi_new(&bcd, 1, BI_SIGN_POSITIVE);
+	bi_init(&bcd);
 
 	test(
 		bcd_get_digit(&bcd, 0) == 0,
@@ -48,5 +48,5 @@ void		test_bcd_get_digit_case2(void)
 		"bcd_get_digit : return value"
 	);
 
-	free(bcd.data);
+	bi_del(&bcd);
 }

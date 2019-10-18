@@ -9,8 +9,8 @@ void		test_bi_array_to_bi_case1(void)
 	size_t		size = 32;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
@@ -40,8 +40,8 @@ void		test_bi_array_to_bi_case1(void)
 			"bi_array_to_bi : b.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 	bi_del_bi_array(arr, size);
 }
 
@@ -55,13 +55,14 @@ void		test_bi_array_to_bi_case2(void)
 	size_t		size = 32;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_NEGATIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x02);
 	bi_push(&a, 0x03);
 	bi_push(&a, 0x04);
 	bi_push(&a, 0x05);
+	a.sign = BI_SIGN_NEGATIVE;
 	arr = bi_to_bi_array(&a, size);
 	res = bi_array_to_bi(arr, size, &b);
 
@@ -86,7 +87,7 @@ void		test_bi_array_to_bi_case2(void)
 			"bi_array_to_bi : b.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 	bi_del_bi_array(arr, size);
 }

@@ -6,7 +6,7 @@ void		test_bi_max_bit_case1(void)
 	t_bigint	a;
 	size_t		res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x04);
 	res = bi_max_bit(&a);
 
@@ -15,7 +15,7 @@ void		test_bi_max_bit_case1(void)
 		"bi_max_bit (0x04) : return value"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 void		test_bi_max_bit_case2(void)
@@ -24,7 +24,7 @@ void		test_bi_max_bit_case2(void)
 	t_bigint	a;
 	size_t		res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x04);
 	bi_push(&a, 0x10);
 	res = bi_max_bit(&a);
@@ -34,7 +34,7 @@ void		test_bi_max_bit_case2(void)
 		"bi_max_bit (0x1004) : return value"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case 0
@@ -44,7 +44,7 @@ void		test_bi_max_bit_case3(void)
 	t_bigint	a;
 	size_t		res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	res = bi_max_bit(&a);
 
 	test(
@@ -52,5 +52,5 @@ void		test_bi_max_bit_case3(void)
 		"bi_max_bit (0x00) : return value"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }

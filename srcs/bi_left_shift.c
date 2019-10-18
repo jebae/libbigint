@@ -19,7 +19,7 @@ static int		set_mem(
 	}
 	else
 	{
-		BI_HANDLE_FUNC_FAIL(bi_init(res, size));
+		BI_HANDLE_FUNC_FAIL(bi_memalloc(res, size));
 		ft_memcpy(res->data, bi->data, bi->occupied);
 	}
 	res->occupied = size;

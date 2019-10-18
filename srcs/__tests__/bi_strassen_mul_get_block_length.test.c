@@ -8,8 +8,8 @@ void		test_bi_strassen_mul_get_block_length_case1(void)
 	t_bigint	b;
 	size_t		length;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xff);
 	bi_push(&b, 0xff);
 	length = bi_strassen_mul_get_block_length(&a, &b);
@@ -19,8 +19,8 @@ void		test_bi_strassen_mul_get_block_length_case1(void)
 		"bi_strassen_mul_get_block_length : length"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case a's max bit + b's max bit > length * 8 
@@ -31,8 +31,8 @@ void		test_bi_strassen_mul_get_block_length_case2(void)
 	t_bigint	b;
 	size_t		length;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	for (int i=0; i < 17; i++)
 	{
 		bi_push(&a, 0xff);
@@ -45,8 +45,8 @@ void		test_bi_strassen_mul_get_block_length_case2(void)
 		"bi_strassen_mul_get_block_length : length"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case a's max bit + b's max bit > length * 8
@@ -57,8 +57,8 @@ void		test_bi_strassen_mul_get_block_length_case3(void)
 	t_bigint	b;
 	size_t		length;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	for (int i=0; i < 33; i++)
 	{
 		bi_push(&a, 0xff);
@@ -71,6 +71,6 @@ void		test_bi_strassen_mul_get_block_length_case3(void)
 		"bi_strassen_mul_get_block_length : length"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }

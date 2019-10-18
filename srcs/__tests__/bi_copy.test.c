@@ -7,8 +7,9 @@ void		test_bi_copy_case1(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 3, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	a.sign = BI_SIGN_NEGATIVE;
+	bi_init(&b);
 	bi_push(&a, 0x11);
 	bi_push(&a, 0x0e);
 	res = bi_copy(&b, &a);
@@ -34,8 +35,8 @@ void		test_bi_copy_case1(void)
 			"bi_copy : b.data[i]"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case mutable
@@ -45,7 +46,8 @@ void		test_bi_copy_case2(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 3, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	a.sign = BI_SIGN_NEGATIVE;
 	bi_push(&a, 0x11);
 	bi_push(&a, 0x0e);
 	res = bi_copy(&a, &a);
@@ -75,5 +77,5 @@ void		test_bi_copy_case2(void)
 		"bi_copy : a.data[1]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }

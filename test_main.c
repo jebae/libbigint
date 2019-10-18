@@ -3,11 +3,8 @@
 int		main(void)
 {
 	// memory management
-	test_bi_new_case1();
 	test_bi_erase_case1();
 	test_bi_expand_case1();
-	test_bi_resize_case1();
-	test_bi_resize_case2();
 	test_bi_push_case1();
 	test_bi_push_case2();
 	test_bi_expand_at_least_case1();
@@ -57,7 +54,7 @@ int		main(void)
 	test_bi_sub_bi_case16();
 	test_bi_sub_bi_case17();
 
-	// mul pow of 2
+	// left_shift
 	test_bi_left_shift_case1();
 	test_bi_left_shift_case2();
 	test_bi_left_shift_case3();
@@ -139,7 +136,7 @@ int		main(void)
 	test_bi_strassen_mul_bi_case12();
 	test_bi_strassen_mul_bi_case13();
 
-	// div pow of 2
+	// right shift
 	test_bi_right_shift_case1();
 	test_bi_right_shift_case2();
 	test_bi_right_shift_case3();
@@ -152,14 +149,15 @@ int		main(void)
 	test_bi_get_bit_case1();
 	test_bi_get_bit_case2();
 	test_bi_get_bit_case3();
+	test_bi_get_bit_case4();
 
-	// double dabble
+	// // double dabble
 	test_bi_double_dabble_case1();
 	test_bi_double_dabble_case2();
 	test_bi_double_dabble_case3();
 	test_bi_double_dabble_case4();
 
-	// bi_set_bit
+	// // bi_set_bit
 	test_bi_set_bit_case1();
 	test_bi_set_bit_case2();
 	test_bi_set_bit_case3();

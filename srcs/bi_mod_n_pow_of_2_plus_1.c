@@ -11,11 +11,13 @@ static int		init_pq(t_bigint *p, t_bigint *q, size_t max_bit)
 {
 	size_t			size;
 
+	bi_init(p);
+	bi_init(q);
 	size = max_bit / BI_UNIT_BITS + ((max_bit % BI_UNIT_BITS) ? 1 : 0);
-	BI_HANDLE_FUNC_FAIL(bi_new(p, size, BI_SIGN_POSITIVE));
-	if (bi_new(q, size, BI_SIGN_POSITIVE) == BI_FAIL)
+	BI_HANDLE_FUNC_FAIL(bi_memalloc(p, size));
+	if (bi_memalloc(q, size) == BI_FAIL)
 	{
-		ft_memdel((void **)&(p->data));
+		bi_del(p);
 		return (BI_FAIL);
 	}
 	bi_push(p, 0x01);
@@ -35,7 +37,7 @@ static void		set_q(t_bigint *q, t_bigint *bi, size_t max_bit_index)
 	size_t			i;
 	size_t			j;
 
-	bi_init(q, q->size);
+	bi_erase(q);
 	j = max_bit_index / BI_UNIT_BITS;
 	i = 0;
 	while (i < j)
@@ -69,17 +71,17 @@ static int		set_mod_result(
 		bi_push(m, 0x01);
 		if (bi_left_shift(m, n, m) == BI_FAIL)
 		{
-			ft_memdel((void **)&(m->data));
+			bi_del(m);
 			return (BI_FAIL);
 		}
 		m->data[0] |= 0x01;
 		if (bi_sub_bi(m, res, res) == BI_FAIL)
 		{
-			ft_memdel((void **)&(m->data));
+			bi_del(m);
 			return (BI_FAIL);
 		}
 	}
-	ft_memdel((void **)&(m->data));
+	bi_del(m);
 	return (BI_SUCCESS);
 }
 
@@ -110,6 +112,6 @@ int				bi_mod_n_pow_of_2_plus_1(
 			neg_depth++;
 		max_bit = bi_max_bit(res);
 	}
-	ft_memdel((void **)&(q.data));
+	bi_del(&q);
 	return (set_mod_result(res, &p, n, neg_depth));
 }

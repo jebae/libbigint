@@ -7,7 +7,7 @@ static int		set_mem(t_bigint *bi, size_t size, int mutable)
 	if (mutable)
 		f = &bi_expand_at_least;
 	else
-		f = &bi_init;
+		f = &bi_memalloc;
 	BI_HANDLE_FUNC_FAIL(f(bi, size));
 	return (BI_SUCCESS);
 }

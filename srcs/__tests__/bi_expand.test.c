@@ -4,12 +4,10 @@ void		test_bi_expand_case1(void)
 {
 	printf(KYEL "test_bi_expand_case1\n" KNRM);
 	t_bigint	bi;
-	size_t		size = 1;
 	int			res;
 
-	bi_new(&bi, size, BI_SIGN_POSITIVE);
-	bi.data[0] = 0xFF;
-	bi.occupied = 1;
+	bi_init(&bi);
+	bi_push(&bi, 0xff);
 	res = bi_expand(&bi, 15);
 
 	test(
@@ -23,7 +21,7 @@ void		test_bi_expand_case1(void)
 	);
 
 	test(
-		bi.data[0] == 0xFF,
+		bi.data[0] == 0xff,
 		"bi_expand : bi.data[0]"
 	);
 	for (size_t i=1; i < 16; i++)
@@ -31,5 +29,6 @@ void		test_bi_expand_case1(void)
 			bi.data[i] == 0x00,
 			"bi_expand : bi.data[i]"
 		);
-	free(bi.data);
+
+	bi_del(&bi);
 }

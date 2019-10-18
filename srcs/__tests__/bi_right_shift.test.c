@@ -8,9 +8,10 @@ void		test_bi_right_shift_case1(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_NEGATIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xff);
+	b.sign = BI_SIGN_NEGATIVE;
 	res = bi_right_shift(&a, 7, &b);
 
 	test(
@@ -33,8 +34,8 @@ void		test_bi_right_shift_case1(void)
 		"bi_right_shift (0xff, 7) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case multi size
@@ -45,8 +46,8 @@ void		test_bi_right_shift_case2(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xff);
 	bi_push(&a, 0xa9);
 	res = bi_right_shift(&a, 7, &b);
@@ -71,8 +72,8 @@ void		test_bi_right_shift_case2(void)
 		"bi_right_shift (0xa9ff, 7) : b.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case more than 2^8
@@ -83,8 +84,8 @@ void		test_bi_right_shift_case3(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0xff);
 	bi_push(&a, 0x01);
 	bi_push(&a, 0x00);
@@ -107,8 +108,8 @@ void		test_bi_right_shift_case3(void)
 		"bi_right_shift (0x8fa20001ff, 33) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case very small
@@ -119,8 +120,8 @@ void		test_bi_right_shift_case4(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x0d);
 	res = bi_right_shift(&a, 2, &b);
 
@@ -139,8 +140,8 @@ void		test_bi_right_shift_case4(void)
 		"bi_right_shift (0x0d, 2) : b.data[0]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case n = 0
@@ -151,8 +152,8 @@ void		test_bi_right_shift_case5(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xa9);
 	res = bi_right_shift(&a, 0, &b);
@@ -177,8 +178,8 @@ void		test_bi_right_shift_case5(void)
 		"bi_right_shift (0xa905, 0) : b.data[1]"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }
 
 // case mutable
@@ -188,7 +189,7 @@ void		test_bi_right_shift_case6(void)
 	t_bigint	a;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
 	bi_push(&a, 0x05);
 	bi_push(&a, 0xa9);
 	res = bi_right_shift(&a, 9, &a);
@@ -208,7 +209,7 @@ void		test_bi_right_shift_case6(void)
 		"bi_right_shift (0xa905, 9) : a.data[0]"
 	);
 
-	free(a.data);
+	bi_del(&a);
 }
 
 // case bi = 0
@@ -219,8 +220,8 @@ void		test_bi_right_shift_case7(void)
 	t_bigint	b;
 	int			res;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	res = bi_right_shift(&a, 4, &b);
 
 	test(
@@ -233,6 +234,6 @@ void		test_bi_right_shift_case7(void)
 		"bi_right_shift (0x00, 0) : b.occupied"
 	);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 }

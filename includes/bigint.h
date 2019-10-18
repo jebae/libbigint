@@ -31,12 +31,12 @@ typedef struct		s_bi_strassen_mul_fft_vars
 /*
 ** memory management
 */
-int					bi_new(t_bigint *bi, size_t size, char sign);
-int					bi_init(t_bigint *bi, size_t size);
+int					bi_memalloc(t_bigint *bi, size_t size);
+void				bi_init(t_bigint *bi);
+void				bi_del(t_bigint *bi);
 void				bi_erase(t_bigint *bi);
 int					bi_expand(t_bigint *bi, size_t size);
 int					bi_expand_at_least(t_bigint *bi, size_t size);
-int					bi_resize(t_bigint *bi, size_t size);
 int					bi_push(t_bigint *bi, unsigned char value);
 
 /*

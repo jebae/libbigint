@@ -2,23 +2,9 @@
 
 static int	handle_return(t_bigint *res, t_bigint *to_add, int ret)
 {
-	ft_memdel((void **)&(res->data));
-	ft_memdel((void **)&(to_add->data));
+	bi_del(res);
+	bi_del(to_add);
 	return (ret);
-}
-
-static int	preprocess(
-	t_bigint *res,
-	t_bigint *to_add
-)
-{
-	BI_HANDLE_FUNC_FAIL(bi_new(res, 1, BI_SIGN_POSITIVE));
-	if (bi_new(to_add, 1, BI_SIGN_POSITIVE) == BI_FAIL)
-	{
-		ft_memdel((void **)&(res->data));
-		return (BI_FAIL);
-	}
-	return (BI_SUCCESS);
 }
 
 static char		get_sign(t_bigint *a, t_bigint *b)
@@ -40,7 +26,7 @@ int				bi_mul_1byte(
 	unsigned char		carry;
 	size_t				i;
 
-	BI_HANDLE_FUNC_FAIL(bi_init(res, bi->occupied));
+	BI_HANDLE_FUNC_FAIL(bi_memalloc(res, bi->occupied));
 	i = 0;
 	carry = 0x00;
 	while (i < bi->occupied)
@@ -62,7 +48,8 @@ int			bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 	t_bigint		res;
 	t_bigint		to_add;
 
-	BI_HANDLE_FUNC_FAIL(preprocess(&res, &to_add));
+	bi_init(&res);
+	bi_init(&to_add);
 	i = 0;
 	while (i < b->occupied)
 	{

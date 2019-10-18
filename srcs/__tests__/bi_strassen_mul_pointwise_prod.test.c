@@ -9,12 +9,12 @@ void		test_bi_strassen_mul_pointwise_prod_case1(void)
 	t_bigint	*b_arr;
 	size_t		n = 5;
 
-	bi_new(&a, 1, BI_SIGN_POSITIVE);
-	bi_new(&b, 1, BI_SIGN_POSITIVE);
+	bi_init(&a);
+	bi_init(&b);
 	for (size_t i=0; i < n; i++)
 	{
-		bi_push(&a, i);
-		bi_push(&b, i);
+		bi_push(&a, i + 1);
+		bi_push(&b, i + 1);
 	}
 	a_arr = bi_to_bi_array(&a, n);
 	b_arr = bi_to_bi_array(&b, n);
@@ -22,12 +22,12 @@ void		test_bi_strassen_mul_pointwise_prod_case1(void)
 
 	for (size_t i=0; i < n; i++)
 		test(
-			a_arr[i].data[0] == i * i,
+			a_arr[i].data[0] == (i + 1) * (i + 1),
 			"bi_strassen_mul_pointwise_prod : a_arr[i].data"
 		);
 
-	free(a.data);
-	free(b.data);
+	bi_del(&a);
+	bi_del(&b);
 	bi_del_bi_array(a_arr, n);
 	bi_del_bi_array(b_arr, n);
 }

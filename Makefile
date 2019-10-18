@@ -36,28 +36,28 @@ LIBS = -L . -lbigint\
 	-L $(LIBFT_PATH) -lft\
 
 # srcs
-SRCS = bi_new.c\
-	bi_init.c\
+SRCS = bi_init.c\
+	bi_del.c\
+	bi_memalloc.c\
 	bi_erase.c\
 	bi_expand.c\
 	bi_expand_at_least.c\
-	bi_resize.c\
 	bi_push.c\
 	bi_copy.c\
 	bi_abs_compare.c\
 	bi_max_bit.c\
 	bi_op_utils.c\
-	bi_array.c\
-	bi_update_occupied.c\
 	bi_add_bi.c\
 	bi_sub_bi.c\
-	bi_abs.c\
+	bi_update_occupied.c\
 	bi_left_shift.c\
-	bi_right_shift.c\
+	bi_abs.c\
 	bi_mod_n_pow_of_2_plus_1.c\
 	bi_mod_n_pow_of_2_plus_1_utils.c\
-	bi_strassen_mul_bi_utils.c\
+	bi_array.c\
 	bi_mul_bi.c\
+	bi_right_shift.c\
+	bi_strassen_mul_bi_utils.c\
 	bi_strassen_mul_bi.c\
 	bi_get_bit.c\
 	bi_set_bit.c\

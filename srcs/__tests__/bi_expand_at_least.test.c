@@ -7,7 +7,7 @@ void		test_bi_expand_at_least_case1(void)
 	t_bigint	bi;
 	int			res;
 
-	bi_new(&bi, 10, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	bi_push(&bi, 0xf9);
 	bi_push(&bi, 0x1e);
 	res = bi_expand_at_least(&bi, 16);
@@ -37,7 +37,7 @@ void		test_bi_expand_at_least_case1(void)
 		"bi_expand_at_least : bi.data[1]"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
 }
 
 // case not expand really
@@ -48,7 +48,8 @@ void		test_bi_expand_at_least_case2(void)
 	size_t		size = 10;
 	int			res;
 
-	bi_new(&bi, size, BI_SIGN_POSITIVE);
+	bi_init(&bi);
+	bi_memalloc(&bi, size);
 	bi_push(&bi, 0xf9);
 	bi_push(&bi, 0x1e);
 	res = bi_expand_at_least(&bi, 8);
@@ -78,5 +79,5 @@ void		test_bi_expand_at_least_case2(void)
 		"bi_expand_at_least : bi.data[1]"
 	);
 
-	free(bi.data);
+	bi_del(&bi);
 }

@@ -9,11 +9,9 @@ void		test(int res, const char *msg);
 /*
 ** memory management test
 */
-void		test_bi_new_case1(void);
+void		test_bi_init_case1(void);
 void		test_bi_erase_case1(void);
 void		test_bi_expand_case1(void);
-void		test_bi_resize_case1(void);
-void		test_bi_resize_case2(void);
 void		test_bi_push_case1(void);
 void		test_bi_push_case2(void);
 void		test_bi_expand_at_least_case1(void);
@@ -181,6 +179,7 @@ void		test_bi_mul_bi_case13(void);
 void		test_bi_get_bit_case1(void);
 void		test_bi_get_bit_case2(void);
 void		test_bi_get_bit_case3(void);
+void		test_bi_get_bit_case4(void);
 
 /*
 ** double dabble test

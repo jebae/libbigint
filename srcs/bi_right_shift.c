@@ -15,7 +15,7 @@ static void		shift_by_byte(t_bigint *bi, size_t n)
 		bi->data[i + shift] = 0x00;
 		i++;
 	}
-	while (i < shift)
+	while (i < bi->occupied && i < shift)
 		bi->data[i++] = 0x00;
 	bi_update_occupied(bi);
 }
@@ -28,7 +28,7 @@ static void		shift_by_bit(t_bigint *bi, size_t n)
 	unsigned short	cur;
 
 	shift = n % BI_UNIT_BITS;
-	if (shift == 0)
+	if (shift == 0 || bi->occupied == 0)
 		return ;
 	prev = bi->data;
 	*prev >>= shift;

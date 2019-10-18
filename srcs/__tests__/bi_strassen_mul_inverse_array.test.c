@@ -7,9 +7,9 @@ void		test_bi_strassen_mul_inverse_array_case1(void)
 	t_bigint	*bi_arr;
 	size_t		n = 8;
 
-	bi_new(&bi, 1, BI_SIGN_POSITIVE);
+	bi_init(&bi);
 	for (size_t i=0; i < n; i++)
-		bi_push(&bi, i);
+		bi_push(&bi, i + 1);
 	bi_arr = bi_to_bi_array(&bi, n);
 	bi_strassen_invsere_array(bi_arr, n);
 
@@ -23,7 +23,6 @@ void		test_bi_strassen_mul_inverse_array_case1(void)
 			"test_bi_strassen_mul_inverse_array_case1 (0 ~ 7) : bi_arr[i].data"
 		);
 
-	free(bi.data);
+	bi_del(&bi);
 	bi_del_bi_array(bi_arr, n);
 }
-

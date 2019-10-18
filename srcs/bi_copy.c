@@ -6,7 +6,7 @@ int		bi_copy(t_bigint *dst, t_bigint *src)
 
 	if (dst == src)
 		return (BI_SUCCESS);
-	BI_HANDLE_FUNC_FAIL(bi_init(dst, src->occupied));
+	BI_HANDLE_FUNC_FAIL(bi_memalloc(dst, src->occupied));
 	dst->sign = src->sign;
 	dst->occupied = src->occupied;
 	i = 0;
