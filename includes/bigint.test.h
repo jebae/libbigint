@@ -241,4 +241,15 @@ void		test_bcd_rm_trailing_zero_case3(void);
 */
 void		test_bcd_iter_case1(void);
 
+/*
+** bcd_round
+*/
+void		test_bcd_round_case1(void);
+void		test_bcd_round_case2(void);
+void		test_bcd_round_case3(void);
+void		test_bcd_round_case4(void);
+void		test_bcd_round_case5(void);
+void		test_bcd_round_case6(void);
+void		test_bcd_round_case7(void);
+
 #endif

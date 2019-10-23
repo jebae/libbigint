@@ -163,5 +163,6 @@ void				bcd_iter(
 	void (*f)(unsigned char, void *),
 	void *arg
 );
+int					bcd_round(t_bigint *bcd, size_t pos, t_bigint *res);
 
 #endif

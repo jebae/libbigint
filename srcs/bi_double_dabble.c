@@ -8,13 +8,15 @@ static int		set_mem(t_bigint *bcd, t_bigint *bin)
 	size = (size % BI_UNIT_BITS == 0)
 		? size / BI_UNIT_BITS
 		: size / BI_UNIT_BITS + 1;
-	BI_HANDLE_FUNC_FAIL(bi_memalloc(bcd, size));
+	if (bi_memalloc(bcd, size) == BI_FAIL)
+		return (BI_FAIL);
 	return (BI_SUCCESS);
 }
 
 static int		bcd_left_shift(t_bigint *bcd, int bit)
 {
-	BI_HANDLE_FUNC_FAIL(bi_left_shift(bcd, 1, bcd));
+	if (bi_left_shift(bcd, 1, bcd) == BI_FAIL)
+		return (BI_FAIL);
 	bcd->data[0] |= bit;
 	return (BI_SUCCESS);
 }
@@ -39,7 +41,8 @@ int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 	size_t		i;
 	int			bit;
 
-	BI_HANDLE_FUNC_FAIL(set_mem(bcd, bin));
+	if (set_mem(bcd, bin) == BI_FAIL)
+		return (BI_FAIL);
 	i = bin->occupied * BI_UNIT_BITS;
 	while (i > 0)
 	{

@@ -3,7 +3,10 @@
 int		bi_memalloc(t_bigint *bi, size_t size)
 {
 	if (bi->data != NULL && bi->size >= size)
+	{
 		bi_erase(bi);
+		return (BI_SUCCESS);
+	}
 	bi_del(bi);
 	if (size == 0)
 		return (BI_SUCCESS);

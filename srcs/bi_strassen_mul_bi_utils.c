@@ -36,7 +36,8 @@ int			bi_strassen_mul_shuffle_order(t_bigint *arr, size_t size)
 
 	if (size == 0)
 		return (BI_SUCCESS);
-	BI_HANDLE_FUNC_FAIL(copy_arr(arr, &copy, size));
+	if (copy_arr(arr, &copy, size) == BI_FAIL)
+		return (BI_FAIL);
 	num_bits = ft_int_log2(size);
 	i = 0;
 	while (i < size)
@@ -60,9 +61,10 @@ int			bi_strassen_mul_pointwise_prod(
 	i = 0;
 	while (i < n)
 	{
-		BI_HANDLE_FUNC_FAIL(bi_mul_bi(a_arr + i, b_arr + i, a_arr + i));
-		BI_HANDLE_FUNC_FAIL(
-			bi_mod_n_pow_of_2_plus_1(a_arr + i, n, a_arr + i));
+		if (bi_mul_bi(a_arr + i, b_arr + i, a_arr + i) == BI_FAIL)
+			return (BI_FAIL);
+		if (bi_mod_n_pow_of_2_plus_1(a_arr + i, n, a_arr + i) == BI_FAIL)
+			return (BI_FAIL);
 		i++;
 	}
 	return (BI_SUCCESS);

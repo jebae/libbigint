@@ -194,5 +194,14 @@ int		main(void)
 
 	// bcd_iter
 	test_bcd_iter_case1();
+
+	// bcd_round
+	test_bcd_round_case1();
+	test_bcd_round_case2();
+	test_bcd_round_case3();
+	test_bcd_round_case4();
+	test_bcd_round_case5();
+	test_bcd_round_case6();
+	test_bcd_round_case7();
 	// while (1);
 }

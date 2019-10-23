@@ -8,7 +8,8 @@ static int		set_mem(t_bigint *bin, t_bigint *bcd)
 	size = (size % BI_UNIT_BITS == 0)
 		? size / BI_UNIT_BITS
 		: size / BI_UNIT_BITS + 1;
-	BI_HANDLE_FUNC_FAIL(bi_memalloc(bin, size));
+	if (bi_memalloc(bin, size) == BI_FAIL)
+		return (BI_FAIL);
 	return (BI_SUCCESS);
 }
 
@@ -33,8 +34,10 @@ int             bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin)
     t_bigint    copy;
 
 	bi_init(&copy);
-    BI_HANDLE_FUNC_FAIL(set_mem(bin, bcd));
-	BI_HANDLE_FUNC_FAIL(bi_copy(&copy, bcd));
+    if (set_mem(bin, bcd) == BI_FAIL)
+		return (BI_FAIL);
+	if (bi_copy(&copy, bcd) == BI_FAIL)
+		return (BI_FAIL);
     i = 0;
 	while (copy.occupied != 0)
 	{

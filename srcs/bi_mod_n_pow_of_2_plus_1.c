@@ -14,7 +14,8 @@ static int		init_pq(t_bigint *p, t_bigint *q, size_t max_bit)
 	bi_init(p);
 	bi_init(q);
 	size = max_bit / BI_UNIT_BITS + ((max_bit % BI_UNIT_BITS) ? 1 : 0);
-	BI_HANDLE_FUNC_FAIL(bi_memalloc(p, size));
+	if (bi_memalloc(p, size) == BI_FAIL)
+		return (BI_FAIL);
 	if (bi_memalloc(q, size) == BI_FAIL)
 	{
 		bi_del(p);
@@ -99,7 +100,8 @@ int				bi_mod_n_pow_of_2_plus_1(
 	if (n == 0)
 		return (bi_mod_n_pow_of_2_plus_1_handle_0(bi, res));
 	max_bit = bi_max_bit(bi);
-	BI_HANDLE_FUNC_FAIL(init_pq(&p, &q, max_bit));
+	if (init_pq(&p, &q, max_bit) == BI_FAIL)
+		return (BI_FAIL);
 	if (bi_copy(res, bi) == BI_FAIL)
 		return (bi_mod_n_pow_of_2_plus_1_handle_fail(&p, &q));
 	neg_depth = (bi->sign == BI_SIGN_NEGATIVE) ? 1 : 0;

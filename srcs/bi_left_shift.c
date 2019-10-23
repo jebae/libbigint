@@ -19,7 +19,8 @@ static int		set_mem(
 	}
 	else
 	{
-		BI_HANDLE_FUNC_FAIL(bi_memalloc(res, size));
+		if (bi_memalloc(res, size) == BI_FAIL)
+			return (BI_FAIL);
 		ft_memcpy(res->data, bi->data, bi->occupied);
 	}
 	res->occupied = size;
@@ -66,7 +67,8 @@ static void		shift_by_bit(t_bigint *bi, size_t n)
 
 int				bi_left_shift(t_bigint *bi, size_t n, t_bigint *res)
 {
-	BI_HANDLE_FUNC_FAIL(set_mem(res, bi, n));
+	if (set_mem(res, bi, n) == BI_FAIL)
+		return (BI_FAIL);
 	shift_by_byte(res, n);
 	shift_by_bit(res, n);
 	res->sign = bi->sign;

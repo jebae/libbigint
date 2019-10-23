@@ -50,7 +50,8 @@ static int		fft(t_bigint *arr, size_t n, unsigned int log2n)
 	size_t						i;
 	t_bi_strassen_mul_fft_vars	v;
 
-	BI_HANDLE_FUNC_FAIL(bi_strassen_mul_shuffle_order(arr, n));
+	if (bi_strassen_mul_shuffle_order(arr, n) == BI_FAIL)
+		return (BI_FAIL);
 	bi_init(&v.t);
 	i = 1;
 	while (i <= log2n)
@@ -74,7 +75,8 @@ static int		ifft(t_bigint *arr, size_t n, unsigned int log2n)
 	size_t		i;
 
 	bi_strassen_invsere_array(arr, n);
-	BI_HANDLE_FUNC_FAIL(fft(arr, n, log2n));
+	if (fft(arr, n, log2n) == BI_FAIL)
+		return (BI_FAIL);
 	i = 0;
 	while (i < n)
 	{

@@ -1,6 +1,6 @@
 #include "bigint.h"
 
-static int	handle_return(t_bigint *res, t_bigint *to_add, int ret)
+static int		handle_return(t_bigint *res, t_bigint *to_add, int ret)
 {
 	bi_del(res);
 	bi_del(to_add);
@@ -26,7 +26,8 @@ int				bi_mul_1byte(
 	unsigned char		carry;
 	size_t				i;
 
-	BI_HANDLE_FUNC_FAIL(bi_memalloc(res, bi->occupied));
+	if (bi_memalloc(res, bi->occupied) == BI_FAIL)
+		return (BI_FAIL);
 	i = 0;
 	carry = 0x00;
 	while (i < bi->occupied)
@@ -42,7 +43,7 @@ int				bi_mul_1byte(
 	return (BI_SUCCESS);
 }
 
-int			bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
+int				bi_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c)
 {
 	size_t			i;
 	t_bigint		res;

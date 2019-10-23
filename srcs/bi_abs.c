@@ -2,8 +2,8 @@
 
 int		bi_abs(t_bigint *bi, t_bigint *res)
 {
-	if (bi != res)
-		BI_HANDLE_FUNC_FAIL(bi_copy(res, bi));
+	if (bi != res && bi_copy(res, bi) == BI_FAIL)
+		return (BI_FAIL);
 	res->sign = BI_SIGN_POSITIVE;
 	return (BI_SUCCESS);
 }

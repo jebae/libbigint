@@ -46,7 +46,8 @@ static void		shift_by_bit(t_bigint *bi, size_t n)
 
 int				bi_right_shift(t_bigint *bi, size_t n, t_bigint *res)
 {
-	BI_HANDLE_FUNC_FAIL(bi_copy(res, bi));
+	if (bi_copy(res, bi) == BI_FAIL)
+		return (BI_FAIL);
 	shift_by_byte(res, n);
 	shift_by_bit(res, n);
 	bi_update_occupied(res);

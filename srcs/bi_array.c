@@ -60,7 +60,8 @@ int					bi_array_to_bi(
 	size_t			i;
 	t_bigint		to_add;
 
-	BI_HANDLE_FUNC_FAIL(bi_memalloc(res, 1));
+	if (bi_memalloc(res, 1) == BI_FAIL)
+		return (BI_FAIL);
 	bi_init(&to_add);
 	i = 0;
 	while (i < size)
