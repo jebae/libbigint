@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bi_array.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 15:59:59 by jebae             #+#    #+#             */
+/*   Updated: 2019/10/24 16:06:49 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bigint.h"
 
 static t_bigint		*to_array_handle_fail(t_bigint *arr, size_t size)
@@ -53,7 +65,7 @@ t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size)
 
 int					bi_array_to_bi(
 	t_bigint *arr,
-	size_t size, 
+	size_t size,
 	t_bigint *res
 )
 {

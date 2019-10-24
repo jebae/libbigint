@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bi_double_dabble.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 16:00:07 by jebae             #+#    #+#             */
+/*   Updated: 2019/10/24 16:06:23 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bigint.h"
 
 static int		set_mem(t_bigint *bcd, t_bigint *bin)
@@ -52,6 +64,6 @@ int				bi_double_dabble(t_bigint *bin, t_bigint *bcd)
 		i--;
 	}
 	bcd->sign = bin->sign;
-    bi_update_occupied(bcd);
+	bi_update_occupied(bcd);
 	return (BI_SUCCESS);
 }

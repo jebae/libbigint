@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bi_rev_double_dabble.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 16:05:09 by jebae             #+#    #+#             */
+/*   Updated: 2019/10/24 16:05:19 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bigint.h"
 
 static int		set_mem(t_bigint *bin, t_bigint *bcd)
@@ -28,17 +40,17 @@ static void		sub_3_if_gte_8(t_bigint *bcd)
 	}
 }
 
-int             bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin)
+int				bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin)
 {
-    size_t      i;
-    t_bigint    copy;
+	size_t		i;
+	t_bigint	copy;
 
 	bi_init(&copy);
-    if (set_mem(bin, bcd) == BI_FAIL)
+	if (set_mem(bin, bcd) == BI_FAIL)
 		return (BI_FAIL);
 	if (bi_copy(&copy, bcd) == BI_FAIL)
 		return (BI_FAIL);
-    i = 0;
+	i = 0;
 	while (copy.occupied != 0)
 	{
 		bi_set_bit(bin, i, bi_get_bit(&copy, 0));
@@ -46,8 +58,8 @@ int             bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin)
 		sub_3_if_gte_8(&copy);
 		i++;
 	}
-    bin->sign = bcd->sign;
-    bi_update_occupied(bin);
+	bin->sign = bcd->sign;
+	bi_update_occupied(bin);
 	bi_del(&copy);
-    return (BI_SUCCESS);
+	return (BI_SUCCESS);
 }

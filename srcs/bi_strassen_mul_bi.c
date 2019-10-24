@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bi_strassen_mul_bi.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 16:01:26 by jebae             #+#    #+#             */
+/*   Updated: 2019/10/24 16:01:26 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "bigint.h"
 
 static int		handle_return(
@@ -29,14 +41,13 @@ static int		fft_loop_by_level(
 		k = j;
 		while (k < n)
 		{
-			BI_HANDLE_FUNC_FAIL(bi_left_shift(arr + k + v->m2, e, &(v->t)));
-			BI_HANDLE_FUNC_FAIL(
-				bi_sub_bi(arr + k, &(v->t), arr + k + v->m2));
-			BI_HANDLE_FUNC_FAIL(bi_add_bi(arr + k, &(v->t), arr + k));
-			BI_HANDLE_FUNC_FAIL(
-				bi_mod_n_pow_of_2_plus_1(arr + k, n, arr + k));
-			BI_HANDLE_FUNC_FAIL(bi_mod_n_pow_of_2_plus_1(
-				arr + k + v->m2, n, arr + k + v->m2));
+			if (bi_left_shift(arr + k + v->m2, e, &(v->t)) == BI_FAIL ||
+				bi_sub_bi(arr + k, &(v->t), arr + k + v->m2) == BI_FAIL ||
+				bi_add_bi(arr + k, &(v->t), arr + k) == BI_FAIL ||
+				bi_mod_n_pow_of_2_plus_1(arr + k, n, arr + k) == BI_FAIL ||
+				bi_mod_n_pow_of_2_plus_1(
+					arr + k + v->m2, n, arr + k + v->m2) == BI_FAIL)
+				return (BI_FAIL);
 			k += v->m;
 		}
 		e += v->em;
@@ -61,12 +72,12 @@ static int		fft(t_bigint *arr, size_t n, unsigned int log2n)
 		v.em = 1 << (log2n - i + 1);
 		if (fft_loop_by_level(arr, n, &v) == BI_FAIL)
 		{
-			ft_memdel((void **)&v.t.data);
+			bi_del(&v.t);
 			return (BI_FAIL);
 		}
 		i++;
 	}
-	ft_memdel((void **)&v.t.data);
+	bi_del(&v.t);
 	return (BI_SUCCESS);
 }
 

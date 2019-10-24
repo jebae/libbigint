@@ -1,15 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bigint.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/24 15:56:59 by jebae             #+#    #+#             */
+/*   Updated: 2019/10/24 15:57:43 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BIGINT_H
 # define BIGINT_H
 
 # include "libft.h"
-# include <stdio.h>
 
 # define BI_SUCCESS				0
 # define BI_FAIL				1
 # define BI_SIGN_POSITIVE		0
 # define BI_SIGN_NEGATIVE		1
-
-# define BI_HANDLE_FUNC_FAIL(F) if ((F) == BI_FAIL) return (BI_FAIL)
 # define BI_UNIT_BITS			8
 
 typedef struct		s_bigint
@@ -118,7 +127,7 @@ t_bigint			*bi_to_bi_array(t_bigint *bi, size_t size);
 void				bi_del_bi_array(t_bigint *arr, size_t size);
 int					bi_array_to_bi(
 	t_bigint *arr,
-	size_t size, 
+	size_t size,
 	t_bigint *res
 );
 
@@ -149,7 +158,7 @@ int					bi_strassen_mul_bi(t_bigint *a, t_bigint *b, t_bigint *c);
 ** double dabble
 */
 int					bi_double_dabble(t_bigint *bin, t_bigint *bcd);
-int             	bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin);
+int					bi_rev_double_dabble(t_bigint *bcd, t_bigint *bin);
 
 /*
 ** bcd
