@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 15:56:59 by jebae             #+#    #+#             */
-/*   Updated: 2019/10/24 15:57:43 by jebae            ###   ########.fr       */
+/*   Updated: 2019/10/27 00:37:43 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BIGINT_H
 
 # include "libft.h"
+# include <stdio.h>
 
 # define BI_SUCCESS				0
 # define BI_FAIL				1

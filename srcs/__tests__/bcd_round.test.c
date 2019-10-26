@@ -223,6 +223,7 @@ void		test_bcd_round_case6(void)
 	bi_del(&bcd);
 	bi_del(&rounded);
 }
+
 // case mutable
 void		test_bcd_round_case7(void)
 {

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   bcd_round.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 15:59:45 by jebae             #+#    #+#             */
-/*   Updated: 2019/10/24 15:59:46 by jebae            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "bigint.h"
 
 static void		set_zero_below_pos(t_bigint *bcd, size_t pos)
@@ -44,7 +32,7 @@ int				bcd_round(t_bigint *bcd, size_t pos, t_bigint *res)
 		carry = 1;
 		len = bcd_len(res);
 		i = pos;
-		while (i < len && carry > 0)
+		while (i < len && carry)
 		{
 			digit = bcd_get_digit(res, i) + carry;
 			bcd_set_digit(res, i, digit % 10);
@@ -54,6 +42,7 @@ int				bcd_round(t_bigint *bcd, size_t pos, t_bigint *res)
 		if (carry > 0 && handle_last_carry(res, len) == BI_FAIL)
 			return (BI_FAIL);
 	}
+	bi_update_occupied(res);
 	set_zero_below_pos(res, pos);
 	return (BI_SUCCESS);
 }

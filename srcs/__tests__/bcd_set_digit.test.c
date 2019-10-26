@@ -85,7 +85,7 @@ void		test_bcd_set_digit_case4(void)
 	bcd_set_digit(&bcd, 4, 0);
 
 	test(
-		bcd.occupied == 2,
+		bcd.occupied == 3,
 		"bcd_set_digit : bcd.occupied"
 	);
 
