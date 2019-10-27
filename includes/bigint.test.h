@@ -252,4 +252,15 @@ void		test_bcd_round_case5(void);
 void		test_bcd_round_case6(void);
 void		test_bcd_round_case7(void);
 
+/*
+** bcd_add_digit
+*/
+void		test_bcd_add_digit_case1(void);
+void		test_bcd_add_digit_case2(void);
+void		test_bcd_add_digit_case3(void);
+void		test_bcd_add_digit_case4(void);
+void		test_bcd_add_digit_case5(void);
+void		test_bcd_add_digit_case6(void);
+void		test_bcd_add_digit_case7(void);
+
 #endif

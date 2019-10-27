@@ -42,7 +42,7 @@ int				bcd_round(t_bigint *bcd, size_t pos, t_bigint *res)
 		if (carry > 0 && handle_last_carry(res, len) == BI_FAIL)
 			return (BI_FAIL);
 	}
-	bi_update_occupied(res);
 	set_zero_below_pos(res, pos);
+	bi_update_occupied(res);
 	return (BI_SUCCESS);
 }

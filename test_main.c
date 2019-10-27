@@ -203,5 +203,14 @@ int		main(void)
 	test_bcd_round_case5();
 	test_bcd_round_case6();
 	test_bcd_round_case7();
-	// while (1);
+
+	// bcd_add_digit
+	test_bcd_add_digit_case1();
+	test_bcd_add_digit_case2();
+	test_bcd_add_digit_case3();
+	test_bcd_add_digit_case4();
+	test_bcd_add_digit_case5();
+	test_bcd_add_digit_case6();
+	test_bcd_add_digit_case7();
+	//while (1);
 }

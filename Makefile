@@ -69,6 +69,7 @@ SRCS = bi_init.c\
 	bcd_rm_trailing_zero.c\
 	bcd_iter.c\
 	bcd_round.c\
+	bcd_add_digit.c\
 
 # objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
