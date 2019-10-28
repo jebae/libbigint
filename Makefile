@@ -103,6 +103,7 @@ test : all
 
 clean :
 	@rm -rf $(OBJS)
+	@rm -rf $(OBJDIR)
 
 fclean : clean
 	@rm -rf $(NAME)
