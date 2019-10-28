@@ -6,7 +6,7 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 15:56:59 by jebae             #+#    #+#             */
-/*   Updated: 2019/10/27 14:31:28 by jebae            ###   ########.fr       */
+/*   Updated: 2019/10/28 14:42:26 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define BIGINT_H
 
 # include "libft.h"
-# include <stdio.h>
 
 # define BI_SUCCESS				0
 # define BI_FAIL				1
@@ -174,6 +173,10 @@ void				bcd_iter(
 	void *arg
 );
 int					bcd_round(t_bigint *bcd, size_t pos, t_bigint *res);
-int					bcd_add_digit(t_bigint *a, unsigned char digit, t_bigint *b);
+int					bcd_add_digit(
+	t_bigint *a,
+	unsigned char digit,
+	t_bigint *b
+);
 
 #endif
